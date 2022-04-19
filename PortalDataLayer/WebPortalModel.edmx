@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="DbManavMelihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="DbManavMelihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -14,6 +14,15 @@
           <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TblAboutUs">
+          <Key>
+            <PropertyRef Name="AboutId" />
+          </Key>
+          <Property Name="AboutId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AboutTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="AboutDescription" Type="nvarchar(max)" />
+          <Property Name="AboutImageUrl" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TblCart">
           <Key>
@@ -137,6 +146,7 @@
         </Association>
         <EntityContainer Name="DbManavMelihModelStoreContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblAboutUs" EntityType="Self.TblAboutUs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCart" EntityType="Self.TblCart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblCategories" EntityType="Self.TblCategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblContacts" EntityType="Self.TblContacts" Schema="dbo" store:Type="Tables" />
@@ -161,16 +171,42 @@
             <End Role="TblProducts" EntitySet="TblProducts" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="DbManavMelihModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DbManavMelihEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="DbManavMelihModel.sysdiagram" />
+          <EntitySet Name="TblCarts" EntityType="DbManavMelihModel.TblCart" />
+          <EntitySet Name="TblCategories" EntityType="DbManavMelihModel.TblCategory" />
+          <EntitySet Name="TblContacts" EntityType="DbManavMelihModel.TblContact" />
+          <EntitySet Name="TblOrders" EntityType="DbManavMelihModel.TblOrder" />
+          <EntitySet Name="TblProducts" EntityType="DbManavMelihModel.TblProduct" />
+          <EntitySet Name="TblSubscribers" EntityType="DbManavMelihModel.TblSubscriber" />
+          <EntitySet Name="TblUsers" EntityType="DbManavMelihModel.TblUser" />
+          <AssociationSet Name="FK_TblCart_TblProducts1" Association="DbManavMelihModel.FK_TblCart_TblProducts1">
+            <End Role="TblProduct" EntitySet="TblProducts" />
+            <End Role="TblCart" EntitySet="TblCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblCart_TblUsers" Association="DbManavMelihModel.FK_TblCart_TblUsers">
+            <End Role="TblUser" EntitySet="TblUsers" />
+            <End Role="TblCart" EntitySet="TblCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblProducts_TblCategories1" Association="DbManavMelihModel.FK_TblProducts_TblCategories1">
+            <End Role="TblCategory" EntitySet="TblCategories" />
+            <End Role="TblProduct" EntitySet="TblProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TblOrders_TblUsers" Association="DbManavMelihModel.FK_TblOrders_TblUsers">
+            <End Role="TblUser" EntitySet="TblUsers" />
+            <End Role="TblOrder" EntitySet="TblOrders" />
+          </AssociationSet>
+          <EntitySet Name="TblAboutUs" EntityType="DbManavMelihModel.TblAboutU" />
+        </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="principal_id" Type="Int32" Nullable="false" />
           <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="Int32" />
@@ -188,8 +224,8 @@
           <Property Name="ProductDescprition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ProductId" Type="Int32" />
           <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="TblProduct" Relationship="Self.FK_TblCart_TblProducts1" FromRole="TblCart" ToRole="TblProducts" />
-          <NavigationProperty Name="TblUser" Relationship="Self.FK_TblCart_TblUsers" FromRole="TblCart" ToRole="TblUsers" />
+          <NavigationProperty Name="TblProduct" Relationship="DbManavMelihModel.FK_TblCart_TblProducts1" FromRole="TblCart" ToRole="TblProduct" />
+          <NavigationProperty Name="TblUser" Relationship="DbManavMelihModel.FK_TblCart_TblUsers" FromRole="TblCart" ToRole="TblUser" />
         </EntityType>
         <EntityType Name="TblCategory">
           <Key>
@@ -198,7 +234,7 @@
           <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CategoryActive" Type="Boolean" />
-          <NavigationProperty Name="TblProducts" Relationship="Self.FK_TblProducts_TblCategories1" FromRole="TblCategories" ToRole="TblProducts" />
+          <NavigationProperty Name="TblProducts" Relationship="DbManavMelihModel.FK_TblProducts_TblCategories1" FromRole="TblCategory" ToRole="TblProduct" />
         </EntityType>
         <EntityType Name="TblContact">
           <Key>
@@ -220,7 +256,7 @@
           <Property Name="OrderAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="OrderCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="TblUser" Relationship="Self.FK_TblOrders_TblUsers" FromRole="TblOrders" ToRole="TblUsers" />
+          <NavigationProperty Name="TblUser" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblOrder" ToRole="TblUser" />
         </EntityType>
         <EntityType Name="TblProduct">
           <Key>
@@ -234,8 +270,8 @@
           <Property Name="ProductStock" Type="Int32" />
           <Property Name="ProductActive" Type="Boolean" />
           <Property Name="CategoryId" Type="Int32" />
-          <NavigationProperty Name="TblCarts" Relationship="Self.FK_TblCart_TblProducts1" FromRole="TblProducts" ToRole="TblCart" />
-          <NavigationProperty Name="TblCategory" Relationship="Self.FK_TblProducts_TblCategories1" FromRole="TblProducts" ToRole="TblCategories" />
+          <NavigationProperty Name="TblCarts" Relationship="DbManavMelihModel.FK_TblCart_TblProducts1" FromRole="TblProduct" ToRole="TblCart" />
+          <NavigationProperty Name="TblCategory" Relationship="DbManavMelihModel.FK_TblProducts_TblCategories1" FromRole="TblProduct" ToRole="TblCategory" />
         </EntityType>
         <EntityType Name="TblSubscriber">
           <Key>
@@ -253,14 +289,14 @@
           <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TblCarts" Relationship="Self.FK_TblCart_TblUsers" FromRole="TblUsers" ToRole="TblCart" />
-          <NavigationProperty Name="TblOrders" Relationship="Self.FK_TblOrders_TblUsers" FromRole="TblUsers" ToRole="TblOrders" />
+          <NavigationProperty Name="TblCarts" Relationship="DbManavMelihModel.FK_TblCart_TblUsers" FromRole="TblUser" ToRole="TblCart" />
+          <NavigationProperty Name="TblOrders" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblUser" ToRole="TblOrder" />
         </EntityType>
         <Association Name="FK_TblCart_TblProducts1">
-          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="0..1" />
-          <End Role="TblCart" Type="Self.TblCart" Multiplicity="*" />
+          <End Type="DbManavMelihModel.TblProduct" Role="TblProduct" Multiplicity="0..1" />
+          <End Type="DbManavMelihModel.TblCart" Role="TblCart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TblProducts">
+            <Principal Role="TblProduct">
               <PropertyRef Name="ProductId" />
             </Principal>
             <Dependent Role="TblCart">
@@ -269,10 +305,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblCart_TblUsers">
-          <End Role="TblUsers" Type="Self.TblUser" Multiplicity="0..1" />
-          <End Role="TblCart" Type="Self.TblCart" Multiplicity="*" />
+          <End Type="DbManavMelihModel.TblUser" Role="TblUser" Multiplicity="0..1" />
+          <End Type="DbManavMelihModel.TblCart" Role="TblCart" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TblUsers">
+            <Principal Role="TblUser">
               <PropertyRef Name="UserId" />
             </Principal>
             <Dependent Role="TblCart">
@@ -281,55 +317,38 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblProducts_TblCategories1">
-          <End Role="TblCategories" Type="Self.TblCategory" Multiplicity="0..1" />
-          <End Role="TblProducts" Type="Self.TblProduct" Multiplicity="*" />
+          <End Type="DbManavMelihModel.TblCategory" Role="TblCategory" Multiplicity="0..1" />
+          <End Type="DbManavMelihModel.TblProduct" Role="TblProduct" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TblCategories">
+            <Principal Role="TblCategory">
               <PropertyRef Name="CategoryId" />
             </Principal>
-            <Dependent Role="TblProducts">
+            <Dependent Role="TblProduct">
               <PropertyRef Name="CategoryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblOrders_TblUsers">
-          <End Role="TblUsers" Type="Self.TblUser" Multiplicity="0..1" />
-          <End Role="TblOrders" Type="Self.TblOrder" Multiplicity="*" />
+          <End Type="DbManavMelihModel.TblUser" Role="TblUser" Multiplicity="0..1" />
+          <End Type="DbManavMelihModel.TblOrder" Role="TblOrder" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TblUsers">
+            <Principal Role="TblUser">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="TblOrders">
+            <Dependent Role="TblOrder">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DbManavMelihEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
-          <EntitySet Name="TblCarts" EntityType="Self.TblCart" />
-          <EntitySet Name="TblCategories" EntityType="Self.TblCategory" />
-          <EntitySet Name="TblContacts" EntityType="Self.TblContact" />
-          <EntitySet Name="TblOrders" EntityType="Self.TblOrder" />
-          <EntitySet Name="TblProducts" EntityType="Self.TblProduct" />
-          <EntitySet Name="TblSubscribers" EntityType="Self.TblSubscriber" />
-          <EntitySet Name="TblUsers" EntityType="Self.TblUser" />
-          <AssociationSet Name="FK_TblCart_TblProducts1" Association="Self.FK_TblCart_TblProducts1">
-            <End Role="TblProducts" EntitySet="TblProducts" />
-            <End Role="TblCart" EntitySet="TblCarts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TblCart_TblUsers" Association="Self.FK_TblCart_TblUsers">
-            <End Role="TblUsers" EntitySet="TblUsers" />
-            <End Role="TblCart" EntitySet="TblCarts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TblProducts_TblCategories1" Association="Self.FK_TblProducts_TblCategories1">
-            <End Role="TblCategories" EntitySet="TblCategories" />
-            <End Role="TblProducts" EntitySet="TblProducts" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TblOrders_TblUsers" Association="Self.FK_TblOrders_TblUsers">
-            <End Role="TblUsers" EntitySet="TblUsers" />
-            <End Role="TblOrders" EntitySet="TblOrders" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="TblAboutU">
+          <Key>
+            <PropertyRef Name="AboutId" />
+          </Key>
+          <Property Name="AboutId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AboutTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AboutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AboutImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -339,90 +358,100 @@
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="DbManavMelihModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblCarts">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblCart">
               <MappingFragment StoreEntitySet="TblCart">
-                <ScalarProperty Name="CartId" ColumnName="CartId" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="IsOrdered" ColumnName="IsOrdered" />
-                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
-                <ScalarProperty Name="ProductDescprition" ColumnName="ProductDescprition" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductDescprition" ColumnName="ProductDescprition" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="IsOrdered" ColumnName="IsOrdered" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CartId" ColumnName="CartId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblCategories">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblCategory">
               <MappingFragment StoreEntitySet="TblCategories">
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
                 <ScalarProperty Name="CategoryActive" ColumnName="CategoryActive" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblContacts">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblContact">
               <MappingFragment StoreEntitySet="TblContacts">
-                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
-                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
-                <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
-                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
-                <ScalarProperty Name="ContactSubject" ColumnName="ContactSubject" />
                 <ScalarProperty Name="ContactMessage" ColumnName="ContactMessage" />
+                <ScalarProperty Name="ContactSubject" ColumnName="ContactSubject" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblOrders">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblOrder">
               <MappingFragment StoreEntitySet="TblOrders">
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-                <ScalarProperty Name="OrderPhoneNumber" ColumnName="OrderPhoneNumber" />
-                <ScalarProperty Name="OrderAddress" ColumnName="OrderAddress" />
-                <ScalarProperty Name="OrderCity" ColumnName="OrderCity" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderCity" ColumnName="OrderCity" />
+                <ScalarProperty Name="OrderAddress" ColumnName="OrderAddress" />
+                <ScalarProperty Name="OrderPhoneNumber" ColumnName="OrderPhoneNumber" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblProducts">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblProduct">
               <MappingFragment StoreEntitySet="TblProducts">
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
-                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
-                <ScalarProperty Name="ProductDiscount" ColumnName="ProductDiscount" />
-                <ScalarProperty Name="ProductStock" ColumnName="ProductStock" />
-                <ScalarProperty Name="ProductActive" ColumnName="ProductActive" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProductActive" ColumnName="ProductActive" />
+                <ScalarProperty Name="ProductStock" ColumnName="ProductStock" />
+                <ScalarProperty Name="ProductDiscount" ColumnName="ProductDiscount" />
+                <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+                <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblSubscribers">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblSubscriber">
               <MappingFragment StoreEntitySet="TblSubscribers">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MailAddress" ColumnName="MailAddress" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TblUsers">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblUser">
               <MappingFragment StoreEntitySet="TblUsers">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-                <ScalarProperty Name="UserMail" ColumnName="UserMail" />
                 <ScalarProperty Name="UserPhoneNumber" ColumnName="UserPhoneNumber" />
+                <ScalarProperty Name="UserMail" ColumnName="UserMail" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblAboutUs">
+            <EntityTypeMapping TypeName="DbManavMelihModel.TblAboutU">
+              <MappingFragment StoreEntitySet="TblAboutUs">
+                <ScalarProperty Name="AboutImageUrl" ColumnName="AboutImageUrl" />
+                <ScalarProperty Name="AboutDescription" ColumnName="AboutDescription" />
+                <ScalarProperty Name="AboutTitle" ColumnName="AboutTitle" />
+                <ScalarProperty Name="AboutId" ColumnName="AboutId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

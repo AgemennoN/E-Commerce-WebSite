@@ -33,5 +33,6 @@ namespace PortalDataLayer
         public virtual DbSet<TblProduct> TblProducts { get; set; }
         public virtual DbSet<TblSubscriber> TblSubscribers { get; set; }
         public virtual DbSet<TblUser> TblUsers { get; set; }
+        public virtual DbSet<TblAboutU> TblAboutUs { get; set; }
     }
 }

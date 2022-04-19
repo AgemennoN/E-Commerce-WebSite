@@ -54,6 +54,9 @@
     <Compile Include="sysdiagram.cs">
       <DependentUpon>WebPortalModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TblAboutU.cs">
+      <DependentUpon>WebPortalModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TblCart.cs">
       <DependentUpon>WebPortalModel.tt</DependentUpon>
     </Compile>
