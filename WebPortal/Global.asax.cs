@@ -14,5 +14,15 @@ namespace WebPortal
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
+        void Session_Start()
+        {
+            Session["Admin"] = false;
+        }
+
+        //void Session_End()
+        //{
+        //}
+
     }
 }

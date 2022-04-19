@@ -43,6 +43,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -90,9 +96,161 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
+    <Content Include="wwwroot\css\bootstrap.css" />
+    <Content Include="wwwroot\css\creditly.css" />
+    <Content Include="wwwroot\css\easy-responsive-tabs.css" />
+    <Content Include="wwwroot\css\flexslider.css" />
+    <Content Include="wwwroot\css\font-awesome.css" />
+    <Content Include="wwwroot\css\style.css" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.svg" />
+    <Content Include="wwwroot\images\1.jpg" />
+    <Content Include="wwwroot\images\1.png" />
+    <Content Include="wwwroot\images\10.jpg" />
+    <Content Include="wwwroot\images\10.png" />
+    <Content Include="wwwroot\images\11.jpg" />
+    <Content Include="wwwroot\images\11.png" />
+    <Content Include="wwwroot\images\12.jpg" />
+    <Content Include="wwwroot\images\12.png" />
+    <Content Include="wwwroot\images\13.jpg" />
+    <Content Include="wwwroot\images\13.png" />
+    <Content Include="wwwroot\images\14.jpg" />
+    <Content Include="wwwroot\images\14.png" />
+    <Content Include="wwwroot\images\15.jpg" />
+    <Content Include="wwwroot\images\15.png" />
+    <Content Include="wwwroot\images\16.jpg" />
+    <Content Include="wwwroot\images\16.png" />
+    <Content Include="wwwroot\images\17.jpg" />
+    <Content Include="wwwroot\images\17.png" />
+    <Content Include="wwwroot\images\18.jpg" />
+    <Content Include="wwwroot\images\18.png" />
+    <Content Include="wwwroot\images\19.jpg" />
+    <Content Include="wwwroot\images\19.png" />
+    <Content Include="wwwroot\images\2.jpg" />
+    <Content Include="wwwroot\images\2.png" />
+    <Content Include="wwwroot\images\20.jpg" />
+    <Content Include="wwwroot\images\20.png" />
+    <Content Include="wwwroot\images\21.jpg" />
+    <Content Include="wwwroot\images\21.png" />
+    <Content Include="wwwroot\images\22.jpg" />
+    <Content Include="wwwroot\images\22.png" />
+    <Content Include="wwwroot\images\23.jpg" />
+    <Content Include="wwwroot\images\23.png" />
+    <Content Include="wwwroot\images\24.jpg" />
+    <Content Include="wwwroot\images\24.png" />
+    <Content Include="wwwroot\images\25.jpg" />
+    <Content Include="wwwroot\images\25.png" />
+    <Content Include="wwwroot\images\26.jpg" />
+    <Content Include="wwwroot\images\26.png" />
+    <Content Include="wwwroot\images\27.jpg" />
+    <Content Include="wwwroot\images\27.png" />
+    <Content Include="wwwroot\images\28.jpg" />
+    <Content Include="wwwroot\images\28.png" />
+    <Content Include="wwwroot\images\29.jpg" />
+    <Content Include="wwwroot\images\29.png" />
+    <Content Include="wwwroot\images\3.jpg" />
+    <Content Include="wwwroot\images\3.png" />
+    <Content Include="wwwroot\images\30.jpg" />
+    <Content Include="wwwroot\images\30.png" />
+    <Content Include="wwwroot\images\31.jpg" />
+    <Content Include="wwwroot\images\31.png" />
+    <Content Include="wwwroot\images\32.jpg" />
+    <Content Include="wwwroot\images\32.png" />
+    <Content Include="wwwroot\images\33.jpg" />
+    <Content Include="wwwroot\images\33.png" />
+    <Content Include="wwwroot\images\34.jpg" />
+    <Content Include="wwwroot\images\34.png" />
+    <Content Include="wwwroot\images\35.jpg" />
+    <Content Include="wwwroot\images\35.png" />
+    <Content Include="wwwroot\images\36.png" />
+    <Content Include="wwwroot\images\37.png" />
+    <Content Include="wwwroot\images\38.png" />
+    <Content Include="wwwroot\images\39.png" />
+    <Content Include="wwwroot\images\4.jpg" />
+    <Content Include="wwwroot\images\4.png" />
+    <Content Include="wwwroot\images\40.png" />
+    <Content Include="wwwroot\images\41.png" />
+    <Content Include="wwwroot\images\42.png" />
+    <Content Include="wwwroot\images\43.png" />
+    <Content Include="wwwroot\images\44.png" />
+    <Content Include="wwwroot\images\45.png" />
+    <Content Include="wwwroot\images\46.png" />
+    <Content Include="wwwroot\images\47.png" />
+    <Content Include="wwwroot\images\48.png" />
+    <Content Include="wwwroot\images\49.png" />
+    <Content Include="wwwroot\images\5.jpg" />
+    <Content Include="wwwroot\images\5.png" />
+    <Content Include="wwwroot\images\50.png" />
+    <Content Include="wwwroot\images\51.png" />
+    <Content Include="wwwroot\images\52.png" />
+    <Content Include="wwwroot\images\53.png" />
+    <Content Include="wwwroot\images\54.png" />
+    <Content Include="wwwroot\images\55.png" />
+    <Content Include="wwwroot\images\56.png" />
+    <Content Include="wwwroot\images\57.png" />
+    <Content Include="wwwroot\images\58.png" />
+    <Content Include="wwwroot\images\59.png" />
+    <Content Include="wwwroot\images\6.jpg" />
+    <Content Include="wwwroot\images\6.png" />
+    <Content Include="wwwroot\images\60.png" />
+    <Content Include="wwwroot\images\61.png" />
+    <Content Include="wwwroot\images\62.png" />
+    <Content Include="wwwroot\images\63.png" />
+    <Content Include="wwwroot\images\64.png" />
+    <Content Include="wwwroot\images\65.png" />
+    <Content Include="wwwroot\images\66.png" />
+    <Content Include="wwwroot\images\67.png" />
+    <Content Include="wwwroot\images\68.png" />
+    <Content Include="wwwroot\images\69.png" />
+    <Content Include="wwwroot\images\7.jpg" />
+    <Content Include="wwwroot\images\7.png" />
+    <Content Include="wwwroot\images\70.png" />
+    <Content Include="wwwroot\images\71.png" />
+    <Content Include="wwwroot\images\72.png" />
+    <Content Include="wwwroot\images\73.png" />
+    <Content Include="wwwroot\images\74.png" />
+    <Content Include="wwwroot\images\75.png" />
+    <Content Include="wwwroot\images\76.png" />
+    <Content Include="wwwroot\images\8.jpg" />
+    <Content Include="wwwroot\images\8.png" />
+    <Content Include="wwwroot\images\9.jpg" />
+    <Content Include="wwwroot\images\9.png" />
+    <Content Include="wwwroot\images\arrow.png" />
+    <Content Include="wwwroot\images\card.png" />
+    <Content Include="wwwroot\images\cart.png" />
+    <Content Include="wwwroot\images\close_1.png" />
+    <Content Include="wwwroot\images\img-sp.png" />
+    <Content Include="wwwroot\images\offer.png" />
+    <Content Include="wwwroot\images\paypal.png" />
+    <Content Include="wwwroot\images\star.png" />
+    <Content Include="wwwroot\images\star1.png" />
+    <Content Include="wwwroot\images\tag.png" />
+    <Content Include="wwwroot\js\bootstrap.min.js" />
+    <Content Include="wwwroot\js\counterup.min.js" />
+    <Content Include="wwwroot\js\creditly.js" />
+    <Content Include="wwwroot\js\easing.js" />
+    <Content Include="wwwroot\js\easyResponsiveTabs.js" />
+    <Content Include="wwwroot\js\jquery-1.11.1.min.js" />
+    <Content Include="wwwroot\js\jquery.flexslider.js" />
+    <Content Include="wwwroot\js\jquery.wmuSlider.js" />
+    <Content Include="wwwroot\js\minicart.js" />
+    <Content Include="wwwroot\js\move-top.js" />
+    <Content Include="wwwroot\js\okzoom.js" />
+    <Content Include="wwwroot\js\waypoints.min.js" />
+    <Content Include="wwwroot\templates\about.html" />
+    <Content Include="wwwroot\templates\faqs.html" />
+    <Content Include="wwwroot\templates\index.html" />
+    <Content Include="wwwroot\templates\login.html" />
+    <Content Include="wwwroot\templates\mail.html" />
+    <Content Include="wwwroot\templates\payment.html" />
+    <Content Include="wwwroot\templates\privacy.html" />
+    <Content Include="wwwroot\templates\products.html" />
+    <Content Include="wwwroot\templates\services.html" />
+    <Content Include="wwwroot\templates\short-codes.html" />
+    <Content Include="wwwroot\templates\single.html" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -101,17 +259,34 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_LayoutMainPage.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="wwwroot\fonts\fontawesome-webfont.eot" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.ttf" />
+    <Content Include="wwwroot\fonts\fontawesome-webfont.woff" />
+    <Content Include="wwwroot\fonts\FontAwesome.otf" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessLayer\BusinessLayer.csproj">
+      <Project>{1a7d3f2f-a529-4057-a7e7-01e9eb102bfc}</Project>
+      <Name>BusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PortalDataLayer\PortalDataLayer.csproj">
+      <Project>{65ecd1ec-d420-48fb-9c02-7814272ba25a}</Project>
+      <Name>PortalDataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

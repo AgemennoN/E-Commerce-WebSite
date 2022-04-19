@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8848936045384de89f4ee754f7eea51a" Name="Diagram1">
+        <EntityTypeShape EntityType="DbManavMelihModel.sysdiagram" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblCart" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblCategory" Width="1.5" PointX="0.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblContact" Width="1.5" PointX="10.125" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblOrder" Width="1.5" PointX="7.5" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblProduct" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblSubscriber" Width="1.5" PointX="10.125" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblUser" Width="1.5" PointX="5.375" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="DbManavMelihModel.FK_TblCart_TblProducts1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbManavMelihModel.FK_TblCart_TblUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="DbManavMelihModel.FK_TblProducts_TblCategories1" ManuallyRouted="false" />
+        <AssociationConnector Association="DbManavMelihModel.FK_TblOrders_TblUsers" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
