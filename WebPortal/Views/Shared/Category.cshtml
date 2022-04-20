@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Category";
+
+    List<PortalDataLayer.TblCategory> Categories = new List<PortalDataLayer.TblCategory>();
+    if (ViewBag.Categories != null)
+    {
+        Categories = (List<PortalDataLayer.TblCategory>)ViewBag.Categories;
+    }
+}
+
+<div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    <ul class="nav navbar-nav nav_1">
+        @foreach (PortalDataLayer.TblCategory category in Categories)
+        {
+            <li ><a href="~/Home/Index/@category.CategoryName">@category.CategoryName</a></li>
+        }
+    </ul>
+</div>
+
