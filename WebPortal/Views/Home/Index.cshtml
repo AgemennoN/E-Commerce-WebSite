@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Ana Sayfa";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
-    <!--Hüseyin Bilgiç-->
+
+    <!--Hüseyin Bilgiç - Start -->
+
     List<PortalDataLayer.TblProduct> ProductsByCategory = new List<PortalDataLayer.TblProduct>();
     PortalDataLayer.TblCategory Category = new PortalDataLayer.TblCategory();
     if (ViewBag.Category != null)
@@ -14,7 +16,7 @@
     {
         ProductsByCategory = (List<PortalDataLayer.TblProduct>)ViewBag.ProductsByCategory;
     }
-    <!--Hüseyin Bilgiç-->
+    <!--Hüseyin Bilgiç - End -->
 }
 
 
@@ -22,25 +24,25 @@
     <div class="products-breadcrumb">
         <div class="container">
             <ul>
-                <!--Hüseyin Bilgiç-->
+                <!--Hüseyin Bilgiç - Start -->
                 <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Home</a><span>|</span></li>
                 @if (ViewBag.Category != null)
                 {
                     <li>@Category.CategoryName</li>
                 }
-                <!--Hüseyin Bilgiç-->
+                <!--Hüseyin Bilgiç - End -->
             </ul>
         </div>
     </div>
     <br />
     @if (ProductsByCategory.Count != 0)
     {
-        <!--Hüseyin Bilgiç-->
+        <!--Hüseyin Bilgiç - Start -->
         if (ViewBag.Category != null)
         {
             <h1 class="container" id="categoryName" style="text-align: center;">@Category.CategoryName</h1><br />
         }
-        <!--Hüseyin Bilgiç-->
+        <!--Hüseyin Bilgiç - End -->
         foreach (PortalDataLayer.TblProduct Product in ProductsByCategory)
         {
             if ((bool)Product.ProductActive)
@@ -53,7 +55,7 @@
                             <div class="agile_top_brand_left_grid1">
                                 <figure>
                                     <div class="snipcart-item block">
-                                        <!--Hüseyin Bilgiç-->
+                                        <!--Hüseyin Bilgiç - Start -->
                                         <div class="snipcart-thumb">
                                             <a href="single.html"><img title=" " alt=" " src="~/@Product.ProductImage" /></a>
                                             <p>@Product.ProductName</p>
@@ -66,7 +68,7 @@
 
                                             </h4>
                                         </div>
-                                        <!--Hüseyin Bilgiç-->
+                                        <!--Hüseyin Bilgiç - End -->
                                         <div class="snipcart-details top_brand_home_details">
                                             <form action="checkout.html" method="post">
                                                 <fieldset>
@@ -95,7 +97,7 @@
 
         }
     }
-    //Kategori seçilmemiş ise bu sayfa gözükecek.
+    //Kategori seçilmemiş ise bu sayfa gözükecek. - Hüseyin Bilgiç
     else if (ProductsByCategory.Count == 0 && ViewBag.Category == null)
     {
         <section class="slider">
@@ -129,15 +131,11 @@
             </div>
         </section>
     }
-    //Kategori seçilmiş fakat içerisinde ürün yoksa bu sayfa gözükecek.
+    //Kategori seçilmiş fakat içerisinde ürün yoksa bu sayfa gözükecek. - Hüseyin Bilgiç
     else
     {
-      
-        <!--Hüseyin Bilgiç-->
         <h1 class="container" id="categoryName" style="text-align: center;">Seçilen kategoride ürün bulunmamaktadır.</h1>
-        <!--Hüseyin Bilgiç-->
     }
-
 
     <!-- flexSlider -->
     <link rel="stylesheet" href="~/wwwroot/css/flexslider.css" type="text/css" media="screen" property="" />
@@ -161,7 +159,7 @@
     <div class="container">
         <h3>İndirimli Ürünler</h3>
         <div class="agile_top_brands_grids">
-
+            <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADAN BAŞLAYACAK-->
             <div class="col-md-3 top_brand_left">
                 <div class="hover14 column">
                     <div class="agile_top_brand_left_grid">
@@ -197,43 +195,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-3 top_brand_left">
-                <div class="hover14 column">
-                    <div class="agile_top_brand_left_grid">
-                        @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
-                        <div class="agile_top_brand_left_grid1">
-                            <figure>
-                                <div class="snipcart-item block">
-                                    <div class="snipcart-thumb">
-                                        <a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
-                                        <p>Sun Flower Oil</p>
-                                        <h4>₺ 7.99 <span>₺ 10.00</span></h4>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details">
-                                        <form action="checkout.html" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                <input type="hidden" name="amount" value="7.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADA BİTECEK.-->
             <div class="clearfix"> </div>
         </div>
     </div>

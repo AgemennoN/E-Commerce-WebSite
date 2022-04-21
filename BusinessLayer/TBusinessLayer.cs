@@ -14,7 +14,7 @@ namespace BusinessLayer
         {
             Context = new DbManavMelihEntities();
         }
-        //>>>Hüseyin Bilgiç<<<
+        //<<<Hüseyin Bilgiç - Start
         public List<TblCategory> GetCategories(out string OMessage)
         {
             List<TblCategory> Categories = new List<TblCategory>();
@@ -30,15 +30,16 @@ namespace BusinessLayer
             }
             return Categories;
         }
-        //>>>Hüseyin Bilgiç<<<
-        //>>>Hüseyin Bilgiç<<<
-        public List<TblProduct> GetProductsByCategoryId(int CategoryId,out string OMessage)
+        //Hüseyin Bilgiç - End>>>
+
+        //<<<Hüseyin Bilgiç - Start
+        public List<TblProduct> GetProductsByCategoryId(int CategoryId, out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
             OMessage = "";
             try
             {
-                Products = (from data in Context.TblProducts where data.CategoryId== CategoryId select data).ToList();
+                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId select data).ToList();
             }
             catch (Exception ex)
             {
@@ -47,9 +48,9 @@ namespace BusinessLayer
             }
             return Products;
         }
-        //>>>Hüseyin Bilgiç<<<
+        //Hüseyin Bilgiç - End>>>
 
-        //>>>Hüseyin Bilgiç<<<
+        //<<<Hüseyin Bilgiç - Start
         public TblCategory GetCategoryById(string CategoryName, out string OMessage)
         {
             TblCategory Category = new TblCategory();
@@ -65,7 +66,7 @@ namespace BusinessLayer
             }
             return Category;
         }
-        //>>>Hüseyin Bilgiç<<<
+        //Hüseyin Bilgiç - End>>>
 
     }
 }
