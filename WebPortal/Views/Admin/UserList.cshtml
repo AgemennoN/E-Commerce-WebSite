@@ -1,0 +1,55 @@
+﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Kullanıcılar Listesi Kodu-->
+
+@{
+    ViewBag.Title = "Admin Kullanıcılar Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblUser> GetList = new List<PortalDataLayer.TblUser>();
+
+    if (ViewBag.GetList != null)
+    {
+        GetList = ViewBag.GetList;
+    }
+}
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kullanıcı Adı</th>
+            <th>Kullanıcı Parolası</th>
+            <th>Mail Adresi</th>
+            <th>Telefon Numarası</th>
+            <th>Detay</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in GetList)
+        {
+            <tr>
+                <th>@item.UserId</th>
+                <td>@item.UserName</td>
+                <td>@item.UserPassword</td>
+                <td>@item.UserMail</td>
+                <td>@item.UserPhoneNumber</td>
+                <td><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
+                <td><a href="~/Admin/ProductDelete/@item.UserId" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Kullanıcılar Listesi Kodu-->

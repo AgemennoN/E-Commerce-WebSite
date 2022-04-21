@@ -61,9 +61,10 @@
             <PropertyRef Name="OrderId" />
           </Key>
           <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderPhoneNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="OrderAddress" Type="nvarchar(max)" />
-          <Property Name="OrderCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="TblProducts">
@@ -95,6 +96,7 @@
           <Property Name="UserPassword" Type="nvarchar" MaxLength="100" />
           <Property Name="UserMail" Type="nvarchar" MaxLength="100" />
           <Property Name="UserPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserActive" Type="bit" />
         </EntityType>
         <Association Name="FK_TblCart_TblProducts1">
           <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="0..1" />
@@ -257,6 +259,10 @@
           <Property Name="OrderCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="TblUser" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblOrder" ToRole="TblUser" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TblProduct">
           <Key>
@@ -291,6 +297,7 @@
           <Property Name="UserPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblCarts" Relationship="DbManavMelihModel.FK_TblCart_TblUsers" FromRole="TblUser" ToRole="TblCart" />
           <NavigationProperty Name="TblOrders" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblUser" ToRole="TblOrder" />
+          <Property Name="UserActive" Type="Boolean" />
         </EntityType>
         <Association Name="FK_TblCart_TblProducts1">
           <End Type="DbManavMelihModel.TblProduct" Role="TblProduct" Multiplicity="0..1" />
@@ -404,10 +411,11 @@
           <EntitySetMapping Name="TblOrders">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblOrder">
               <MappingFragment StoreEntitySet="TblOrders">
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderCity" ColumnName="OrderCity" />
-                <ScalarProperty Name="OrderAddress" ColumnName="OrderAddress" />
-                <ScalarProperty Name="OrderPhoneNumber" ColumnName="OrderPhoneNumber" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -437,6 +445,7 @@
           <EntitySetMapping Name="TblUsers">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblUser">
               <MappingFragment StoreEntitySet="TblUsers">
+                <ScalarProperty Name="UserActive" ColumnName="UserActive" />
                 <ScalarProperty Name="UserPhoneNumber" ColumnName="UserPhoneNumber" />
                 <ScalarProperty Name="UserMail" ColumnName="UserMail" />
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />

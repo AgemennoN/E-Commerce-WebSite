@@ -15,8 +15,13 @@
 }
 
 <style>
-    th {color: black !important;}
-    td {color: black !important;}
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
 </style>
 
 <p>
@@ -37,7 +42,7 @@
             <th>Sil</th>
         </tr>
     </thead>
-    <tbody">
+    <tbody>
         @foreach (var item in GetList)
         {
             <tr>
@@ -52,6 +57,6 @@
                 <td><a href="~/Admin/ProductDelete/@item.ProductId" class="btn btn-danger">Sil</a></td>
             </tr>
         }
-        </tbody>
+    </tbody>
 </table>
 <!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
