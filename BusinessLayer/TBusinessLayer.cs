@@ -21,7 +21,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from Data in Context.TblProducts select Data).ToList();
+                Products = (from Data in Context.TblProducts where Data.ProductActive==true select Data).ToList();
             }
             catch (Exception ex)
             {
@@ -29,7 +29,22 @@ namespace BusinessLayer
             }
             return Products;
         }
-        
+        public List<TblProduct> GetFoundProducts(out string OMessage, string UrunAdi)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from Data in Context.TblProducts where Data.ProductName == UrunAdi select Data).ToList();
+                //var Product = Context.Database.SqlQuery("select * from TblProducts where ProductName like '%" + UrunAdi + "%'");
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Products;
+        }
+
 
         ///Vejdi BURAK - End >>>
 

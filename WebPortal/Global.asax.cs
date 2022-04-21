@@ -12,11 +12,11 @@ namespace WebPortal
     {
         protected void Application_Start()
         {
-            string OMessage;
+            //string OMessage;
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            Application["Products"] = BusinessLayer.GetProducts(out OMessage);
+            //Application["Products"] = BusinessLayer.GetProducts(out OMessage);
         }
 
         void Session_Start()
