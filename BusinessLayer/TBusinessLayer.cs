@@ -21,7 +21,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Categories=(from data in Context.TblCategories select data).ToList();
+                Categories=(from data in Context.TblCategories where data.CategoryActive==true select data).ToList();
             }
             catch (Exception ex)
             {
