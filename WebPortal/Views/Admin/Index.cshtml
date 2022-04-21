@@ -1,0 +1,57 @@
+﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
+
+@{
+    ViewBag.Title = "Admin Ürün Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblProduct> GetList = new List<PortalDataLayer.TblProduct>();
+
+    if (ViewBag.GetList != null)
+    {
+        GetList = ViewBag.GetList;
+    }
+}
+
+<style>
+    th {color: black !important;}
+    td {color: black !important;}
+</style>
+
+<p>
+    <a href="~/Admin/ProductCreate" class="btn btn-primary">Ürün Ekle</a>
+</p>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Resim</th>
+            <th>Fiyat</th>
+            <th>İndirim Miktarı</th>
+            <th>Stok</th>
+            <th>Detay</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody">
+        @foreach (var item in GetList)
+        {
+            <tr>
+                <th>@item.ProductId</th>
+                <td>@item.ProductName</td>
+                <td>@item.ProductImage</td>
+                <td>@item.ProductPrice</td>
+                <td>@item.ProductDiscount</td>
+                <td>@item.ProductStock</td>
+                <td><a href="~/Admin/ProductDetail/@item.ProductId" class="btn btn-primary">Detay</a></td>
+                <td><a href="~/Admin/ProductUpdate/@item.ProductId" class="btn btn-warning">Düzenle</a></td>
+                <td><a href="~/Admin/ProductDelete/@item.ProductId" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+        </tbody>
+</table>
+<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
