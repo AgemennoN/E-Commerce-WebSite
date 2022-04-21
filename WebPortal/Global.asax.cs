@@ -13,6 +13,7 @@ namespace WebPortal
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            Application["Products"] = null;
         }
 
         void Session_Start()
