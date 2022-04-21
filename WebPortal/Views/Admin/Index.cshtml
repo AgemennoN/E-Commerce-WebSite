@@ -1,7 +1,7 @@
 ﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
 
 @{
-    ViewBag.Title = "Admin Ürün Listesi";
+    ViewBag.Title = "Siparişler";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -23,40 +23,44 @@
         color: black !important;
     }
 </style>
-
-<p>
-    <a href="~/Admin/ProductCreate" class="btn btn-primary">Ürün Ekle</a>
-</p>
+<div class="container">
+    <div class="w3ls_logo_products_left1">
+        <ul class="special_items">
+            <li><a href="~/Admin/Index" class="btn btn-success-outline">Bekleyen Siparişler</a><i>/</i></li>
+            <li><a href="#" class="btn btn-success-outline">Tüm Siparişler</a><i>/</i></li>
+        </ul>
+    </div>
+</div>
 <br />
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>#</th>
             <th>Ad</th>
-            <th>Resim</th>
+            <th>Telefon Numarası</th>
+            <th>Adres</th>
             <th>Fiyat</th>
-            <th>İndirim Yüzdeliği</th>
-            <th>Stok</th>
+            <th>Tarih / Saat</th>
             <th>Detay</th>
-            <th>Düzenle</th>
             <th>Sil</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in GetList)
+        @*@foreach (var Order in GetOrders)
         {
+            if (((PortalDataLayer.TblOrder)Order).IsDelivered == false)
             <tr>
-                <th width="30">@item.ProductId</th>
-                <td width="500">@item.ProductName</td>
-                <td width="50"><img src=@Url.Content(item.ProductImage) width="30" height="30" /></td>
-                <td width="40">@item.ProductPrice</td>
-                <td width="100">@item.ProductDiscount</td>
-                <td width="40">@item.ProductStock</td>
+                <th width="30">@Order.OrderId</th>
+                <td width="50">@Order.Name</td>
+                <td width="600">@Order.Address ,@Order.City</td>
+                <td width="40">@Order.OrderTime</td>
+                <td width="40">@Order.OrderPrice</td>
                 <td width="40"><a href="~/Admin/ProductDetail/@item.ProductId" class="btn btn-primary">Detay</a></td>
-                <td width="60"><a href="~/Admin/ProductUpdate/@item.ProductId" class="btn btn-warning">Düzenle</a></td>
+            //Detaya gittiğinde, Bu orderın sepetindeki
+                <td width="40"><a href="~/Admin/ProductUpdate/@item.ProductId" class="btn btn-warning">Düzenle</a></td>
                 <td width="30"><a href="~/Admin/ProductDelete/@item.ProductId" class="btn btn-danger">Sil</a></td>
             </tr>
-        }
+        }*@
     </tbody>
 </table>
 <!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
