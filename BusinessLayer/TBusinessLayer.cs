@@ -39,7 +39,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId select data).ToList();
+                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId &&data.ProductActive==true select data).ToList();
             }
             catch (Exception ex)
             {
