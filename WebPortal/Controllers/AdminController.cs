@@ -13,11 +13,20 @@ namespace WebPortal.Controllers
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Yapildi
         public ActionResult Index()
         {
+            //TBusinessLayer BusinessLayer = new TBusinessLayer();
+            //string OMessage;
+            //ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
+            //return View(ViewBag);
+            return View();
+        }
+        public ActionResult ProductList()
+        {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
             return View(ViewBag);
         }
+
         public ActionResult CategoryList()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();

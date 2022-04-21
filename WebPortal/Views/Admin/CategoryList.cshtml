@@ -42,11 +42,11 @@
         @foreach (var item in GetList)
         {
             <tr>
-                <th>@item.CategoryId</th>
+                <th width="30">@item.CategoryId</th>
                 <td>@item.CategoryName</td>
-                <td><a href="~/Admin/ProductDetail/@item.CategoryId" class="btn btn-primary">Detay</a></td>
-                <td><a href="~/Admin/ProductUpdate/@item.CategoryId" class="btn btn-warning">Düzenle</a></td>
-                <td><a href="~/Admin/ProductDelete/@item.CategoryId" class="btn btn-danger">Sil</a></td>
+                <td width="40"><a href="~/Admin/ProductDetail/@item.CategoryId" class="btn btn-primary">Detay</a></td>
+                <td width="60"><a href="~/Admin/ProductUpdate/@item.CategoryId" class="btn btn-warning">Düzenle</a></td>
+                <td width="30"><a href="~/Admin/ProductDelete/@item.CategoryId" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>
