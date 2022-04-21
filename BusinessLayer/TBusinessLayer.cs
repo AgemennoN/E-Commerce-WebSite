@@ -21,7 +21,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Categories = (from data in Context.TblCategories where data.CategoryActive == true select data).ToList();
+                Categories=(from data in Context.TblCategories where data.CategoryActive==true select data).ToList();
             }
             catch (Exception ex)
             {
@@ -29,6 +29,42 @@ namespace BusinessLayer
 
             }
             return Categories;
+        }
+        //Hüseyin Bilgiç - End>>>
+
+        //<<<Hüseyin Bilgiç - Start
+        public List<TblProduct> GetProductsByCategoryId(int CategoryId, out string OMessage)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId &&data.ProductActive==true select data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+
+            }
+            return Products;
+        }
+        //Hüseyin Bilgiç - End>>>
+
+        //<<<Hüseyin Bilgiç - Start
+        public TblCategory GetCategoryById(string CategoryName, out string OMessage)
+        {
+            TblCategory Category = new TblCategory();
+            OMessage = "";
+            try
+            {
+                Category = (from data in Context.TblCategories where data.CategoryName == CategoryName select data).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+
+            }
+            return Category;
         }
         //Hüseyin Bilgiç - End>>>
 
@@ -50,6 +86,7 @@ namespace BusinessLayer
 
             return ProductList;
         }
+
         //Admin Paneli Kullanıcılar Listesi Kodu
         public List<TblUser> GetUserList(out string OMessage)
         {
@@ -61,13 +98,13 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-
                 OMessage = ex.Message;
             }
 
             return UserList;
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
 
     }
 }

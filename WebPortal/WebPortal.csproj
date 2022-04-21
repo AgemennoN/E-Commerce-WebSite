@@ -262,6 +262,7 @@
     <None Include="packages.config" />
     <Content Include="Views\Shared\_LayoutMainPage.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\CategoryList.cshtml" />
