@@ -10,6 +10,7 @@ namespace WebPortal.Controllers
 {
     public class HomeController : Controller
     {
+        //>>>Hüseyin Bilgiç<<<
         public ActionResult Index(string id)
         {
             TBusinessLayer business = new TBusinessLayer();
@@ -18,7 +19,7 @@ namespace WebPortal.Controllers
             if (Category!=null)
             {
                 ViewBag.Category = Category;
-                ViewBag.Products = business.GetProductsByCategoryId(Category.CategoryId, out OMessage);
+                ViewBag.ProductsByCategory = business.GetProductsByCategoryId(Category.CategoryId, out OMessage);
             }
             else if(id !=null&& Category==null)
             {
@@ -27,5 +28,6 @@ namespace WebPortal.Controllers
             ViewBag.Categories = business.GetCategories(out OMessage);
             return View(ViewBag);
         }
+        //>>>Hüseyin Bilgiç<<<
     }
 }

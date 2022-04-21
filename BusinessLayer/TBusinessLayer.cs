@@ -14,7 +14,7 @@ namespace BusinessLayer
         {
             Context = new DbManavMelihEntities();
         }
-        //Hüseyin Bilgiç ekledi.
+        //>>>Hüseyin Bilgiç<<<
         public List<TblCategory> GetCategories(out string OMessage)
         {
             List<TblCategory> Categories = new List<TblCategory>();
@@ -30,7 +30,8 @@ namespace BusinessLayer
             }
             return Categories;
         }
-        //Hüseyin Bilgiç ekledi.
+        //>>>Hüseyin Bilgiç<<<
+        //>>>Hüseyin Bilgiç<<<
         public List<TblProduct> GetProductsByCategoryId(int CategoryId,out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -46,8 +47,9 @@ namespace BusinessLayer
             }
             return Products;
         }
+        //>>>Hüseyin Bilgiç<<<
 
-        //Hüseyin Bilgiç ekledi.
+        //>>>Hüseyin Bilgiç<<<
         public TblCategory GetCategoryById(string CategoryName, out string OMessage)
         {
             TblCategory Category = new TblCategory();
@@ -63,6 +65,7 @@ namespace BusinessLayer
             }
             return Category;
         }
+        //>>>Hüseyin Bilgiç<<<
 
     }
 }

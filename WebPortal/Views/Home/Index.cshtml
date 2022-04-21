@@ -2,43 +2,50 @@
 @{
     ViewBag.Title = "Ana Sayfa";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
-    List<PortalDataLayer.TblProduct> Products = new List<PortalDataLayer.TblProduct>();
+    <!--Hüseyin Bilgiç-->
+    List<PortalDataLayer.TblProduct> ProductsByCategory = new List<PortalDataLayer.TblProduct>();
     PortalDataLayer.TblCategory Category = new PortalDataLayer.TblCategory();
     if (ViewBag.Category != null)
     {
         Category = (PortalDataLayer.TblCategory)ViewBag.Category;
 
     }
-    if (ViewBag.Products != null)
+    if (ViewBag.ProductsByCategory != null)
     {
-        Products = (List<PortalDataLayer.TblProduct>)ViewBag.Products;
+        ProductsByCategory = (List<PortalDataLayer.TblProduct>)ViewBag.ProductsByCategory;
     }
+    <!--Hüseyin Bilgiç-->
 }
 
 
 <div class="w3l_banner_nav_right">
-    @if (Products.Count != 0)
-    {
-        <div class="products-breadcrumb">
-            <div class="container">
-                <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Home</a><span>|</span></li>
-                    @if (ViewBag.Category != null)
-                    {
-                        <li>@Category.CategoryName</li>
-                    }
-                </ul>
-            </div>
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <!--Hüseyin Bilgiç-->
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Home</a><span>|</span></li>
+                @if (ViewBag.Category != null)
+                {
+                    <li>@Category.CategoryName</li>
+                }
+                <!--Hüseyin Bilgiç-->
+            </ul>
         </div>
+    </div>
+    <br />
+    @if (ProductsByCategory.Count != 0)
+    {
+        <!--Hüseyin Bilgiç-->
         if (ViewBag.Category != null)
         {
             <h1 class="container" id="categoryName" style="text-align: center;">@Category.CategoryName</h1><br />
         }
-        foreach (PortalDataLayer.TblProduct Product in Products)
+        <!--Hüseyin Bilgiç-->
+        foreach (PortalDataLayer.TblProduct Product in ProductsByCategory)
         {
             if ((bool)Product.ProductActive)
             {
-                string total = ((decimal)@Product.ProductPrice-((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount/100))).ToString("f2");
+                string total = ((decimal)@Product.ProductPrice - ((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount / 100))).ToString("f2");
                 <div class="col-md-3 top_brand_left">
                     <div class="hover14 column">
                         <div class="agile_top_brand_left_grid">
@@ -46,6 +53,7 @@
                             <div class="agile_top_brand_left_grid1">
                                 <figure>
                                     <div class="snipcart-item block">
+                                        <!--Hüseyin Bilgiç-->
                                         <div class="snipcart-thumb">
                                             <a href="single.html"><img title=" " alt=" " src="~/@Product.ProductImage" /></a>
                                             <p>@Product.ProductName</p>
@@ -58,6 +66,7 @@
 
                                             </h4>
                                         </div>
+                                        <!--Hüseyin Bilgiç-->
                                         <div class="snipcart-details top_brand_home_details">
                                             <form action="checkout.html" method="post">
                                                 <fieldset>
@@ -86,7 +95,8 @@
 
         }
     }
-    else if (Products.Count == 0 && ViewBag.Category == null)
+    //Kategori seçilmemiş ise bu sayfa gözükecek.
+    else if (ProductsByCategory.Count == 0 && ViewBag.Category == null)
     {
         <section class="slider">
             <div class="flexslider">
@@ -119,21 +129,13 @@
             </div>
         </section>
     }
+    //Kategori seçilmiş fakat içerisinde ürün yoksa bu sayfa gözükecek.
     else
     {
-        <div class="products-breadcrumb">
-            <div class="container">
-                <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home">Home</a><span>|</span></li>
-                    @if (ViewBag.Category != null)
-                    {
-                        <li>@Category.CategoryName</li>
-                    }
-                </ul>
-            </div>
-        </div>
-        <hr />
+      
+        <!--Hüseyin Bilgiç-->
         <h1 class="container" id="categoryName" style="text-align: center;">Seçilen kategoride ürün bulunmamaktadır.</h1>
+        <!--Hüseyin Bilgiç-->
     }
 
 
