@@ -22,14 +22,6 @@ namespace WebPortal.Controllers
                 string UrunAdi = Request.QueryString["UrunAdi"].ToString().ToLower();
                 ViewBag.Products = BusinessLayer.GetFoundProducts(out OMessage,UrunAdi);
             }
-            else if(SortingType == "ascending,")//en dusuk fiyata gore sıranan urunler listesi
-            {
-                ViewBag.Products = BusinessLayer.GetProducts(out OMessage);
-            }
-            else if (SortingType == "descending,")//en yuksek fiyata gore sıralanan urunler listesi
-            {
-                ViewBag.Products = BusinessLayer.GetProducts(out OMessage);
-            }
             else // normal sekilde goruntulenecek urunler listesi
             {
                 ViewBag.Products = BusinessLayer.GetProducts(out OMessage);
