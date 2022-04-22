@@ -68,5 +68,24 @@ namespace BusinessLayer
         }
         //Hüseyin Bilgiç - End>>>
 
+
+        //<<<Belgin Çoban - Start
+        public List<TblProduct> GetProducDiscounts(out string OMessage)
+        {
+            List<TblProduct> products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                 products = (from data in Context.TblProducts.Where(p => p.ProductDiscount > 0).OrderByDescending(p => p.ProductDiscount) select data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+
+            }
+            return products;
+        }
+        //Belgin Çoban - End>>>
+
     }
 }

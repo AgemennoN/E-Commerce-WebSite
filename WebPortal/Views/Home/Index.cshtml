@@ -120,12 +120,14 @@
                         </div>
                     </li>
                     <li>
+                        <!-- Belgin Çoban --Start -->
                         <div class="w3l_banner_nav_right_banner2">
-                            <h3>En uygun <i>Fiyatlarla</i></h3>
+                            <h3>Gel Al Noktasında <i> Daha Hesaplı</i></h3>
                             <div class="more">
-                                <a href="kampanyasayfasi.html" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
+                                <a href="/Campaigns/Index" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
                             </div>
                         </div>
+                        <!-- Belgin Çoban --End -->
                     </li>
                 </ul>
             </div>
@@ -160,42 +162,54 @@
         <h3>İndirimli Ürünler</h3>
         <div class="agile_top_brands_grids">
             <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADAN BAŞLAYACAK-->
-            <div class="col-md-3 top_brand_left">
-                <div class="hover14 column">
-                    <div class="agile_top_brand_left_grid">
-                        @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
-                        <div class="agile_top_brand_left_grid1">
-                            <figure>
-                                <div class="snipcart-item block">
-                                    <div class="snipcart-thumb">
-                                        <a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
-                                        <p>Sun Flower Oil</p>
-                                        <h4>₺ 7.99 <span>₺ 10.00</span></h4>
+            <!-- Belgin Çoban -Start-->
+            @foreach (var Product in ViewBag.Products)
+            {
+                string total = ((decimal)@Product.ProductPrice - ((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount / 100))).ToString("f2");
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
+
+                                            @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
+                                                <p>Sun Flower Oil</p>*@
+                                            <p>@Product.ProductName</p>
+                                            <h4>@total <span>@Product.ProductPrice</span></h4>
+
+
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="checkout.html" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
+                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
+                                                    <input type="hidden" name="amount" value="7.99" />
+                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                    <input type="hidden" name="currency_code" value="TRY" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details">
-                                        <form action="checkout.html" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                <input type="hidden" name="amount" value="7.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </figure>
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
+
             <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADA BİTECEK.-->
+            <!-- Belgin Çoban - End.-->
             <div class="clearfix"> </div>
         </div>
     </div>
