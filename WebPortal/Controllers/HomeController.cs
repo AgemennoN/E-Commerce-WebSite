@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BusinessLayer;
 using PortalDataLayer;
 
+
 namespace WebPortal.Controllers
 {
     public class HomeController : Controller
@@ -30,5 +31,7 @@ namespace WebPortal.Controllers
             ViewBag.Categories = business.GetCategories(out OMessage);
             return View(ViewBag);
         }
+
+        
     }
 }

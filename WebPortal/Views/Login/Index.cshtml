@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+
+
+    
+}
+
+
+
+<body>
+
+    <!-- script-for sticky-nav -->
+    <script>
+        $(document).ready(function () {
+            var navoffeset = $(".agileits_header").offset().top;
+            $(window).scroll(function () {
+                var scrollpos = $(window).scrollTop();
+                if (scrollpos >= navoffeset) {
+                    $(".agileits_header").addClass("fixed");
+                } else {
+                    $(".agileits_header").removeClass("fixed");
+                }
+            });
+
+        });
+    </script>
+    <!-- //script-for sticky-nav -->
+    <div class="w3l_banner_nav_right">
+        <div class="products-breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Ana Sayfa</a><span>|</span></li>
+                    <li>Giriş Yap</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="logo_products">
+        <div class="container">
+            <div class="w3l_banner_nav_right">
+                <!-- login -->
+                <div class="w3_login">
+                    <h3>Giriş Yap & Kayıt Ol</h3>
+                    <div class="w3_login_module">
+                        <div class="module form-module">
+                            <div class="toggle">
+                                <i class="fa fa-times fa-pencil"></i>
+                                <div class="tooltip">Tıkla</div>
+                            </div>
+                            <div class="form">
+                                <h2>Giriş Yap</h2>
+                                @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                                {
+                                    <input type="text" name="TxtUsernameLogin" placeholder="Kullanıcı Adı">
+                                    <input type="password" name="TxtPasswordLogin" placeholder="Şifre">
+                                    <button type="submit">Giriş</button>
+                                }
+
+
+                            </div>
+
+                            <div class="form">
+                                <h2>Hesap Oluştur</h2>
+                                @using (Html.BeginForm("Register", "Login", FormMethod.Post))
+                                {
+                                    <input type="text" name="TxtUsername" placeholder="Kullanıcı Adı">
+                                    <input type="password" name="TxtPassword" placeholder="Şifre">
+                                    <input type="email" name="TxtEmail" placeholder="Mail Adresi">
+                                    <input type="text" name="TxtPhone" placeholder="Telefon Numarası">
+                                    <button type="submit">Kayıt Ol</button>
+                                }
+                            </div>
+
+                            @*<div class="cta"><a href="#">Şifremi unuttum </a></div>*@
+                        </div>
+                    </div>
+                    <script>
+                        $('.toggle').click(function () {
+                            // Switches the Icon
+                            $(this).children('i').toggleClass('fa-pencil');
+                            // Switches the forms
+                            $('.form').animate({
+                                height: "toggle",
+                                'padding-top': 'toggle',
+                                'padding-bottom': 'toggle',
+                                opacity: "toggle"
+                            }, "slow");
+                        });
+                    </script>
+                </div>
+                <!-- //login -->
+            </div>
+        </div>
+    </div>
+    <!-- //header -->
+    <!-- newsletter-top-serv-btm -->
+    <div class="newsletter-top-serv-btm">
+        <div class="container">
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                </div>
+                <h3>Nam libero tempore</h3>
+                <p>
+                    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+                    saepe eveniet ut et voluptates repudiandae sint et.
+                </p>
+            </div>
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-bar-chart" aria-hidden="true"></i>
+                </div>
+                <h3>officiis debitis aut rerum</h3>
+                <p>
+                    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+                    saepe eveniet ut et voluptates repudiandae sint et.
+                </p>
+            </div>
+            <div class="col-md-4 wthree_news_top_serv_btm_grid">
+                <div class="wthree_news_top_serv_btm_grid_icon">
+                    <i class="fa fa-truck" aria-hidden="true"></i>
+                </div>
+                <h3>eveniet ut et voluptates</h3>
+                <p>
+                    Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus
+                    saepe eveniet ut et voluptates repudiandae sint et.
+                </p>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //newsletter-top-serv-btm -->
+    <!-- newsletter -->
+    <div class="newsletter">
+        <div class="container">
+            <div class="w3agile_newsletter_left">
+                <h3>sign up for our newsletter</h3>
+            </div>
+            <div class="w3agile_newsletter_right">
+                <form action="#" method="post">
+                    <input type="email" name="Email" value="Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                    <input type="submit" value="subscribe now">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!-- //newsletter -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- here stars scrolling icon -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            /*
+                var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+                };
+            */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+    <script src="js/minicart.js"></script>
+    <script>
+        paypal.minicart.render();
+
+        paypal.minicart.cart.on('checkout', function (evt) {
+            var items = this.items(),
+                len = items.length,
+                total = 0,
+                i;
+
+            // Count the number of each item in the cart
+            for (i = 0; i < len; i++) {
+                total += items[i].get('quantity');
+            }
+
+            if (total < 3) {
+                alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+                evt.preventDefault();
+            }
+        });
+
+    </script>
+</body>
