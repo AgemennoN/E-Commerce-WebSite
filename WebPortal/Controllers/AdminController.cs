@@ -15,10 +15,6 @@ namespace WebPortal.Controllers
         //Admin Sayfasi Urunler Listesi Yapildi
         public ActionResult Index()
         {
-            //TBusinessLayer BusinessLayer = new TBusinessLayer();
-            //string OMessage;
-            //ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
-            //return View(ViewBag);
             return View();
         }
         public ActionResult ProductList()
@@ -26,21 +22,6 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
-            return View(ViewBag);
-        }
-
-        public ActionResult CategoryList()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetList = BusinessLayer.GetCategories(out OMessage);
-            return View(ViewBag);
-        }
-        public ActionResult UserList()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetList = BusinessLayer.GetUserList(out OMessage);
             return View(ViewBag);
         }
 
@@ -82,6 +63,15 @@ namespace WebPortal.Controllers
             return RedirectToAction("ProductList", "Admin");
         }
 
+
+        public ActionResult CategoryList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetList = BusinessLayer.GetCategories(out OMessage);
+            return View(ViewBag);
+        }
+
         // Get: Kategori Ekleme Sayfasi
         [HttpGet]
         public ActionResult CategoryCreate()
@@ -104,6 +94,19 @@ namespace WebPortal.Controllers
 
             return RedirectToAction("CategoryList", "Admin");
         }
+
+
+        public ActionResult UserList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetList = BusinessLayer.GetUserList(out OMessage);
+            return View(ViewBag);
+        }
+
+
+
+
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi
