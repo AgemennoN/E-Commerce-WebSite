@@ -19,7 +19,7 @@ namespace WebPortal.Controllers
 
             if(Request.QueryString["UrunAdi"]!=null)//Urun arama ile donen urunler listesi
             {
-                string UrunAdi = Request.QueryString["UrunAdi"].ToString();
+                string UrunAdi = Request.QueryString["UrunAdi"].ToString().ToLower();
                 ViewBag.Products = BusinessLayer.GetFoundProducts(out OMessage,UrunAdi);
             }
             else if(SortingType == "ascending,")//en dusuk fiyata gore sıranan urunler listesi

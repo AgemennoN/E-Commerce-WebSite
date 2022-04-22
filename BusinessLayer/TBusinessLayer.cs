@@ -35,7 +35,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from Data in Context.TblProducts where Data.ProductName.Contains(UrunAdi) where Data.ProductActive==true select Data).ToList();                
+                Products = (from Data in Context.TblProducts where (Data.ProductName.ToLower()).Contains(UrunAdi) && Data.ProductActive==true select Data).ToList();                
             }
             catch (Exception ex)
             {
