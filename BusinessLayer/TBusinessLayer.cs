@@ -163,6 +163,22 @@ namespace BusinessLayer
 
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        public List<TblOrder> GetOrderList(out string OMessage)
+        {
+            List<TblOrder> OrderList = new List<TblOrder>();
+            OMessage = "";
+            try
+            {
+                OrderList = (from Data in Context.TblOrders select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                OMessage = ex.Message;
+            }
+
+            return OrderList;
+        }
 
     }
 }

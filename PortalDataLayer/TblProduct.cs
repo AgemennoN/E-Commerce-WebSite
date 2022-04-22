@@ -26,7 +26,7 @@ namespace PortalDataLayer
         public Nullable<decimal> ProductPrice { get; set; }
         public Nullable<decimal> ProductDiscount { get; set; }
         public Nullable<int> ProductStock { get; set; }
-        public Nullable<bool> ProductActive { get; set; }
+        public bool ProductActive { get; set; }
         public Nullable<int> CategoryId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

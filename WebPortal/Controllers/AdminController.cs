@@ -15,7 +15,10 @@ namespace WebPortal.Controllers
         //Admin Sayfasi Urunler Listesi Yapildi
         public ActionResult Index()
         {
-            return View();
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetList = BusinessLayer.GetOrderList(out OMessage);
+            return View(ViewBag);
         }
         public ActionResult ProductList()
         {

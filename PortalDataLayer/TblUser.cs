@@ -27,6 +27,7 @@ namespace PortalDataLayer
         public string UserMail { get; set; }
         public string UserPhoneNumber { get; set; }
         public Nullable<bool> UserActive { get; set; }
+        public Nullable<System.DateTime> UserRegisterDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblCart> TblCarts { get; set; }

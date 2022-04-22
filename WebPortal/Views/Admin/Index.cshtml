@@ -6,11 +6,11 @@
 }
 
 @{
-    List<PortalDataLayer.TblProduct> GetList = new List<PortalDataLayer.TblProduct>();
+    List<PortalDataLayer.TblOrder> GetOrders = new List<PortalDataLayer.TblOrder>();
 
     if (ViewBag.GetList != null)
     {
-        GetList = ViewBag.GetList;
+        GetOrders = ViewBag.GetList;
     }
 }
 
@@ -42,25 +42,25 @@
             <th>Fiyat</th>
             <th>Tarih / Saat</th>
             <th>Detay</th>
-            <th>Sil</th>
         </tr>
     </thead>
     <tbody>
-        @*@foreach (var Order in GetOrders)
+        @foreach (var Order in GetOrders)
         {
             if (((PortalDataLayer.TblOrder)Order).IsDelivered == false)
-            <tr>
-                <th width="30">@Order.OrderId</th>
-                <td width="50">@Order.Name</td>
-                <td width="600">@Order.Address ,@Order.City</td>
-                <td width="40">@Order.OrderTime</td>
-                <td width="40">@Order.OrderPrice</td>
-                <td width="40"><a href="~/Admin/ProductDetail/@item.ProductId" class="btn btn-primary">Detay</a></td>
-            //Detaya gittiğinde, Bu orderın sepetindeki
-                <td width="40"><a href="~/Admin/ProductUpdate/@item.ProductId" class="btn btn-warning">Düzenle</a></td>
-                <td width="30"><a href="~/Admin/ProductDelete/@item.ProductId" class="btn btn-danger">Sil</a></td>
-            </tr>
-        }*@
+            {
+                <tr>
+                    <th width="30">@Order.OrderId</th>
+                    <td width="50">@Order.Name</td>
+                    <td width="50">@Order.PhoneNumber</td>
+                    <td width="600">@Order.Address ,@Order.City</td>
+                    <td width="40">@Order.TotalPrice</td>
+                    <td width="40">@Order.OrderDateTime</td>
+                    <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
+                    <td width="40"><a href="#" class="btn btn-warning">Düzenle</a></td>
+                </tr>
+            }
+        }
     </tbody>
 </table>
 <!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->

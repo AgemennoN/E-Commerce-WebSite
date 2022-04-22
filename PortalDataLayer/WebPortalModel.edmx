@@ -4,14 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="DbManavMelihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
+    <Schema Namespace="DbManavMelihModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="name" Nullable="false" MaxLength="128" Type="nvarchar" />
-          <Property Name="principal_id" Nullable="false" Type="int" />
-          <Property Name="diagram_id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
@@ -19,8 +19,8 @@
           <Key>
             <PropertyRef Name="AboutId" />
           </Key>
-          <Property Name="AboutId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="AboutTitle" MaxLength="100" Type="nvarchar" />
+          <Property Name="AboutId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AboutTitle" Type="nvarchar" MaxLength="100" />
           <Property Name="AboutDescription" Type="nvarchar(max)" />
           <Property Name="AboutImageUrl" Type="nvarchar(max)" />
         </EntityType>
@@ -28,12 +28,11 @@
           <Key>
             <PropertyRef Name="CartId" />
           </Key>
-          <Property Name="CartId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+          <Property Name="CartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Quantity" Type="int" />
-          <Property Name="Price" Precision="18" Scale="2" Type="decimal" />
-          <Property Name="IsOrdered" Nullable="false" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="IsOrdered" Type="int" Nullable="false" />
           <Property Name="DateTime" Type="smalldatetime" />
-          <Property Name="ProductDescprition" Type="nvarchar(max)" />
           <Property Name="ProductId" Type="int" />
           <Property Name="UserId" Type="int" />
         </EntityType>
@@ -41,66 +40,71 @@
           <Key>
             <PropertyRef Name="CategoryId" />
           </Key>
-          <Property Name="CategoryId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="CategoryName" MaxLength="50" Type="nvarchar" />
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
           <Property Name="CategoryActive" Type="bit" />
         </EntityType>
         <EntityType Name="TblContacts">
           <Key>
             <PropertyRef Name="ContactId" />
           </Key>
-          <Property Name="ContactId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="ContactName" MaxLength="50" Type="nvarchar" />
-          <Property Name="ContactMail" MaxLength="50" Type="nvarchar" />
-          <Property Name="ContactPhone" MaxLength="20" Type="nvarchar" />
-          <Property Name="ContactSubject" MaxLength="50" Type="nvarchar" />
+          <Property Name="ContactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="ContactSubject" Type="nvarchar" MaxLength="50" />
           <Property Name="ContactMessage" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="TblOrders">
           <Key>
             <PropertyRef Name="OrderId" />
           </Key>
-          <Property Name="OrderId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="Name" MaxLength="50" Type="nvarchar" />
-          <Property Name="PhoneNumber" MaxLength="50" Type="nvarchar" />
+          <Property Name="OrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="City" MaxLength="50" Type="nvarchar" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="OrderedCarts" Type="nvarchar(max)" />
+          <Property Name="IsDelivered" Type="bit" />
+          <Property Name="OrderDateTime" Type="smalldatetime" />
           <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="TblProducts">
           <Key>
             <PropertyRef Name="ProductId" />
           </Key>
-          <Property Name="ProductId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="ProductName" MaxLength="50" Type="nvarchar" />
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
           <Property Name="ProductImage" Type="nvarchar(max)" />
-          <Property Name="ProductPrice" Precision="18" Scale="2" Type="decimal" />
-          <Property Name="ProductDiscount" Precision="18" Scale="2" Type="decimal" />
+          <Property Name="ProductPrice" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProductDiscount" Type="decimal" Precision="18" Scale="2" />
           <Property Name="ProductStock" Type="int" />
-          <Property Name="ProductActive" Type="bit" />
+          <Property Name="ProductActive" Type="bit" Nullable="false" />
           <Property Name="CategoryId" Type="int" />
         </EntityType>
         <EntityType Name="TblSubscribers">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="MailAddress" MaxLength="100" Type="nvarchar" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MailAddress" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="TblUsers">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
-          <Property Name="UserId" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
-          <Property Name="UserName" MaxLength="100" Type="nvarchar" />
-          <Property Name="UserPassword" MaxLength="100" Type="nvarchar" />
-          <Property Name="UserMail" MaxLength="100" Type="nvarchar" />
-          <Property Name="UserPhoneNumber" MaxLength="50" Type="nvarchar" />
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserMail" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserPhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserRegisterDate" Type="smalldatetime" />
           <Property Name="UserActive" Type="bit" />
         </EntityType>
         <Association Name="FK_TblCart_TblProducts1">
-          <End Type="Self.TblProducts" Multiplicity="0..1" Role="TblProducts" />
-          <End Type="Self.TblCart" Multiplicity="*" Role="TblCart" />
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="0..1" />
+          <End Role="TblCart" Type="Self.TblCart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblProducts">
               <PropertyRef Name="ProductId" />
@@ -111,8 +115,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblCart_TblUsers">
-          <End Type="Self.TblUsers" Multiplicity="0..1" Role="TblUsers" />
-          <End Type="Self.TblCart" Multiplicity="*" Role="TblCart" />
+          <End Role="TblUsers" Type="Self.TblUsers" Multiplicity="0..1" />
+          <End Role="TblCart" Type="Self.TblCart" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblUsers">
               <PropertyRef Name="UserId" />
@@ -123,8 +127,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblOrders_TblUsers">
-          <End Type="Self.TblUsers" Multiplicity="0..1" Role="TblUsers" />
-          <End Type="Self.TblOrders" Multiplicity="*" Role="TblOrders" />
+          <End Role="TblUsers" Type="Self.TblUsers" Multiplicity="0..1" />
+          <End Role="TblOrders" Type="Self.TblOrders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblUsers">
               <PropertyRef Name="UserId" />
@@ -135,8 +139,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TblProducts_TblCategories1">
-          <End Type="Self.TblCategories" Multiplicity="0..1" Role="TblCategories" />
-          <End Type="Self.TblProducts" Multiplicity="*" Role="TblProducts" />
+          <End Role="TblCategories" Type="Self.TblCategories" Multiplicity="0..1" />
+          <End Role="TblProducts" Type="Self.TblProducts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TblCategories">
               <PropertyRef Name="CategoryId" />
@@ -157,20 +161,20 @@
           <EntitySet Name="TblSubscribers" EntityType="Self.TblSubscribers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblUsers" EntityType="Self.TblUsers" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TblCart_TblProducts1" Association="Self.FK_TblCart_TblProducts1">
-            <End EntitySet="TblProducts" Role="TblProducts" />
-            <End EntitySet="TblCart" Role="TblCart" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
+            <End Role="TblCart" EntitySet="TblCart" />
           </AssociationSet>
           <AssociationSet Name="FK_TblCart_TblUsers" Association="Self.FK_TblCart_TblUsers">
-            <End EntitySet="TblUsers" Role="TblUsers" />
-            <End EntitySet="TblCart" Role="TblCart" />
+            <End Role="TblUsers" EntitySet="TblUsers" />
+            <End Role="TblCart" EntitySet="TblCart" />
           </AssociationSet>
           <AssociationSet Name="FK_TblOrders_TblUsers" Association="Self.FK_TblOrders_TblUsers">
-            <End EntitySet="TblUsers" Role="TblUsers" />
-            <End EntitySet="TblOrders" Role="TblOrders" />
+            <End Role="TblUsers" EntitySet="TblUsers" />
+            <End Role="TblOrders" EntitySet="TblOrders" />
           </AssociationSet>
           <AssociationSet Name="FK_TblProducts_TblCategories1" Association="Self.FK_TblProducts_TblCategories1">
-            <End EntitySet="TblCategories" Role="TblCategories" />
-            <End EntitySet="TblProducts" Role="TblProducts" />
+            <End Role="TblCategories" EntitySet="TblCategories" />
+            <End Role="TblProducts" EntitySet="TblProducts" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -182,7 +186,6 @@
           <EntitySet Name="TblCarts" EntityType="DbManavMelihModel.TblCart" />
           <EntitySet Name="TblCategories" EntityType="DbManavMelihModel.TblCategory" />
           <EntitySet Name="TblContacts" EntityType="DbManavMelihModel.TblContact" />
-          <EntitySet Name="TblOrders" EntityType="DbManavMelihModel.TblOrder" />
           <EntitySet Name="TblProducts" EntityType="DbManavMelihModel.TblProduct" />
           <EntitySet Name="TblSubscribers" EntityType="DbManavMelihModel.TblSubscriber" />
           <EntitySet Name="TblUsers" EntityType="DbManavMelihModel.TblUser" />
@@ -198,11 +201,12 @@
             <End Role="TblCategory" EntitySet="TblCategories" />
             <End Role="TblProduct" EntitySet="TblProducts" />
           </AssociationSet>
+          <EntitySet Name="TblAboutUs" EntityType="DbManavMelihModel.TblAboutU" />
+          <EntitySet Name="TblOrders" EntityType="DbManavMelihModel.TblOrder" />
           <AssociationSet Name="FK_TblOrders_TblUsers" Association="DbManavMelihModel.FK_TblOrders_TblUsers">
             <End Role="TblUser" EntitySet="TblUsers" />
             <End Role="TblOrder" EntitySet="TblOrders" />
           </AssociationSet>
-          <EntitySet Name="TblAboutUs" EntityType="DbManavMelihModel.TblAboutU" />
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -249,18 +253,6 @@
           <Property Name="ContactSubject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="TblOrder">
-          <Key>
-            <PropertyRef Name="OrderId" />
-          </Key>
-          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <NavigationProperty Name="TblUser" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblOrder" ToRole="TblUser" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="TblProduct">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -271,7 +263,7 @@
           <Property Name="ProductPrice" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ProductDiscount" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="ProductStock" Type="Int32" />
-          <Property Name="ProductActive" Type="Boolean" />
+          <Property Name="ProductActive" Type="Boolean" Nullable="false" />
           <Property Name="CategoryId" Type="Int32" />
           <NavigationProperty Name="TblCarts" Relationship="DbManavMelihModel.FK_TblCart_TblProducts1" FromRole="TblProduct" ToRole="TblCart" />
           <NavigationProperty Name="TblCategory" Relationship="DbManavMelihModel.FK_TblProducts_TblCategories1" FromRole="TblProduct" ToRole="TblCategory" />
@@ -293,8 +285,9 @@
           <Property Name="UserMail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="UserPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="TblCarts" Relationship="DbManavMelihModel.FK_TblCart_TblUsers" FromRole="TblUser" ToRole="TblCart" />
-          <NavigationProperty Name="TblOrders" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblUser" ToRole="TblOrder" />
           <Property Name="UserActive" Type="Boolean" />
+          <Property Name="UserRegisterDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="TblOrders" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblUser" ToRole="TblOrder" />
         </EntityType>
         <Association Name="FK_TblCart_TblProducts1">
           <End Type="DbManavMelihModel.TblProduct" Role="TblProduct" Multiplicity="0..1" />
@@ -332,6 +325,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="TblAboutU">
+          <Key>
+            <PropertyRef Name="AboutId" />
+          </Key>
+          <Property Name="AboutId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AboutTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AboutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AboutImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="OrderedCarts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDelivered" Type="Boolean" />
+          <Property Name="OrderDateTime" Type="DateTime" Precision="0" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="TblUser" Relationship="DbManavMelihModel.FK_TblOrders_TblUsers" FromRole="TblOrder" ToRole="TblUser" />
+        </EntityType>
         <Association Name="FK_TblOrders_TblUsers">
           <End Type="DbManavMelihModel.TblUser" Role="TblUser" Multiplicity="0..1" />
           <End Type="DbManavMelihModel.TblOrder" Role="TblOrder" Multiplicity="*" />
@@ -344,15 +362,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="TblAboutU">
-          <Key>
-            <PropertyRef Name="AboutId" />
-          </Key>
-          <Property Name="AboutId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AboutTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="AboutDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AboutImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -375,7 +384,6 @@
               <MappingFragment StoreEntitySet="TblCart">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="ProductDescprition" ColumnName="ProductDescprition" />
                 <ScalarProperty Name="DateTime" ColumnName="DateTime" />
                 <ScalarProperty Name="IsOrdered" ColumnName="IsOrdered" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
@@ -405,18 +413,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TblOrders">
-            <EntityTypeMapping TypeName="DbManavMelihModel.TblOrder">
-              <MappingFragment StoreEntitySet="TblOrders">
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TblProducts">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblProduct">
               <MappingFragment StoreEntitySet="TblProducts">
@@ -442,6 +438,7 @@
           <EntitySetMapping Name="TblUsers">
             <EntityTypeMapping TypeName="DbManavMelihModel.TblUser">
               <MappingFragment StoreEntitySet="TblUsers">
+                <ScalarProperty Name="UserRegisterDate" ColumnName="UserRegisterDate" />
                 <ScalarProperty Name="UserActive" ColumnName="UserActive" />
                 <ScalarProperty Name="UserPhoneNumber" ColumnName="UserPhoneNumber" />
                 <ScalarProperty Name="UserMail" ColumnName="UserMail" />
@@ -458,6 +455,22 @@
                 <ScalarProperty Name="AboutDescription" ColumnName="AboutDescription" />
                 <ScalarProperty Name="AboutTitle" ColumnName="AboutTitle" />
                 <ScalarProperty Name="AboutId" ColumnName="AboutId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblOrders">
+            <EntityTypeMapping TypeName="DbManavMelihModel.TblOrder">
+              <MappingFragment StoreEntitySet="TblOrders">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderDateTime" ColumnName="OrderDateTime" />
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="OrderedCarts" ColumnName="OrderedCarts" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
