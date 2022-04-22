@@ -1,11 +1,14 @@
 ﻿
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "HighPrice";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 
+    List<PortalDataLayer.TblProduct> GetPriceProducts = new List<PortalDataLayer.TblProduct>();
+    if (ViewBag.HighProductsList != null)
+    {
+        GetPriceProducts = ViewBag.HighProductsList;
+    }
 }
-
 <div class="w3l_banner_nav_right">
     <div class="products-breadcrumb">
         <div class="container">
@@ -17,23 +20,24 @@
     </div>
     <div class="w3ls_w3l_banner_nav_right_grid">
         <h3>Tüm Ürünler</h3>
-        <div class="dropdown" style="margin:0 6% 3% 0; float:right">
+        <!--FIRAT-START-->
+        <div class="dropdown" style="margin-right:0 6% 3% 0; float:right">
             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Akıllı Arama<span class="caret"></span></button>
             <ul class="dropdown-menu" style="opacity:0.7;">
                 <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
                 <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
             </ul>
         </div><br />
+        <!--FIRAT--END-->
         <div class="w3ls_w3l_banner_nav_right_grid1">
 
             @{
-                List<PortalDataLayer.TblProduct> Products = (List<PortalDataLayer.TblProduct>)HttpContext.Current.Application["Products"];
-                foreach (var Product in Products)
+                foreach (var Product in GetPriceProducts)
                 {
                     <div class="col-md-3 w3ls_w3l_banner_left">
                         <div class="hover14 column">
                             <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                               
+
                                 <div class="agile_top_brand_left_grid1">
                                     <figure>
                                         <div class="snipcart-item block">
@@ -76,3 +80,4 @@
     </div>
 </div>
 <div class="clearfix"></div>
+

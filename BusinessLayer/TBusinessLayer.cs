@@ -33,6 +33,34 @@ namespace BusinessLayer
 
         ///Vejdi BURAK - End >>>
 
+        public List<TblProduct> GetLowPrice(out string OMessage)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive==true orderby DataLow.ProductPrice select DataLow).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Products;
+        }
+        public List<TblProduct> GetHighPrice(out string OMessage)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive == true orderby DataLow.ProductPrice descending select DataLow).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Products;
+        }
 
 
     }
