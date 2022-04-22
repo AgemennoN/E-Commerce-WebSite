@@ -21,7 +21,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Categories=(from data in Context.TblCategories where data.CategoryActive==true select data).ToList();
+                Categories = (from data in Context.TblCategories where data.CategoryActive == true select data).ToList();
             }
             catch (Exception ex)
             {
@@ -39,7 +39,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId &&data.ProductActive==true select data).ToList();
+                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId && data.ProductActive == true select data).ToList();
             }
             catch (Exception ex)
             {
@@ -102,6 +102,43 @@ namespace BusinessLayer
             }
 
             return UserList;
+        }
+
+        public bool AddProduct(out string OMessage, TblProduct Product)
+        {
+            OMessage = "";
+            bool IsAdded = false;
+            try
+            {
+                List<TblProduct> IsActive = null;
+
+                Context.TblProducts.Add(Product);
+                //Context.Database.SqlQuery<TblProduct>("update TblProduct set ProductActive='true' where ProductActive='null'").ToList();
+                Context.SaveChanges();
+                IsAdded = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return IsAdded;
+        }
+
+        // Urun Ekleme Butonuna Tiklayinca Kategoriyi DropDown Cekmek İcin
+        public List<TblCategory> GetCategoryList(out string OMessage)
+        {
+            List<TblCategory> CategoryList = new List<TblCategory>();
+            OMessage = "";
+            try
+            {
+                CategoryList = (from Data in Context.TblCategories where Data.CategoryActive == true orderby Data.CategoryName ascending select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return CategoryList;
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
