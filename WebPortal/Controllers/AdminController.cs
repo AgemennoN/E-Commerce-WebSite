@@ -13,12 +13,23 @@ namespace WebPortal.Controllers
         // GET: Admin
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         //Admin Sayfasi Urunler Listesi Yapildi
-        public ActionResult Index()
+        public ActionResult Index(string Id)
         {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetList = BusinessLayer.GetOrderList(out OMessage);
-            return View(ViewBag);
+            if (Id != "All")
+            {
+                TBusinessLayer BusinessLayer = new TBusinessLayer();
+                string OMessage;
+                ViewBag.GetList = BusinessLayer.GetNonDeliveredOrderList(out OMessage);
+                return View(ViewBag);
+            }
+            else
+            {
+                TBusinessLayer BusinessLayer = new TBusinessLayer();
+                string OMessage;
+                ViewBag.GetList = BusinessLayer.GetOrderList(out OMessage);
+                return View(ViewBag);
+            }
+
         }
         public ActionResult ProductList()
         {
@@ -107,7 +118,14 @@ namespace WebPortal.Controllers
             return View(ViewBag);
         }
 
-
+        public ActionResult ProductDelete(string Id)
+        {
+            int ProductId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.ProductDeleteFromDb(ProductId, out OMessage);
+            return RedirectToAction("ProductList", "Admin");
+        }
 
 
 

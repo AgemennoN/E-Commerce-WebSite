@@ -54,7 +54,7 @@
                 <td width="40">@item.ProductStock</td>
                 <td width="40"><a href="~/Admin/ProductDetail/@item.ProductId" class="btn btn-primary">Detay</a></td>
                 <td width="60"><a href="~/Admin/ProductUpdate/@item.ProductId" class="btn btn-warning">Düzenle</a></td>
-                <td width="30"><a href="~/Admin/ProductDelete/@item.ProductId" class="btn btn-danger">Sil</a></td>
+                <td width="30"><a href="@Url.Action("ProductDelete","Admin", new {Id = @item.ProductId} )" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>

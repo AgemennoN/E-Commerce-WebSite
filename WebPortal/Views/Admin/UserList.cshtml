@@ -33,6 +33,7 @@
             <th>Kullanıcı Parolası</th>
             <th>Mail Adresi</th>
             <th>Telefon Numarası</th>
+            <th>Üye Olma Tarihi</th>
             <th>Detay</th>
             <th>Sil</th>
         </tr>
@@ -40,15 +41,16 @@
     <tbody>
         @foreach (var item in GetList)
         {
-            <tr>
-                <th width="30">@item.UserId</th>
-                <td>@item.UserName</td>
-                <td>@item.UserPassword</td>
-                <td>@item.UserMail</td>
-                <td>@item.UserPhoneNumber</td>
-                <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
-                <td width="30"><a href="~/Admin/ProductDelete/@item.UserId" class="btn btn-danger">Sil</a></td>
-            </tr>
+        <tr>
+            <th width="30">@item.UserId</th>
+            <td>@item.UserName</td>
+            <td>@item.UserPassword</td>
+            <td>@item.UserMail</td>
+            <td>@item.UserPhoneNumber</td>
+            <td>@item.UserRegisterDate</td>
+            <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
+            <td width="30"><a href="~/Admin/ProductDelete/@item.UserId" class="btn btn-danger">Sil</a></td>
+        </tr>
         }
     </tbody>
 </table>

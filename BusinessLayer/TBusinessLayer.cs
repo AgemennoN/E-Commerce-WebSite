@@ -161,8 +161,6 @@ namespace BusinessLayer
         }
 
 
-        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
-
         public List<TblOrder> GetOrderList(out string OMessage)
         {
             List<TblOrder> OrderList = new List<TblOrder>();
@@ -176,9 +174,52 @@ namespace BusinessLayer
 
                 OMessage = ex.Message;
             }
-
             return OrderList;
         }
+        public List<TblOrder> GetNonDeliveredOrderList(out string OMessage)
+        {
+            List<TblOrder> OrderList = new List<TblOrder>();
+            OMessage = "";
+            try
+            {
+                OrderList = (from Data in Context.TblOrders where Data.IsDelivered == false select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+
+                OMessage = ex.Message;
+            }
+            return OrderList;
+        }
+
+        public bool ProductDeleteFromDb(int ProductId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblProduct Product = (from Data in Context.TblProducts where Data.ProductId == ProductId select Data).FirstOrDefault();
+                if(Product == null)
+                {
+                    OMessage = "Böyle bir ürün Veri tabanında kayıtlı değil.";
+                }
+                else
+                {
+                    Context.TblProducts.Where(x => x.ProductId == ProductId).ToList().ForEach(x => x.ProductActive = false);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + ProductId.ToString() + " " + Product.ProductName + " isimli ürün silindi.";
+                }
+            }
+            catch (Exception ex)
+            {
+
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
     }
 }
