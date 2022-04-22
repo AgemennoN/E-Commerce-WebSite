@@ -18,6 +18,7 @@ namespace WebPortal
         void Session_Start()
         {
             Session["Admin"] = false;
+            Session["User"] = null;
         }
 
         //void Session_End()
