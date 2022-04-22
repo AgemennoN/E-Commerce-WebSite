@@ -14,13 +14,16 @@ namespace WebPortal.Controllers
         {
             TBusinessLayer business = new TBusinessLayer();
             string OMessage;
-            TblCategory Category= business.GetCategoryById(id, out OMessage);
-            if (Category!=null)
+            TblCategory Category = business.GetCategoryById(id, out OMessage);
+            if (Category != null)
             {
                 ViewBag.Category = Category;
-                ViewBag.Products = business.GetProductsByCategoryId(Category.CategoryId, out OMessage);
+                ViewBag.Products = business.GetProductsByCategoryId(
+                    Category.CategoryId,
+                    out OMessage
+                );
             }
-            else if(id !=null&& Category==null)
+            else if (id != null && Category == null)
             {
                 return new RedirectResult("/");
             }
