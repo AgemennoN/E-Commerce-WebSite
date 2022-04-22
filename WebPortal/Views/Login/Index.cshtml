@@ -42,19 +42,19 @@
             <div class="w3l_banner_nav_right">
                 <!-- login -->
                 <div class="w3_login">
-                    <h3>Sign In & Sign Up</h3>
+                    <h3>Giriş Yap & Kayıt Ol</h3>
                     <div class="w3_login_module">
                         <div class="module form-module">
                             <div class="toggle">
                                 <i class="fa fa-times fa-pencil"></i>
-                                <div class="tooltip">Click Me</div>
+                                <div class="tooltip">Tıkla</div>
                             </div>
                             <div class="form">
-                                <h2>Login to your account</h2>
+                                <h2>Giriş Yap</h2>
                                 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
                                 {
-                                    <input type="text" name="TxtUsernameLogin" placeholder="Username">
-                                    <input type="password" name="TxtPasswordLogin" placeholder="Password">
+                                    <input type="text" name="TxtUsernameLogin" placeholder="Kullanıcı Adı">
+                                    <input type="password" name="TxtPasswordLogin" placeholder="Şifre">
                                     <button type="submit">Giriş</button>
                                 }
 
@@ -62,18 +62,18 @@
                             </div>
 
                             <div class="form">
-                                <h2>Create an account</h2>
+                                <h2>Hesap Oluştur</h2>
                                 @using (Html.BeginForm("Register", "Login", FormMethod.Post))
                                 {
-                                    <input type="text" name="TxtUsername" placeholder="Username">
-                                    <input type="password" name="TxtPassword" placeholder="Password">
-                                    <input type="email" name="TxtEmail" placeholder="Email Address">
-                                    <input type="text" name="TxtPhone" placeholder="Phone Number">
+                                    <input type="text" name="TxtUsername" placeholder="Kullanıcı Adı">
+                                    <input type="password" name="TxtPassword" placeholder="Şifre">
+                                    <input type="email" name="TxtEmail" placeholder="Mail Adresi">
+                                    <input type="text" name="TxtPhone" placeholder="Telefon Numarası">
                                     <button type="submit">Kayıt Ol</button>
                                 }
                             </div>
 
-                            <div class="cta"><a href="#">Forgot your password?</a></div>
+                            @*<div class="cta"><a href="#">Şifremi unuttum </a></div>*@
                         </div>
                     </div>
                     <script>
