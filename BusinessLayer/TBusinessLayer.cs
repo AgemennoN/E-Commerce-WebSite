@@ -87,6 +87,7 @@ namespace BusinessLayer
             return ProductList;
         }
 
+
         //Admin Paneli Kullanıcılar Listesi Kodu
         public List<TblUser> GetUserList(out string OMessage)
         {
@@ -104,27 +105,6 @@ namespace BusinessLayer
             return UserList;
         }
 
-        public bool AddProduct(out string OMessage, TblProduct Product)
-        {
-            OMessage = "";
-            bool IsAdded = false;
-            try
-            {
-                List<TblProduct> IsActive = null;
-
-                Context.TblProducts.Add(Product);
-                //Context.Database.SqlQuery<TblProduct>("update TblProduct set ProductActive='true' where ProductActive='null'").ToList();
-                Context.SaveChanges();
-                IsAdded = true;
-            }
-            catch (Exception ex)
-            {
-                OMessage = ex.Message;
-            }
-
-            return IsAdded;
-        }
-
         // Urun Ekleme Butonuna Tiklayinca Kategoriyi DropDown Cekmek İcin
         public List<TblCategory> GetCategoryList(out string OMessage)
         {
@@ -140,6 +120,47 @@ namespace BusinessLayer
             }
             return CategoryList;
         }
+
+
+        // Admin Urun Ekleme Fonksiyonu
+        public bool AddProduct(out string OMessage, TblProduct Product)
+        {
+            OMessage = "";
+            bool IsAdded = false;
+            try
+            {
+                Context.TblProducts.Add(Product);
+                Context.SaveChanges();
+                IsAdded = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return IsAdded;
+        }
+
+        //Admin Kategori Ekleme Fonskiyonu
+        public bool AddCategory(out string OMessage, TblCategory Category)
+        {
+            OMessage = "";
+            bool IsAdded = false;
+            try
+            {
+                Context.TblCategories.Add(Category);
+                Context.SaveChanges();
+                IsAdded = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return IsAdded;
+        }
+
+
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
 

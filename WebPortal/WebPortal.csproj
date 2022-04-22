@@ -270,6 +270,7 @@
     <Content Include="Views\Admin\UserList.cshtml" />
     <Content Include="Views\Admin\ProductList.cshtml" />
     <Content Include="Views\Admin\ProductCreate.cshtml" />
+    <Content Include="Views\Admin\CategoryCreate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

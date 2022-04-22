@@ -76,10 +76,33 @@ namespace WebPortal.Controllers
 
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
-            bool IsAded = BusinessLayer.AddProduct(out OMessage, Product);
+            BusinessLayer.AddProduct(out OMessage, Product);
 
             //return new RedirectResult("~/Admin");
             return RedirectToAction("ProductList", "Admin");
+        }
+
+        // Get: Kategori Ekleme Sayfasi
+        [HttpGet]
+        public ActionResult CategoryCreate()
+        {
+            return View();
+        }
+
+        // Post: Kategori Ekleme Sayfasi
+        [HttpPost]
+        public ActionResult CategoryCreate(TblCategory Category)
+        {
+            string CategoryName = Request.Form["TxtCategoryName"].ToString();
+
+            Category.CategoryName = CategoryName;
+            Category.CategoryActive = true;
+
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            BusinessLayer.AddCategory(out OMessage, Category);
+
+            return RedirectToAction("CategoryList", "Admin");
         }
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
