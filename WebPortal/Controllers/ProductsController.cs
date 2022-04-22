@@ -37,5 +37,21 @@ namespace WebPortal.Controllers
             return View();            
         }
         // Vejdi BURAK - End
+
+        //FIRAT --START
+        public ActionResult LowPrice()
+        {
+            string OMessage;
+            ViewBag.LowProductsList = BusinessLayer.GetLowPrice(out OMessage);
+            return View();
+        }
+        public ActionResult HighPrice()
+        {
+            string OMessage;
+            ViewBag.HighProductsList = BusinessLayer.GetHighPrice(out OMessage);
+            return View();
+        }
+        //fırat--END
+
     }
 }
