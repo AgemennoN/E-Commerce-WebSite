@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Models
 {
+    #region Busra Şimşek
     public class BussinesContactModel
     {
         public string Name { get; set; }
@@ -14,4 +15,5 @@ namespace BusinessLayer.Models
         public string Subject { get; set; }
         public string Message { get; set; }
     }
+    #endregion
 }

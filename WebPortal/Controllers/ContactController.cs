@@ -9,6 +9,7 @@ using WebPortal.Models;
 
 namespace WebPortal.Controllers
 {
+    #region Busra Şimşek
     public class ContactController : Controller
     {
         private TBusinessLayer _bussines;
@@ -42,4 +43,5 @@ namespace WebPortal.Controllers
             return View("Index");
         }
     }
+    #endregion  
 }
