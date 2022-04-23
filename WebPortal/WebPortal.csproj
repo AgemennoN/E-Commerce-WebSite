@@ -265,6 +265,7 @@
     <Compile Include="Controllers\CampaignsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,6 +287,7 @@
     <Content Include="Views\Products\LowPrice.cshtml" />
     <Content Include="Views\Shared\Category.cshtml" />
     <Content Include="Views\Campaigns\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

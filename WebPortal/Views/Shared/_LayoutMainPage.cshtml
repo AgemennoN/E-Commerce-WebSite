@@ -61,7 +61,15 @@
         <div class="w3l_header_right" style="margin-top:6px;">
             <ul>
                 <li>
-                    <a href="login.html" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
+                    @if (Session["User"] == null)
+                    {
+                        <a href="~/Login" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a> 
+                    }
+
                 </li>
             </ul>
             @*<ul>
@@ -111,6 +119,10 @@
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
                     <li><a href="/Campaigns/Index">Kampanyalar</a><i>/</i></li>
                     <li><a href="about.html">Hakkımızda</a><i></i></li>
+                    @if ((bool)Session["Admin"] == true)
+                    {
+                        <li><a href="~/Admin/Index"> / Admin Paneli</a><i></i></li>
+                    }
                 </ul>
             </div>
             <div class="w3ls_logo_products_left1">
