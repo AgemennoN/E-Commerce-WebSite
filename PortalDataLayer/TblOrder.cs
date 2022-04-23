@@ -15,6 +15,7 @@ namespace PortalDataLayer
     public partial class TblOrder
     {
         public int OrderId { get; set; }
+        public Nullable<int> UserId { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
@@ -23,7 +24,6 @@ namespace PortalDataLayer
         public string OrderedCarts { get; set; }
         public Nullable<bool> IsDelivered { get; set; }
         public Nullable<System.DateTime> OrderDateTime { get; set; }
-        public Nullable<int> UserId { get; set; }
     
         public virtual TblUser TblUser { get; set; }
     }
