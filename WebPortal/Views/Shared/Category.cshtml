@@ -2,22 +2,21 @@
 @{
     ViewBag.Title = "Category";
     <!--Hüseyin Bilgiç-->
-    List<PortalDataLayer.TblCategory> Categories = new List<PortalDataLayer.TblCategory>();
-    if (ViewBag.Categories != null)
-    {
-        Categories = (List<PortalDataLayer.TblCategory>)ViewBag.Categories;
-    }
+    List<PortalDataLayer.TblCategory> Categories = (List<PortalDataLayer.TblCategory>)HttpContext.Current.Application["Categories"];
     <!--Hüseyin Bilgiç-->
 }
 
 <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-    <ul class="nav navbar-nav nav_1">
-        <!--Hüseyin Bilgiç-->
-        @foreach (PortalDataLayer.TblCategory category in Categories)
-        {
-            <li><a href="~/Home/Index/@category.CategoryName">@category.CategoryName</a></li>
-        }
-        <!--Hüseyin Bilgiç-->
-    </ul>
+    <!--Hüseyin Bilgiç-->
+    @if (Categories != null)
+    {
+        <ul class="nav navbar-nav nav_1">
+            @foreach (PortalDataLayer.TblCategory category in Categories)
+            {
+                <li><a href="~/Home/Index/@category.CategoryName">@category.CategoryName</a></li>
+            }
+        </ul>
+    }
+    <!--Hüseyin Bilgiç-->
 </div>
 

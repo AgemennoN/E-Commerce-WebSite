@@ -42,10 +42,12 @@
             <a href="#">Manavda Zirve = Manav Melih</a>
         </div>
         <div class="w3l_search">
-            <form action="#" method="post">
-                <input type="text" name="Product" value="Ürün adı giriniz..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+            {
+                <input type="text" name="UrunAdi" value="Ürün adı giriniz..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
                 <input type="submit" value=" ">
-            </form>
+            }
+
         </div>
         <div class="product_list_header">
             <form action="#" method="post" class="last">
@@ -59,7 +61,15 @@
         <div class="w3l_header_right" style="margin-top:6px;">
             <ul>
                 <li>
-                    <a href="login.html" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
+                    @if (Session["User"] == null)
+                    {
+                        <a href="~/Login" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a> 
+                    }
+
                 </li>
             </ul>
             @*<ul>
@@ -105,10 +115,14 @@
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
                     <li><a href="~/Home/Index">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="products.html">Ürünler</a><i>/</i></li>
+                    <li><a href="~/Products/Index">Ürünler</a><i>/</i></li>
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="BestOffers.html">Kampanyalar</a><i>/</i></li>
+                    <li><a href="/Campaigns/Index">Kampanyalar</a><i>/</i></li>
                     <li><a href="about.html">Hakkımızda</a><i></i></li>
+                    @if ((bool)Session["Admin"] == true)
+                    {
+                        <li><a href="~/Admin/Index"> / Admin Paneli</a><i></i></li>
+                    }
                 </ul>
             </div>
             <div class="w3ls_logo_products_left1">
@@ -239,7 +253,7 @@
                 <div class="clearfix"> </div>
             </div>
             <div class="wthree_footer_copy">
-                <p>© @DateTime.Now.Year Manav Melih. Tüm hakları saklıdır | TechCareer Back-End BootCamp Team</a></p>
+                <p><a> © @DateTime.Now.Year Manav Melih. Tüm hakları saklıdır | TechCareer Back-End BootCamp Team</a></p>
             </div>
         </div>
     </div>

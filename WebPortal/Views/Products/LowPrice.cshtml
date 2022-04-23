@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "LowPrice";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+
+    List<PortalDataLayer.TblProduct> GetPriceProducts = new List<PortalDataLayer.TblProduct>();
+    if (ViewBag.LowProductsList != null)
+    {
+        GetPriceProducts = ViewBag.LowProductsList;
+    }
+}
+<div class="w3l_banner_nav_right">
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home/">Ana Sayfa</a><span>|</span></li>
+                <li>Tüm Ürünler</li>
+            </ul>
+        </div>
+    </div>
+    <div class="w3ls_w3l_banner_nav_right_grid">
+        <h3>Tüm Ürünler</h3>
+        <!--FIRAT-START-->
+        <div class="dropdown" style="margin-right:0 6% 1% 0; float:right">
+            <button class="btn btn-lg btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
+            <ul class="dropdown-menu" style="opacity:0.7;">
+                <li>@Html.ActionLink("Azalan Fiyat", "LowPrice", "Products")</li>
+                <li>@Html.ActionLink("Artan Fiyat", "HighPrice", "Products")</li>
+            </ul>
+        </div><br />
+        <!--FIRAT--END-->
+        <div class="w3ls_w3l_banner_nav_right_grid1">
+
+            @{
+                foreach (var Product in GetPriceProducts)
+                {
+                    if (Product.ProductDiscount != 0)
+                    {
+                        <div class="col-md-3 w3ls_w3l_banner_left">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
+                                                    <p>@Product.ProductName</p>
+                                                    <h4>@Product.PriceOnSale<span>@Product.ProductPrice</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" name="cmd" value="_cart" />
+                                                            <input type="hidden" name="add" value="1" />
+                                                            <input type="hidden" name="business" value=" " />
+                                                            <input type="hidden" name="item_name" value="@Product.ProductName" />
+                                                            <input type="hidden" name="amount" value="@Product.ProductPrice" />
+                                                            <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
+                                                            <input type="hidden" name="currency_code" value="TRY" />
+                                                            <input type="hidden" name="return" value=" " />
+                                                            <input type="hidden" name="cancel_return" value=" " />
+                                                            <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-3 w3ls_w3l_banner_left">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
+                                                    <p>@Product.ProductName</p>
+                                                    <h4>@Product.ProductPrice</h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" name="cmd" value="_cart" />
+                                                            <input type="hidden" name="add" value="1" />
+                                                            <input type="hidden" name="business" value=" " />
+                                                            <input type="hidden" name="item_name" value="@Product.ProductName" />
+                                                            <input type="hidden" name="amount" value="@Product.ProductPrice" />
+                                                            <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
+                                                            <input type="hidden" name="currency_code" value="TRY" />
+                                                            <input type="hidden" name="return" value=" " />
+                                                            <input type="hidden" name="cancel_return" value=" " />
+                                                            <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    //double Price = (double)Product.ProductPrice * (100 - (double)Product.ProductDiscount) / 100;
+
+                }
+            }
+
+
+            <div class="clearfix"> </div>
+        </div>
+
+    </div>
+</div>
+<div class="clearfix"></div>
+

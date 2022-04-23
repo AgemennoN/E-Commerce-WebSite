@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BusinessLayer;
 using PortalDataLayer;
 
+
 namespace WebPortal.Controllers
 {
     public class HomeController : Controller
@@ -26,6 +27,11 @@ namespace WebPortal.Controllers
                 return new RedirectResult("/");
             }
             ViewBag.Categories = business.GetCategories(out OMessage);
+
+            //>>>Belgin Çoban--<<<
+            ViewBag.ProductsOnSales = business.GetProducDiscounts(out OMessage);
+            //>> --End<<<
+
             return View(ViewBag);
         }
         //>>>Hüseyin Bilgiç<<<

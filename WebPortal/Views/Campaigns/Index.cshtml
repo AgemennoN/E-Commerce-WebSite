@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+<!--Belgin Çoban - Start -->
+
+<div class="w3l_banner_nav_right">
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Ana Sayfa</a><span>|</span></li>
+                <li>Kampanyalar</li>
+            </ul>
+        </div>
+    </div>
+
+    <section class="slider">
+        <div class="flexslider ">
+            <ul class="slides">
+                <li>
+                    <div class="w3l_banner_nav_right_banner">
+                        <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
+                        <div class="more">
+                            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="w3l_banner_nav_right_banner1">
+                        <h3>En Taze Sebze <span>Çeşitleri</span></h3>
+                        <div class="more">
+                            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
+                        </div>
+                    </div>
+                </li>
+                <li>                   
+                    <div class="w3l_banner_nav_right_banner2">
+                        <h3>Hesaplı Fiyatlarla<i>Buz Gibi İçecekler</i></h3>
+                        <div class="more">
+                            <a href="/Campaigns/Index" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
+                        </div>
+                    </div>
+                  
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+<div>
+<!-- flexSlider -->
+<link rel="stylesheet" href="~/wwwroot/css/flexslider.css" type="text/css" media="screen" property="" />
+<script defer src="~/wwwroot/js/jquery.flexslider.js"></script>
+<script type="text/javascript">
+        $(window).load(function () {
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function (slider) {
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+</script>
+<!-- //flexSlider -->
+</div>
+<div class="clearfix"></div>
+<!-- banner -->
+<!-- top-brands -->
+<div class="top-brands">
+    <div class="container">
+        <h3>İndirimli Ürünler</h3>
+        <div class="agile_top_brands_grids">
+            <!-- Belgin Çoban -Start-->
+            @foreach (PortalDataLayer.TblProduct Product in ViewBag.Products)
+            {
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
+                                             <p>@Product.ProductName</p>
+                                             <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="checkout.html" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
+                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
+                                                    <input type="hidden" name="amount" value="7.99" />
+                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                    <input type="hidden" name="currency_code" value="TRY" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- Belgin Çoban - End.-->        
+        </div>
+    </div>
+</div>
+
