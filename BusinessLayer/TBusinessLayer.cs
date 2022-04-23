@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BusinessLayer.Models;
 using PortalDataLayer;
 
 namespace BusinessLayer
@@ -130,5 +131,31 @@ namespace BusinessLayer
         }
         ///Fırat Seven - End >>>
 
+
+        #region Buşra Şimşek Contact Add Function
+        public string AddContact(BussinesContactModel contactModel)
+        {
+            //Automapper kullanılabilir..
+            Context.TblContacts.Add(new TblContact
+            {
+                ContactName = contactModel.Name,
+                ContactMail = contactModel.Mail,
+                ContactPhone = contactModel.Phone,
+                ContactMessage = contactModel.Message,
+                ContactSubject = contactModel.Subject,
+            });
+            //Save yapıyoruz... Save olmama durumunda geriye false döndürüyoruz
+            try
+            {
+                Context.SaveChanges();
+                return "İşlem başarıyla gerçekleşti";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+ 
+        }
+        #endregion
     }
 }

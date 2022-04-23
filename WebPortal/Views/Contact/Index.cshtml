@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+}
+  <!-- mail -->
+<div class="container">
+    <div class="row text-center">
+        <h3>Bize Ulaşın</h3>
+        @if (!String.IsNullOrEmpty(ViewBag.Message))
+        {
+            <label style="color:green">@ViewBag.Message</label>
+        }
+        <div class="agileinfo_mail_grids">
+            <div class="col-md-3 agileinfo_mail_grid_left">
+                <ul>
+                    <li><i class="fa fa-home" aria-hidden="true"></i></li>
+                    <li>Adres<span>İstanbul merkez.</span></li>
+                </ul>
+                <ul>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+                    <li>E-Mail<span><a href="mailto:melih@grocery.com">Melih@grocery.com</a></span></li>
+                </ul>
+                <ul>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                    <li>Telefon<span>(+123) 233 2362 826</span></li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-sm-12 agileinfo_mail_grid_right" style="margin-bottom:20px;">
+                <form action="AddContact" method="post">
+                    <div class="col-md-6 wthree_contact_left_grid">
+                        <input type="text" name="Name" value="Name*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name*';}" required="">
+                        <input type="email" name="Mail" value="Email*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email*';}" required="">
+                    </div>
+                    <div class="col-md-6 wthree_contact_left_grid">
+                        <input type="text" name="Phone" value="Telephone*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Telephone*';}" required="">
+                        <input type="text" name="Subject" value="Subject*" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Subject*';}" required="">
+                    </div>
+                    <div class="clearfix"> </div>
+                    <textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+                    <input type="submit" value="Gönder">
+                    <input type="reset" value="Temizle">
+                </form>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+    <!-- //mail -->
+<div class="clearfix"></div>
+
+<!-- //banner -->
+<!-- map -->
+<div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d96748.15352429623!2d-74.25419879353115!3d40.731667701988506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sshopping+mall+in+New+York%2C+NY%2C+United+States!5e0!3m2!1sen!2sin!4v1467205237951" style="border:0"></iframe>
+</div>
