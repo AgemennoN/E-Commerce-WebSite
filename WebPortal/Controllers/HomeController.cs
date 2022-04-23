@@ -25,6 +25,12 @@ namespace WebPortal.Controllers
             {
                 return new RedirectResult("/");
             }
+            ViewBag.Categories = business.GetCategories(out OMessage);
+
+            //>>>Belgin Çoban--<<<
+            ViewBag.ProductsOnSales = business.GetProducDiscounts(out OMessage);
+            //>> --End<<<
+
             return View(ViewBag);
         }
         //>>>Hüseyin Bilgiç<<<

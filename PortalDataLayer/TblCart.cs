@@ -12,32 +12,32 @@
 namespace PortalDataLayer
 {
 
-using System;
+    using System;
     using System.Collections.Generic;
-    
-public partial class TblCart
-{
 
-    public int CartId { get; set; }
+    public partial class TblCart
+    {
 
-    public Nullable<int> Quantity { get; set; }
+        public int CartId { get; set; }
 
-    public Nullable<decimal> Price { get; set; }
+        public Nullable<int> Quantity { get; set; }
 
-    public int IsOrdered { get; set; }
+        public Nullable<decimal> Price { get; set; }
 
-    public Nullable<System.DateTime> DateTime { get; set; }
+        public int IsOrdered { get; set; }
 
-    public Nullable<int> ProductId { get; set; }
+        public Nullable<System.DateTime> DateTime { get; set; }
 
-    public Nullable<int> UserId { get; set; }
+        public Nullable<int> ProductId { get; set; }
+
+        public Nullable<int> UserId { get; set; }
 
 
 
-    public virtual TblProduct TblProduct { get; set; }
+        public virtual TblProduct TblProduct { get; set; }
 
-    public virtual TblUser TblUser { get; set; }
+        public virtual TblUser TblUser { get; set; }
 
-}
+    }
 
 }
