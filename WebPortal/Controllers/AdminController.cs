@@ -128,14 +128,25 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             ViewBag.CategoryList = BusinessLayer.GetCategoryList(out OMessage);
-
+            
             if(Request.QueryString["ProductId"] != null)
             {
-                int ProductId = Convert.ToInt32(Request.QueryString["ProductId"].ToString());
-                ViewBag.ProductbyId = BusinessLayer.GetProductByProductId(ProductId, out OMessage);
+                int ProductId = new int();
+                TblProduct Product = null;
+                if(Int32.TryParse(Request.QueryString["ProductId"], out ProductId))
+                   // If the parameter is Parseble
+                    Product = BusinessLayer.GetProductByProductId(ProductId, out OMessage);
+
+                if(Product == null)
+                    // if the item with the ProdectId does not exist Send Admin to the ProductList Page
+                    return RedirectToAction("ProductList", "Admin");
+
+                ViewBag.ProductbyId = Product;  // Else sent the product to the ProductEdit Page
             }
-
-
+            else if(Request.QueryString["ProductId"] == null)
+            {   // if Url is entered by hand and the parameter "ProductId" doesn't entered.
+                return RedirectToAction("ProductList", "Admin");
+            }
             return View(ViewBag);
         }
 
@@ -143,26 +154,32 @@ namespace WebPortal.Controllers
         [HttpPost]
         public ActionResult ProductEdit(TblProduct Product)
         {
-            //string ProductName = Request.Form["TxtProductName"].ToString();
-            //string ProductImage = Request.Form["TxtProductImage"].ToString();
-            //string ProductPrice = Request.Form["TxtProductPrice"].ToString();
-            //string ProductDiscount = Request.Form["TxtProductDiscount"].ToString();
-            //string ProductStock = Request.Form["TxtProductStock"].ToString();
-            //string Category = Request.Form["TxtCategory"].ToString();
+            string ProductId = Request.Form["TxtProductId"].ToString();
+            string ProductName = Request.Form["TxtProductName"].ToString();
+            string ProductImage;
+            if (Request.Form["TxtProductImage"] == null || Request.Form["TxtProductImage"].ToString() == "")
+                ProductImage = "/wwwroot/images/1.png";
+            else
+                ProductImage = Request.Form["TxtProductImage"].ToString();
+            string ProductPrice = Request.Form["TxtProductPrice"].ToString();
+            string ProductDiscount = Request.Form["TxtProductDiscount"].ToString();
+            string ProductStock = Request.Form["TxtProductStock"].ToString();
+            string Category = Request.Form["TxtCategory"].ToString();
 
-            //Product.ProductName = ProductName;
-            //Product.ProductImage = ProductImage;
-            //Product.ProductPrice = Convert.ToDecimal(ProductPrice);
-            //Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
-            //// İndirim oranına göre güncel fiyat otomatik olarak eklendi.
-            //Product.PriceOnSale = Convert.ToDecimal(ProductPrice) * (100 - Convert.ToDecimal(ProductDiscount)) / 100;
-            //Product.ProductStock = Convert.ToInt32(ProductStock);
-            //Product.ProductActive = true;
-            //Product.CategoryId = Convert.ToInt32(Category);
-
-            //TBusinessLayer BusinessLayer = new TBusinessLayer();
-            //string OMessage;
-            //BusinessLayer.AddProduct(out OMessage, Product);
+            Product.ProductId = Convert.ToInt32(ProductId);
+            Product.ProductName = ProductName;
+            Product.ProductImage = ProductImage;
+            Product.ProductPrice = Convert.ToDecimal(ProductPrice);
+            Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
+            // İndirim oranına göre güncel fiyat otomatik olarak eklendi.
+            Product.PriceOnSale = Convert.ToDecimal(ProductPrice) * (100 - Convert.ToDecimal(ProductDiscount)) / 100;
+            Product.ProductStock = Convert.ToInt32(ProductStock);
+            Product.ProductActive = true;
+            Product.CategoryId = Convert.ToInt32(Category);
+            
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            BusinessLayer.EditProduct(Product, out OMessage);
 
             ////return new RedirectResult("~/Admin");
             return RedirectToAction("ProductList", "Admin");

@@ -32,13 +32,19 @@
             <div class="col-md-4 col-md-offset-4">
                 <h3 class="text-primary text-center">Ürün Düzenleme Formu</h3>
                 <br />
-                @using (Html.BeginForm("ProductCreate", "Admin", FormMethod.Post))
-                {
+                @using (Html.BeginForm("ProductEdit", "Admin", FormMethod.Post))
+                    {
+
+                    //ProductId yi form içinde göndermem gerekiyorki düzenlencek itemin Id sini yollayabileyim
+                    //ama mantıklı nasıl olur bilemedim Tam buna bakyordum Telegramdan konuştuk Pushluyorum şu Anda
+                    <div class="form-group">
+                        <input name="TxtProductId" value="@Product.ProductId"> 
+                    </div>
                     <div class="form-group">
                         <input class="form-control" type="text" name="TxtProductName" placeholder="Adı" value="@Product.ProductName" required="">
                     </div>
                     <div class="form-group">
-                        <input type="file" name="TxtProductImage" placeholder="Resmi" required="">
+                        <input type="file" name="TxtProductImage" placeholder="Resmi" value="@Product.ProductImage">
                         <small class="text-muted">(Ornek : isim.jpg)</small>
                     </div>
                     <div class="form-group">
@@ -60,7 +66,7 @@
                             }
                         </select>
                     </div>
-                    <input id="ProductSubmit" type="submit" class="btn btn-primary btn-block" value="Ürün Ekle">
+                    <input id="ProductSubmit" type="submit" class="btn btn-primary btn-block" value="Ürünü Düzenle">
                 }
             </div>
         </div>

@@ -516,6 +516,36 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        // Admin Urun Düzenleme Fonksiyonu
+        public bool EditProduct(TblProduct Product, out string OMessage)
+        {
+            OMessage = "";
+            bool IsEdited = false;
+            try
+            {
+                TblProduct data = (from Data in Context.TblProducts where Data.ProductId == Product.ProductId select Data).FirstOrDefault();
+                if (data != null)
+                {
+                    data.ProductName = Product.ProductName;
+                    data.ProductPrice = Product.ProductPrice;
+                    data.ProductDiscount = Product.ProductDiscount;
+                    data.PriceOnSale = Product.PriceOnSale;
+                    data.ProductImage = Product.ProductImage;
+                    data.ProductStock = Product.ProductStock;
+                    data.CategoryId = Product.CategoryId;
+                    Context.SaveChanges();
+                    IsEdited = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return IsEdited;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
     }
 }
