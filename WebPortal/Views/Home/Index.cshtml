@@ -31,6 +31,18 @@
         </script>
 
     }
+
+    if (TempData["LogoutMessage"] != null)
+    {
+
+        <script type="text/javascript">
+
+             window.onload = function () {
+               alert("@TempData["LogoutMessage"].ToString()");
+              };
+        </script>
+
+    }
 }
 
 <div class="w3l_banner_nav_right">

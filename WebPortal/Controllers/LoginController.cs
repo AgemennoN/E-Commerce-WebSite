@@ -72,9 +72,9 @@ namespace WebPortal.Controllers
 
             };
            
-            bool Success = BusinessLayer.AddUser(User,out Omessage);    //User nesnesi veritabanına eklendi
+            bool Success = BusinessLayer.AddUser(User,out Omessage);    //User nesnesi veritabanına eklendi mi diye kontrol edip Success değişkenine atanıyor
 
-            TempData["LoginSuccess"] = Success;
+            TempData["LoginSuccess"] = Success;    //TempData kullanarak veriler index.cshtml'e taşınıyor
             TempData["LoginMessage"] = Omessage;
 
             return new RedirectResult("~/Login");
@@ -82,8 +82,10 @@ namespace WebPortal.Controllers
 
         public ActionResult Logout()
         {
+            string Omessage = "Cıkış yapıldı";
             Session["Admin"] = false;
             Session["User"] = null;
+            TempData["LogoutMessage"] = Omessage;
             return new RedirectResult("~/Home");
         } //Çıkış yapıldı
         //AKIN CAN CESARETLI - END>>>
