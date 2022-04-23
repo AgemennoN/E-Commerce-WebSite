@@ -19,7 +19,6 @@ namespace PortalDataLayer
         public Nullable<decimal> Price { get; set; }
         public int IsOrdered { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
-        public string ProductDescprition { get; set; }
         public Nullable<int> ProductId { get; set; }
         public Nullable<int> UserId { get; set; }
     

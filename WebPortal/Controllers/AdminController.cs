@@ -54,6 +54,8 @@ namespace WebPortal.Controllers
             Product.ProductImage = ProductImage;
             Product.ProductPrice = Convert.ToDecimal(ProductPrice);
             Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
+            // İndirim oranına göre güncel fiyat otomatik olarak eklendi.
+            Product.PriceOnSale = Convert.ToDecimal(ProductPrice) * (100 - Convert.ToDecimal(ProductDiscount)) / 100;
             Product.ProductStock = Convert.ToInt32(ProductStock);
             Product.ProductActive = true;
             Product.CategoryId = Convert.ToInt32(Category);
