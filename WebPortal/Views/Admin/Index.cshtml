@@ -48,16 +48,24 @@
     <tbody>
         @foreach (var Order in GetOrders)
         {
-            <tr>
-                <th width="30">@Order.OrderId</th>
-                <td width="50">@Order.Name</td>
-                <td width="50">@Order.PhoneNumber</td>
-                <td width="600">@Order.Address / @Order.City</td>
-                <td width="40">@Order.TotalPrice</td>
-                <td width="40">@Order.OrderDateTime</td>
-                <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
-                <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-warning">Teslim Edildi</a></td>
-            </tr>
+        <tr>
+            <th width="30">@Order.OrderId</th>
+            <td width="50">@Order.Name</td>
+            <td width="50">@Order.PhoneNumber</td>
+            <td width="600">@Order.Address / @Order.City</td>
+            <td width="40">@Order.TotalPrice</td>
+            <td width="40">@Order.OrderDateTime</td>
+            <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
+            @if (Order.IsDelivered == false)
+            {
+                <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-danger">Teslim Et</a></td>
+            }
+            else
+            {
+                <td width="40"><a href="#" class="btn btn-warning">Teslim Edildi</a></td>
+            }
+
+        </tr>
         }
     </tbody>
 </table>
