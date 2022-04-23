@@ -25,7 +25,6 @@ namespace WebPortal.Controllers
             {
                 return new RedirectResult("/");
             }
-            ViewBag.Categories = business.GetCategories(out OMessage);
             return View(ViewBag);
         }
         //>>>Hüseyin Bilgiç<<<

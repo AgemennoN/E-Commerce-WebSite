@@ -43,11 +43,11 @@
             <h1 class="container" id="categoryName" style="text-align: center;">@Category.CategoryName</h1><br />
         }
         <!--Hüseyin Bilgiç - End -->
-        foreach (PortalDataLayer.TblProduct Product in ProductsByCategory)
-        {
-            if ((bool)Product.ProductActive)
+            foreach (PortalDataLayer.TblProduct Product in ProductsByCategory)
             {
-                string total = ((decimal)@Product.ProductPrice - ((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount / 100))).ToString("f2");
+                if ((bool)Product.ProductActive)
+                {
+                    
                 <div class="col-md-3 top_brand_left">
                     <div class="hover14 column">
                         <div class="agile_top_brand_left_grid">
@@ -60,8 +60,8 @@
                                             <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
                                             <p>@Product.ProductName</p>
                                             <h4>
-                                                @total
-                                                @if (@Product.ProductPrice.ToString() != @total)
+                                                @Product.PriceOnSale
+                                                @if (Product.ProductPrice != Product.PriceOnSale)
                                                 {
                                                     <span>@Product.ProductPrice</span>
                                                 }

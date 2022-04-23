@@ -1,3 +1,4 @@
+using BusinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace WebPortal
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            Application["Categories"] = BusinessLayer.GetCategories(out OMessage);
         }
 
         void Session_Start()
