@@ -17,7 +17,7 @@ namespace WebPortal.Controllers
             TBusinessLayer business = new TBusinessLayer();
             string OMessage;
 
-            ViewBag.Products = business.GetCategories(out OMessage);
+            ViewBag.Products = business.GetProducDiscounts(out OMessage);
             return View(ViewBag);
         }
         //>>>Belgin Çoban --End<<<

@@ -105,7 +105,7 @@
                 <ul class="slides">
                     <li>
                         <div class="w3l_banner_nav_right_banner">
-                            <h3>Manav Melih ile<span>Evlerinizi</span>Şenlendirin</h3>
+                            <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
                             <div class="more">
                                 <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
                             </div>
@@ -113,7 +113,7 @@
                     </li>
                     <li>
                         <div class="w3l_banner_nav_right_banner1">
-                            <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
+                            <h3>En Taze Sebze <span>Çeşitleri</span></h3>
                             <div class="more">
                                 <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
                             </div>
@@ -122,7 +122,7 @@
                     <li>
                         <!-- Belgin Çoban --Start -->
                         <div class="w3l_banner_nav_right_banner2">
-                            <h3>Gel Al Noktasında <i> Daha Hesaplı</i></h3>
+                            <h3>Hesaplı Fiyatlarla<i>Buz Gibi İçecekler</i></h3>
                             <div class="more">
                                 <a href="/Campaigns/Index" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
                             </div>
@@ -163,9 +163,8 @@
         <div class="agile_top_brands_grids">
             <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADAN BAŞLAYACAK-->
             <!-- Belgin Çoban -Start-->
-            @foreach (var Product in ViewBag.Products)
+            @foreach (var Product in ViewBag.ProductsOnSales)
             {
-                string total = ((decimal)@Product.ProductPrice - ((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount / 100))).ToString("f2");
                 <div class="col-md-3 top_brand_left">
                     <div class="hover14 column">
                         <div class="agile_top_brand_left_grid">
@@ -179,7 +178,7 @@
                                             @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
                                                 <p>Sun Flower Oil</p>*@
                                             <p>@Product.ProductName</p>
-                                            <h4>@total <span>@Product.ProductPrice</span></h4>
+                                            <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
 
 
                                         </div>

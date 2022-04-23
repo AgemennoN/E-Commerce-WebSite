@@ -6,18 +6,18 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8848936045384de89f4ee754f7eea51a" Name="Diagram1" ZoomLevel="93">
         <EntityTypeShape EntityType="DbManavMelihModel.sysdiagram" Width="1.5" PointX="1" PointY="1.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblCart" Width="1.5" PointX="5.125" PointY="1.75" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblCategory" Width="1.5" PointX="1" PointY="2.5" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblContact" Width="1.5" PointX="5.125" PointY="5" IsExpanded="false" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblOrder" Width="1.5" PointX="7.25" PointY="4.625" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblProduct" Width="1.5" PointX="3.125" PointY="1.75" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblSubscriber" Width="1.5" PointX="3.125" PointY="5" IsExpanded="false" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblUser" Width="1.5" PointX="7.25" PointY="1.75" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblUser" Width="1.5" PointX="7.375" PointY="2" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblAboutU" Width="1.5" PointX="1" PointY="5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblCart" Width="1.5" PointX="5.125" PointY="2" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblOrder" Width="1.5" PointX="7.375" PointY="5" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblProduct" Width="1.5" PointX="3.125" PointY="1.625" />
         <AssociationConnector Association="DbManavMelihModel.FK_TblCart_TblProducts1" />
         <AssociationConnector Association="DbManavMelihModel.FK_TblCart_TblUsers" />
         <AssociationConnector Association="DbManavMelihModel.FK_TblProducts_TblCategories1" />
         <AssociationConnector Association="DbManavMelihModel.FK_TblOrders_TblUsers" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblAboutU" Width="1.5" PointX="1" PointY="5" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

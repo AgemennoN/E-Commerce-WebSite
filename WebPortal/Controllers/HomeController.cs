@@ -28,7 +28,7 @@ namespace WebPortal.Controllers
             ViewBag.Categories = business.GetCategories(out OMessage);
 
             //>>>Belgin Çoban--<<<
-            ViewBag.Products = business.GetProducDiscounts(out OMessage);
+            ViewBag.ProductsOnSales = business.GetProducDiscounts(out OMessage);
             //>> --End<<<
 
             return View(ViewBag);
