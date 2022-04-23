@@ -29,8 +29,8 @@ namespace PortalDataLayer
         public Nullable<bool> ProductActive { get; set; }
         public Nullable<int> CategoryId { get; set; }
     
+        public virtual TblCategory TblCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblCart> TblCarts { get; set; }
-        public virtual TblCategory TblCategory { get; set; }
     }
 }

@@ -15,88 +15,106 @@
         ProductInfos = (List<PortalDataLayer.TblProduct>)ViewBag.ProductInfos;
     }
 }
-<!-- products-breadcrumb -->
-<div class="products-breadcrumb">
-    <div class="container">
-        <ul>
-            <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home/Index">Ana Sayfa</a><span>|</span></li>
-            <li>Sepet</li>
-        </ul>
-    </div>
-</div>
-<!-- //products-breadcrumb -->
-<!-- banner -->
+
 <div class="banner">
     <div class="w3l_banner_nav_right">
-        <!-- about -->
-        <div class="privacy about">
-            <h3>Sepet</h3>
-
-            <div class="checkout-right">
-                <h4>Alışveriş Sepetiniz  X Ürün İçermektedir</h4>
-                <table class="timetable_sub">
-                    <thead>
-                        <tr>
-                            <th>Sıra Numarası</th>
-                            <th>Ürün</th>
-                            <th>Ürün İsmi</th>
-                            <th>Ürün Adeti</th>
-                            <th>Ürün Fiyatı</th>
-                            <th>Ürün Çıkarma</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="rem1">
-                            @for (int i = 0; i < CartList.Count; i++)
-                            {
-                                <td class="invert"> @(i+1) </td>
-                                <td class="invert-image"><img src="@ProductInfos[i].ProductImage" alt=" " class="img-responsive"></td>
-                                <td class="invert">@ProductInfos[i].ProductName</td>
-                                <td class="invert">@CartList[i].Quantity</td>
-                                <td class="invert">@ProductInfos[i].ProductPrice</td>
-                                <td class="invert">
-                                    <button> Ürünü Sil</button>
-                                </td>
-                            }
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="checkout-left">
-                <div class="col-md-4 checkout-left-basket">
-                    <h4>Sepet Özeti</h4>
-                    <ul>
-                        @{
-                            decimal TotalDiscount = 0;
-                            decimal TotalPrice = 0;
-
-                            for (int i = 0; i < CartList.Count; i++)
-                            {
-                                decimal Discount = 0;
-                                Discount = (decimal)(ProductInfos[i].ProductPrice * (ProductInfos[i].ProductDiscount / 100));
-                                decimal LastPrice = (decimal)(ProductInfos[i].ProductPrice - Discount);
-
-                                TotalDiscount += (decimal)(CartList[i].Quantity * Discount);
-                                TotalPrice += (decimal)(CartList[i].Quantity * LastPrice);
-
-                                <li>
-                                    @ProductInfos[i].ProductName <i> : </i> İndirim :% @ProductInfos[i].ProductDiscount <span>₺@(ProductInfos[i].ProductPrice * CartList[i].Quantity) </span>
-                                </li>
-                            }
-                        }
-
-                        <li>Toplam İndirim  <span>₺ @TotalDiscount</span></li>
-                        <li>Toplam Tutar  <span>₺ @TotalPrice</span></li>
-                    </ul>
-                </div>
-                <div class="col-md-8 address_form_agile">
-                    <div class="checkout-right-basket">
-                        <a href="~/Payment/Index">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
+        <div class="products-breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home/Index">Ana Sayfa</a><span>|</span></li>
+                    <li>Sepet</li>
+                </ul>
             </div>
         </div>
+        <!-- about -->
+        @if (Session["User"] != null)
+        {
+            <div class="privacy about">
+                <h3>Sepet</h3>
+
+                <div class="checkout-right">
+                    <h4>Alışveriş Sepetiniz  @ProductInfos.Count Ürün İçermektedir</h4>
+                    <table class="timetable_sub">
+                        <thead>
+                            <tr>
+                                <th>Sıra Numarası</th>
+                                <th>Ürün</th>
+                                <th>Ürün İsmi</th>
+                                <th>Ürün Adeti</th>
+                                <th>Birim Fiyatı</th>
+                                <th>Toplam Fiyatı</th>
+                                <th>Ürün Çıkarma</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @for (int i = 0; i < CartList.Count; i++)
+                            {
+                                <tr class="rem1">
+                                    <td class="invert"> @(i + 1) </td>
+                                    <td class="invert-image"><img src="@ProductInfos[i].ProductImage" alt=" " class="img-responsive"></td>
+                                    <td class="invert">@ProductInfos[i].ProductName</td>
+                                    <td class="invert">@CartList[i].Quantity</td>
+                                    <td class="invert">@ProductInfos[i].ProductPrice</td>
+                                    <td class="invert">@(ProductInfos[i].ProductPrice* CartList[i].Quantity) </td>
+                                    <td class="invert">
+                                        <a href="~/Cart/DeleteProduct/@CartList[i].CartId" class="button" />
+                                        <button id="@CartList[i].CartId" name="DeleteProduct"> Ürünü Sil</button>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="list-group">
+                    <div class="col-md-4 checkout-left-basket">
+                        <h4>Sepet Özeti</h4>
+                        <ul>
+                            @{
+                                decimal TotalDiscount = 0;
+                                decimal TotalPrice = 0;
+                                string CartOrders = "";
+                                for (int i = 0; i < CartList.Count; i++)
+                                {
+                                    decimal Discount = 0;
+                                    Discount = (decimal)(ProductInfos[i].ProductPrice * (ProductInfos[i].ProductDiscount / 100));
+                                    decimal LastPrice = (decimal)(ProductInfos[i].ProductPrice - Discount);
+
+                                    TotalDiscount += (decimal)(CartList[i].Quantity * Discount);
+                                    TotalPrice += (decimal)(CartList[i].Quantity * LastPrice);
+                                    CartOrders += CartList[i].ProductId.ToString() + ",";
+
+                                    <li>
+                                        @ProductInfos[i].ProductName <span>₺@((ProductInfos[i].ProductPrice * CartList[i].Quantity)) </span>
+                                    </li>
+                                }
+                                TempData["CartOrders"] = CartOrders;
+                                TempData["TotalPrice"] = TotalPrice;
+                            }
+                        </ul>
+                        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                        <div class="list-group list">
+                            <div class="list-group-item list-group-item-success "><h6>Toplam İndirim </h6> <h6 class="text-right">- ₺ @TotalDiscount.ToString("0.00")</h6></div>
+                            <div class="list-group-item list-group-item-info "> <h6>Toplam Tutar</h6> <h6 class="text-right"> ₺ @TotalPrice.ToString("0.00")</h6></div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 address_form_agile">
+                        <div class="checkout-right-basket">
+                            <a href="~/Payment/Index">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger bg-danger mt-5" style="color:white">
+                <h1> Aradığınız Sayfa Bulunamadı... <br /> Geçersiz Sayfa veya Kullanıcı İsteği...</h1>
+            </div>
+        }
     </div>
     <div class="clearfix"></div>
 </div>

@@ -5,36 +5,23 @@
 }
 
 
-<!-- products-breadcrumb -->
-<div class="products-breadcrumb">
-    <div class="container">
-        <ul>
-            <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
-            <li>Payment</li>
-        </ul>
-    </div>
-</div>
-<!-- //products-breadcrumb -->
-<!-- banner -->
-<div class="banner">
-    <div class="w3l_banner_nav_left">
-        <nav class="navbar nav_bottom">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header nav_2">
-                <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
 
-        </nav>
+<div class="w3l_banner_nav_right">
+    <!-- products-breadcrumb -->
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home">Ana Sayfa</a><span>|</span></li>
+                <li>Ödeme Sayfası</li>
+            </ul>
+        </div>
     </div>
-    <div class="w3l_banner_nav_right">
-        <!-- payment -->
-        <div class="privacy about">
-            <h3>Ödeme Sayfası</h3>
+    <!-- //products-breadcrumb -->
+    <!-- payment -->
+    <div class="privacy about">
+        <h3>Ödeme Sayfası</h3>
+        @if (Session["User"] != null)
+        {
 
             <div class="checkout-right">
                 <!--Horizontal Tab-->
@@ -43,93 +30,87 @@
                         <div>
                             <div id="tab4" class="tab-grid" style="display: block;">
                                 <div class="row">
+                                    <div class=" col-md-2"> </div>
                                     <div class="col-md-6">
-                                        <form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
-                                            <section class="creditly-wrapper wthree, w3_agileits_wrapper">
+                                        @using (Html.BeginForm("AddPayment", "Payment", FormMethod.Post))
+                                        {
+                                            <section class="creditly-wrapper wthree, w3_agileits_wrapper col-md-6">
                                                 <div class="information-wrapper">
                                                     <div class="first-row form-group">
                                                         <div class="controls">
-                                                            <label class="control-label">Full name: </label>
-                                                            <input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
-                                                        </div>
-                                                        <div class="w3_agileits_card_number_grids">
-                                                            <div class="w3_agileits_card_number_grid_left">
-                                                                <div class="controls">
-                                                                    <label class="control-label">Mobile number:</label>
-                                                                    <input class="form-control" type="text" placeholder="Mobile number">
-                                                                </div>
+                                                            <div class="controls">
+                                                                <label class="control-label">Ad Soyad: </label>
+                                                                <input class="billing-address-name form-control" type="text" name="NameSurname" placeholder="Ad Soyad" value="" required>
                                                             </div>
-                                                            <div class="w3_agileits_card_number_grid_right">
-                                                                <div class="controls">
-                                                                    <label class="control-label">Landmark: </label>
-                                                                    <input class="form-control" type="text" placeholder="Landmark">
+                                                            <div class="w3_agileits_card_number_grids">
+                                                                <div class="w3_agileits_card_number_grid_left">
+                                                                    <div class="controls">
+                                                                        <label class="control-label">Mobile number:</label>
+                                                                        <input class="form-control" type="text" placeholder="Telefon Numarası" name="PhoneNumber" value="" required>
+                                                                    </div>
                                                                 </div>
+                                                                <div class="w3_agileits_card_number_grid_right">
+                                                                    <div class="controls">
+                                                                        <label class="control-label">Adres: </label>
+                                                                        <input class="form-control" type="text" name="Adress" placeholder="Adres" value="" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="clear"> </div>
                                                             </div>
-                                                            <div class="clear"> </div>
-                                                        </div>
-                                                        <div class="controls">
-                                                            <label class="control-label">Town/City: </label>
-                                                            <input class="form-control" type="text" placeholder="Town/City">
-                                                        </div>
-                                                        <div class="controls">
-                                                            <label class="control-label">Address type: </label>
-                                                            <select class="form-control option-w3ls">
-                                                                <option>Office</option>
-                                                                <option>Home</option>
-                                                                <option>Commercial</option>
-                                                            </select>
+                                                            <div class="controls">
+                                                                <label class="control-label">Şehir: </label>
+                                                                <input class="form-control" type="text" name="City" placeholder="Şehir" required>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <button class="submit check_out">Delivery to this Address</button>
+
                                                 </div>
                                             </section>
-                                        </form>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <form class="cc-form">
-                                            <div class="clearfix">
-                                                <div class="form-group form-group-cc-number">
-                                                    <label>Card Number</label>
-                                                    <input class="form-control" placeholder="xxxx xxxx xxxx xxxx" type="text"><span class="cc-card-icon"></span>
+
+                                            <div class="col-md-6">
+
+                                                <div class="clearfix">
+                                                    <div class="form-group form-group-cc-number">
+                                                        <label>Kart Numarası</label>
+                                                        <input class="form-control" placeholder="xxxx xxxx xxxx xxxx" type="text" required><span class="cc-card-icon"></span>
+                                                    </div>
+                                                    <div class="form-group form-group-cc-cvc">
+                                                        <label>CVV</label>
+                                                        <input class="form-control" placeholder="xxxx" type="text">
+                                                    </div>
                                                 </div>
-                                                <div class="form-group form-group-cc-cvc">
-                                                    <label>CVV</label>
-                                                    <input class="form-control" placeholder="xxxx" type="text">
+                                                <div class="clearfix">
+                                                    <div class="form-group form-group-cc-name">
+                                                        <label>Kart Sahibinin Adı</label>
+                                                        <input class="form-control" type="text">
+                                                    </div>
+                                                    <div class="form-group form-group-cc-date">
+                                                        <label>Son Kullanım Tarihi</label>
+                                                        <input class="form-control" placeholder="mm/yy" type="text">
+                                                    </div>
                                                 </div>
+
+                                                <input class="btn btn-primary submit" type="submit" value="Ödemeyi Tamamla">
                                             </div>
-                                            <div class="clearfix">
-                                                <div class="form-group form-group-cc-name">
-                                                    <label>Card Holder Name</label>
-                                                    <input class="form-control" type="text">
-                                                </div>
-                                                <div class="form-group form-group-cc-date">
-                                                    <label>Valid Thru</label>
-                                                    <input class="form-control" placeholder="mm/yy" type="text">
-                                                </div>
-                                            </div>
-                                            <div class="checkbox checkbox-small">
-                                                <label>
-                                                    <input class="i-check" type="checkbox" checked="">Add to My Cards
-                                                </label>
-                                            </div>
-                                            <input class="btn btn-primary submit" type="submit" class="submit" value="Proceed Payment">
-                                        </form>
+                                        }
+
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-                <!--Plug-in Initialisation-->
-                <!-- // Pay -->
-
             </div>
-
-        </div>
-        <!-- //payment -->
+        }
+        else
+        {
+            <div class="alert alert-danger bg-danger mt-5" style="color:white">
+                <h1> Aradığınız Sayfa Bulunamadı... <br /> Geçersiz Sayfa veya Kullanıcı İsteği...</h1>
+            </div>
+        }
     </div>
-    <div class="clearfix"></div>
 </div>
+
+
+<div class="clearfix"></div>
+
