@@ -83,6 +83,8 @@ namespace BusinessLayer
             }
             return Products;
         }
+        ///Vejdi BURAK - End >>>
+        //<<< Vejdi BURAK - Start
         public List<TblProduct> GetFoundProducts(out string OMessage, string UrunAdi)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -114,6 +116,8 @@ namespace BusinessLayer
             }
             return Products;
         }
+        ///Fırat Seven - End >>>
+        //<<<Fırat Seven - Start
         public List<TblProduct> GetHighPrice(out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -147,6 +151,9 @@ namespace BusinessLayer
 
             return result;
         }
+        //AKIN CAN CESARETLI - END>>>
+
+        //<<<AKIN CAN CESARETLI - START
         public bool AddUser(TblUser User, out string Omessage)
         {
             Omessage = "";
@@ -174,6 +181,9 @@ namespace BusinessLayer
             }
             return result;
         }
+        //AKIN CAN CESARETLI - END>>>
+
+        //<<<AKIN CAN CESARETLI - START
         public TblUser Login(string Username, string Password, out string Omessage)
         {
             Omessage = "";
@@ -199,7 +209,6 @@ namespace BusinessLayer
 
             return result;
         }
-
         //AKIN CAN CESARETLI - END>>>
 
         //<<<Belgin Çoban - Start
@@ -238,8 +247,9 @@ namespace BusinessLayer
 
             return ProductList;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
-
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         //Admin Paneli Kullanıcılar Listesi Kodu
         public List<TblUser> GetUserList(out string OMessage)
         {
@@ -256,7 +266,9 @@ namespace BusinessLayer
 
             return UserList;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         //Admin Paneli Aboneler Listesi Kodu
         public List<TblSubscriber> GetSubscriberList(out string OMessage)
         {
@@ -273,6 +285,7 @@ namespace BusinessLayer
 
             return SubscriberList;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
         // Urun Ekleme Butonuna Tiklayinca Kategoriyi DropDown Cekmek İcin
         public List<TblCategory> GetCategoryList(out string OMessage)
@@ -291,6 +304,7 @@ namespace BusinessLayer
         }
 
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         // Admin Urun Ekleme Fonksiyonu
         public bool AddProduct(out string OMessage, TblProduct Product)
         {
@@ -309,7 +323,9 @@ namespace BusinessLayer
 
             return IsAdded;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         //Admin Kategori Ekleme Fonskiyonu
         public bool AddCategory(out string OMessage, TblCategory Category)
         {
@@ -328,7 +344,9 @@ namespace BusinessLayer
 
             return IsAdded;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public List<TblOrder> GetOrderList(out string OMessage)
         {
             List<TblOrder> OrderList = new List<TblOrder>();
@@ -344,6 +362,9 @@ namespace BusinessLayer
             }
             return OrderList;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public List<TblOrder> GetNonDeliveredOrderList(out string OMessage)
         {
             List<TblOrder> OrderList = new List<TblOrder>();
@@ -359,7 +380,9 @@ namespace BusinessLayer
             }
             return OrderList;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public bool ProductDeleteFromDb(int ProductId, out string OMessage)
         {
             bool Success = false;
@@ -385,7 +408,9 @@ namespace BusinessLayer
             }
             return Success;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public bool CategoryDeleteFromDb(int CategoryId, out string OMessage)
         {
             bool Success = false;
@@ -411,7 +436,9 @@ namespace BusinessLayer
             }
             return Success;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public bool UserDeleteFromDb(int UserId, out string OMessage)
         {
             bool Success = false;
@@ -437,7 +464,9 @@ namespace BusinessLayer
             }
             return Success;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public bool SubscriberDeleteFromDb(int SubscriberId, out string OMessage)
         {
             bool Success = false;
@@ -463,9 +492,30 @@ namespace BusinessLayer
             }
             return Success;
         }
-
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
-    
-    
+
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        public TblProduct GetProductByProductId(int ProductId, out string OMessage)
+        {
+            TblProduct Product = new TblProduct();
+            OMessage = "";
+            try
+            {
+                Product = (from Data in Context.TblProducts where Data.ProductId == ProductId select Data).FirstOrDefault();
+                if (Product == null)
+                {
+                    OMessage = "Böyle bir ürün Veri tabanında kayıtlı değil.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Product;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+
     }
 }
