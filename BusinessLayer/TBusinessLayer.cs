@@ -547,5 +547,35 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        // From Db changes TblOrder's IsDelivered to True
+        public bool OrderDeliverById(int OrderId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblOrder Order = (from Data in Context.TblOrders where Data.OrderId == OrderId select Data).FirstOrDefault();
+                if (Order == null)
+                {
+                    OMessage = "Böyle bir Sipariş Veri tabanında kayıtlı değil.";
+                }
+                else
+                {
+                    Context.TblOrders.Where(x => x.OrderId == OrderId).ToList().ForEach(x => x.IsDelivered = true);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + OrderId.ToString() + " " + Order.Name + " isimli\n" + Order.OrderDateTime + " Tarihli Sipariş Teslim Edildi.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
     }
 }

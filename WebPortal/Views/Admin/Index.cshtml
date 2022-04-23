@@ -42,6 +42,7 @@
             <th>Fiyat</th>
             <th>Tarih / Saat</th>
             <th>Detay</th>
+            <th>Teslim Et</th>
         </tr>
     </thead>
     <tbody>
@@ -55,6 +56,7 @@
                 <td width="40">@Order.TotalPrice</td>
                 <td width="40">@Order.OrderDateTime</td>
                 <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
+                <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-warning">Teslim Edildi</a></td>
             </tr>
         }
     </tbody>

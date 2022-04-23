@@ -221,7 +221,14 @@ namespace WebPortal.Controllers
             return RedirectToAction("UserList", "Admin");
         }
 
-
+        public ActionResult OrderDeliver(string Id)
+        {
+            int OrderId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.OrderDeliverById(OrderId, out OMessage);
+            return RedirectToAction("Index", "Admin");
+        }
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi
