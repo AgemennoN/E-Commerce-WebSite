@@ -6,11 +6,19 @@
 }
 
 @{
-    List<PortalDataLayer.TblUser> GetList = new List<PortalDataLayer.TblUser>();
+    //Üyelerin ekrana getirildiği ViewBag
+    List<PortalDataLayer.TblUser> GetListByUsers = new List<PortalDataLayer.TblUser>();
 
     if (ViewBag.GetList != null)
     {
-        GetList = ViewBag.GetList;
+        GetListByUsers = ViewBag.GetListByUsers;
+    }
+    //Abonelerin ekrana getirildiği ViewBag
+    List<PortalDataLayer.TblSubscriber> GetListBySubscribers = new List<PortalDataLayer.TblSubscriber>();
+
+    if (ViewBag.GetListBySubscribers != null)
+    {
+        GetListBySubscribers = ViewBag.GetListBySubscribers;
     }
 }
 
@@ -23,7 +31,7 @@
         color: black !important;
     }
 </style>
-
+<h2>Üyeler</h2>
 <br />
 <table class="table table-bordered table-striped">
     <thead>
@@ -39,17 +47,38 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in GetList)
+        @foreach (var item in GetListByUsers)
+        {
+            <tr>
+                <th width="30">@item.UserId</th>
+                <td>@item.UserName</td>
+                <td>@item.UserPassword</td>
+                <td>@item.UserMail</td>
+                <td>@item.UserPhoneNumber</td>
+                <td>@item.UserRegisterDate</td>
+                <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
+                <td width="30"><a href="@Url.Action("UserDelete","Admin", new {Id = @item.UserId} )" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h2>Aboneler</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Aboneler</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in GetListBySubscribers)
         {
         <tr>
-            <th width="30">@item.UserId</th>
-            <td>@item.UserName</td>
-            <td>@item.UserPassword</td>
-            <td>@item.UserMail</td>
-            <td>@item.UserPhoneNumber</td>
-            <td>@item.UserRegisterDate</td>
-            <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
-            <td width="30"><a href="@Url.Action("UserDelete","Admin", new {Id = @item.UserId} )" class="btn btn-danger">Sil</a></td>
+            <th width="30">@item.Id</th>
+            <td>@item.MailAddress</td>
+            <td width="30"><a href="@Url.Action("SubscriberDelete","Admin", new {Id = @item.Id} )" class="btn btn-danger">Sil</a></td>
         </tr>
         }
     </tbody>

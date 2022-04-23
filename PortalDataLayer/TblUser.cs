@@ -17,8 +17,8 @@ namespace PortalDataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TblUser()
         {
-            this.TblOrders = new HashSet<TblOrder>();
             this.TblCarts = new HashSet<TblCart>();
+            this.TblOrders = new HashSet<TblOrder>();
         }
     
         public int UserId { get; set; }
@@ -26,12 +26,12 @@ namespace PortalDataLayer
         public string UserPassword { get; set; }
         public string UserMail { get; set; }
         public string UserPhoneNumber { get; set; }
-        public Nullable<bool> UserActive { get; set; }
         public Nullable<System.DateTime> UserRegisterDate { get; set; }
+        public Nullable<bool> UserActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TblOrder> TblOrders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TblCart> TblCarts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TblOrder> TblOrders { get; set; }
     }
 }

@@ -105,6 +105,23 @@ namespace BusinessLayer
             return UserList;
         }
 
+        //Admin Paneli Aboneler Listesi Kodu
+        public List<TblSubscriber> GetSubscriberList(out string OMessage)
+        {
+            List<TblSubscriber> SubscriberList = new List<TblSubscriber>();
+            OMessage = "";
+            try
+            {
+                SubscriberList = (from Data in Context.TblSubscribers select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return SubscriberList;
+        }
+
         // Urun Ekleme Butonuna Tiklayinca Kategoriyi DropDown Cekmek İcin
         public List<TblCategory> GetCategoryList(out string OMessage)
         {
@@ -260,6 +277,32 @@ namespace BusinessLayer
                     Context.SaveChanges();
                     Success = true;
                     OMessage = "#" + UserId.ToString() + " " + User.UserName + " adlı Kullanıcı silindi.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+
+        public bool SubscriberDeleteFromDb(int SubscriberId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblSubscriber Subscriber = (from Data in Context.TblSubscribers where Data.Id == SubscriberId select Data).FirstOrDefault();
+                if (Subscriber == null)
+                {
+                    OMessage = "Böyle bir Abone Veri tabanında kayıtlı değil.";
+                }
+                else
+                {
+                    Context.TblSubscribers.Remove(Subscriber);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + SubscriberId.ToString() + " " + Subscriber.MailAddress + " adresli Abone silindi.";
                 }
             }
             catch (Exception ex)

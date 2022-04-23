@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="DbManavMelihModel.TblCategory" Width="1.5" PointX="1" PointY="2.5" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblContact" Width="1.5" PointX="5.125" PointY="5" IsExpanded="false" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblProduct" Width="1.5" PointX="3.125" PointY="1.75" />
-        <EntityTypeShape EntityType="DbManavMelihModel.TblSubscriber" Width="1.5" PointX="3.125" PointY="5" IsExpanded="false" />
+        <EntityTypeShape EntityType="DbManavMelihModel.TblSubscriber" Width="1.5" PointX="3.125" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblUser" Width="1.5" PointX="7.25" PointY="1.75" />
         <AssociationConnector Association="DbManavMelihModel.FK_TblProducts_TblCategories1" />
         <EntityTypeShape EntityType="DbManavMelihModel.TblAboutU" Width="1.5" PointX="1" PointY="5" IsExpanded="false" />

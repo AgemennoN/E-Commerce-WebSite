@@ -79,7 +79,6 @@ namespace WebPortal.Controllers
             return RedirectToAction("ProductList", "Admin");
         }
 
-
         public ActionResult CategoryList()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -111,12 +110,12 @@ namespace WebPortal.Controllers
             return RedirectToAction("CategoryList", "Admin");
         }
 
-
         public ActionResult UserList()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
-            ViewBag.GetList = BusinessLayer.GetUserList(out OMessage);
+            ViewBag.GetListByUsers = BusinessLayer.GetUserList(out OMessage);
+            ViewBag.GetListBySubscribers = BusinessLayer.GetSubscriberList(out OMessage);
             return View(ViewBag);
         }
 
@@ -144,6 +143,15 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             bool Success = BusinessLayer.UserDeleteFromDb(UserId, out OMessage);
+            return RedirectToAction("UserList", "Admin");
+        }
+
+        public ActionResult SubsriberDelete(string Id)
+        {
+            int SubsriberId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.SubscriberDeleteFromDb(SubsriberId, out OMessage);
             return RedirectToAction("UserList", "Admin");
         }
 
