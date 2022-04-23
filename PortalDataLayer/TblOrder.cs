@@ -45,6 +45,3 @@ namespace PortalDataLayer
     }
 
 }
-© 2022 GitHub, Inc.
-Terms
-Privacy
