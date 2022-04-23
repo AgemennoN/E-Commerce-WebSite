@@ -26,13 +26,13 @@ namespace PortalDataLayer
         }
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
-        public virtual DbSet<TblCart> TblCarts { get; set; }
         public virtual DbSet<TblCategory> TblCategories { get; set; }
         public virtual DbSet<TblContact> TblContacts { get; set; }
-        public virtual DbSet<TblOrder> TblOrders { get; set; }
-        public virtual DbSet<TblProduct> TblProducts { get; set; }
         public virtual DbSet<TblSubscriber> TblSubscribers { get; set; }
         public virtual DbSet<TblUser> TblUsers { get; set; }
         public virtual DbSet<TblAboutU> TblAboutUs { get; set; }
+        public virtual DbSet<TblCart> TblCarts { get; set; }
+        public virtual DbSet<TblOrder> TblOrders { get; set; }
+        public virtual DbSet<TblProduct> TblProducts { get; set; }
     }
 }

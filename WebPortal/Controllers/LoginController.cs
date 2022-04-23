@@ -23,7 +23,7 @@ namespace WebPortal.Controllers
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string Omessage;
-            List<TblUser> UserList = BusinessLayer.GetUsers(out Omessage);
+            
 
 
             string Username = Request.Form["TxtUsernameLogin"].ToString();
@@ -35,44 +35,49 @@ namespace WebPortal.Controllers
                 if (User.UserId == 2)
                 {
                     Session["Admin"] = true;
+
                 }
+                TempData["LoginMessage"] = Omessage;
                 return new RedirectResult("~/Home");
             }
             else
             {
+                TempData["LoginMessage"] = Omessage;
                 return new RedirectResult("~/Login");
             }
 
             
             
+            
         }
-        public ActionResult Register() //Kayıt işlemi için controller oluşturuldu. Formdan bilgiler alınıp veri tabanına eklendi.
+        public ActionResult Register() //Kayıt işlemi için controller oluşturuldu. 
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string Omessage;
-            List<TblUser>UserList = BusinessLayer.GetUsers(out Omessage);
+            string Omessage;           
 
             string Username = Request.Form["TxtUsername"].ToString();
-            string Password = Request.Form["TxtPassword"].ToString();
+            string Password = Request.Form["TxtPassword"].ToString();  //Formdan bilgiler alındı
             string Email = Request.Form["TxtEmail"].ToString();
             string PhoneNumber = Request.Form["TxtPhone"].ToString();
 
-           
+
             TblUser User = new TblUser()
             {
                 UserName = Username,
                 UserPassword = Password,
-                UserMail = Email,
+                UserMail = Email,                       //Yeni oluşturulan User nesnesine formdan alınan bilgiler atandı
                 UserPhoneNumber = PhoneNumber,
-                
+                UserActive = true,
+                UserRegisterDate = DateTime.Now                
 
             };
            
-            bool Success = BusinessLayer.AddUser(User,out Omessage);
-            TempData["Success"] = Success;
-            TempData["Message"] = Omessage;
+            bool Success = BusinessLayer.AddUser(User,out Omessage);    //User nesnesi veritabanına eklendi
 
-            return new RedirectResult("~/Home");
+            TempData["LoginSuccess"] = Success;
+            TempData["LoginMessage"] = Omessage;
+
+            return new RedirectResult("~/Login");
         }
 
         public ActionResult Logout()
@@ -80,7 +85,7 @@ namespace WebPortal.Controllers
             Session["Admin"] = false;
             Session["User"] = null;
             return new RedirectResult("~/Home");
-        }
+        } //Çıkış yapıldı
         //AKIN CAN CESARETLI - END>>>
 
     }

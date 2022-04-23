@@ -41,9 +41,19 @@ namespace BusinessLayer
             bool result = false;
             try
             {
-                Context.TblUsers.Add(User);
-                Context.SaveChanges();
-                result = true;
+                TblUser Data = (from data in Context.TblUsers where data.UserName == User.UserName && data.UserActive == true select data).FirstOrDefault();
+                if (Data == null)
+                {
+                    Context.TblUsers.Add(User);
+                    Context.SaveChanges();
+                    result = true;
+                    Omessage = "Yeni Kayıt Başarılı";
+                }
+                else
+                {
+                    Omessage = "Kullanıcı ismi zaten kullanılıyor";
+                }
+                
             }
             catch (Exception ex)
             {
@@ -56,7 +66,7 @@ namespace BusinessLayer
         {
             Omessage = "";
             TblUser result = null;
-            TblUser User = (from user in Context.TblUsers where user.UserName == Username select user).FirstOrDefault();
+            TblUser User = (from user in Context.TblUsers where user.UserName == Username && user.UserActive == true select user).FirstOrDefault();
             if (User == null)
             {
                 Omessage = "Giriş bilgileri hatalı";
@@ -69,15 +79,15 @@ namespace BusinessLayer
                 }
                 else if(User.UserPassword == Password)
                 {
-                    Omessage = "Giriş başarılı";
                     result = User;
+                    Omessage = "Giriş başarılı";
+                   
                 }
             }
 
             return result;
-        }
+        }        
 
-        
         //AKIN CAN CESARETLI - END>>>
     }
 }

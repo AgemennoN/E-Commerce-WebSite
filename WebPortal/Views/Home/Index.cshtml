@@ -4,6 +4,19 @@
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
 
+@{
+    if (TempData["LoginMessage"] != null)
+    {
+
+        <script type="text/javascript">
+
+             window.onload = function () {
+               alert("@TempData["LoginMessage"].ToString()");
+              };
+        </script>
+
+    }
+}
 
 <div class="w3l_banner_nav_right">
     <section class="slider">
@@ -53,7 +66,6 @@
 </div>
 <div class="clearfix"></div>
 <!-- banner -->
-
 <!-- top-brands -->
 <div class="top-brands">
     <div class="container">
@@ -137,7 +149,6 @@
     </div>
 </div>
 <!-- //top-brands -->
-
 <!-- fresh-vegetables -->
 <div class="fresh-vegetables">
     <div class="container">
