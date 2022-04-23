@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+
+    PortalDataLayer.TblProduct product = new PortalDataLayer.TblProduct();
+
+    if (ViewBag.Product != null)
+    {
+        product = (PortalDataLayer.TblProduct)ViewBag.Product;
+    }
+
+}
+
+<!-- [EMGT] + Hüseyin Bilgiç -- Start-->
+
+@if (ViewBag.Product != null)
+{
+    <div class="agileinfo_single container">
+        <h5>@product.ProductName</h5>
+        <div class="col-md-4 agileinfo_single_left">
+            <img id="example" src="@Url.Content(product.ProductImage)" alt=" " class="img-responsive">
+        </div>
+        <div class="col-md-8 agileinfo_single_right">
+            <div class="w3agile_description">
+                <h4>Ürün Detayı :</h4>
+                <p>
+                    @product.ProductDescription
+                </p>
+            </div>
+            <div class="snipcart-item block">
+                <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                    <h4>
+                        ₺ @product.PriceOnSale
+                        @if (product.ProductPrice != product.PriceOnSale)
+                        {
+                            <span>₺ @product.ProductPrice </span>
+                        }
+
+                    </h4>
+                </div>
+                <div class="snipcart-details agileinfo_single_right_details">
+                    <form action="#" method="post">
+                        <fieldset>
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="add" value="1">
+                            <input type="hidden" name="business" value=" ">
+                            <input type="hidden" name="item_name" value="@product.ProductName">
+                            <input type="hidden" name="amount" value="21.00">
+                            <input type="hidden" name="discount_amount" value="@product.ProductDiscount">
+                            <input type="hidden" name="currency_code" value="TRY ">
+                            <input type="hidden" name="return" value=" ">
+                            <input type="hidden" name="cancel_return" value=" ">
+                            <input type="submit" name="submit" value="Sepete Ekle" class="button">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+}
+else
+{
+    <h1 class="container" style="text-align: center;">Ürün Bulunamadı. Tekrar Deneyiniz!</h1>
+}
+
+<!-- [EMGT] + Hüseyin Bilgiç -- End -->

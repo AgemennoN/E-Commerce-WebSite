@@ -30,6 +30,21 @@ namespace WebPortal.Controllers
         }
         // Vejdi BURAK - End
 
+        // [EMGT] + Hüseyin Bilgiç -- Start
+        public ActionResult ProductDetail(string id)
+        {
+            string OMessage;
+            int State;
+            bool Result = int.TryParse(id, out State);
+            if (Result)
+            {
+                ViewBag.Product = BusinessLayer.GetProductById(State, out OMessage);
+            }
+            return View();
+        }
+        // [EMGT] + Hüseyin Bilgiç -- End
+
+
         //FIRAT --START
         public ActionResult LowPrice()
         {

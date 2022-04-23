@@ -82,7 +82,7 @@
                                     <div class="snipcart-item block">
                                         <!--Hüseyin Bilgiç - Start -->
                                         <div class="snipcart-thumb">
-                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
+                                            <a href="~/Products/ProductDetail/@Product.ProductId"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
                                             <p>@Product.ProductName</p>
                                             <h4>
                                                 @Product.PriceOnSale
@@ -188,48 +188,52 @@
         <div class="agile_top_brands_grids">
             <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADAN BAŞLAYACAK-->
             <!-- Belgin Çoban -Start-->
-            @foreach (var Product in ViewBag.ProductsOnSales)
+            @if (ViewBag.ProductsOnSales != null)
             {
-                <div class="col-md-3 top_brand_left">
-                    <div class="hover14 column">
-                        <div class="agile_top_brand_left_grid">
-                            @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
-                            <div class="agile_top_brand_left_grid1">
-                                <figure>
-                                    <div class="snipcart-item block">
-                                        <div class="snipcart-thumb">
-                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
+                foreach (var Product in ViewBag.ProductsOnSales)
+                {
+                    <div class="col-md-3 top_brand_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid">
+                                @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a href="~/Products/ProductDetail/@Product.ProductId"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
 
-                                            @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
-                                                <p>Sun Flower Oil</p>*@
-                                            <p>@Product.ProductName</p>
-                                            <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
+                                                @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
+                                            <p>Sun Flower Oil</p>*@
+                                                <p>@Product.ProductName</p>
+                                                <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
 
 
+                                            </div>
+                                            <div class="snipcart-details top_brand_home_details">
+                                                <form action="checkout.html" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
+                                                        <input type="hidden" name="item_name" value="Sun Flower Oil" />
+                                                        <input type="hidden" name="amount" value="7.99" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="TRY" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
                                         </div>
-                                        <div class="snipcart-details top_brand_home_details">
-                                            <form action="checkout.html" method="post">
-                                                <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value=" " />
-                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                    <input type="hidden" name="amount" value="7.99" />
-                                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                                    <input type="hidden" name="currency_code" value="TRY" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                                </fieldset>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </figure>
+                                    </figure>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+                
             }
 
             <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADA BİTECEK.-->

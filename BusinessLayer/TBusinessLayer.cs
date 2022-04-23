@@ -22,7 +22,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Categories=(from data in Context.TblCategories where data.CategoryActive==true select data).ToList();
+                Categories = (from data in Context.TblCategories where data.CategoryActive == true select data).ToList();
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId &&data.ProductActive==true select data).ToList();
+                Products = (from data in Context.TblProducts where data.CategoryId == CategoryId && data.ProductActive == true select data).ToList();
             }
             catch (Exception ex)
             {
@@ -99,7 +99,7 @@ namespace BusinessLayer
             return Products;
         }
         ///Vejdi BURAK - End >>>
-        
+
         //<<<Fırat Seven - Start
         public List<TblProduct> GetLowPrice(out string OMessage)
         {
@@ -166,7 +166,7 @@ namespace BusinessLayer
                 {
                     Omessage = "Kullanıcı ismi zaten kullanılıyor";
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -190,17 +190,17 @@ namespace BusinessLayer
                 {
                     Omessage = "Giriş bilgileri hatalı";
                 }
-                else if(User.UserPassword == Password)
+                else if (User.UserPassword == Password)
                 {
                     result = User;
                     Omessage = "Giriş başarılı";
-                   
+
                 }
             }
 
             return result;
-        }        
-     
+        }
+
 
         //AKIN CAN CESARETLI - END>>>
 
@@ -247,6 +247,24 @@ namespace BusinessLayer
 
         }
         #endregion
+        // [EMGT] + Hüseyin Bilgiç -- Start
+        public TblProduct GetProductById(int id, out string OMessage)
+        {
+            OMessage = "";
+            TblProduct product = new TblProduct();
+            try
+            {
+                product = (from data in Context.TblProducts where data.ProductId ==id select data).FirstOrDefault(); // Ürün id'sine göre ürün çağırma 
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+
+            }
+            return product;
+
+        }
+        // [EMGT] + Hüseyin Bilgiç -- End
 
     }
 }
