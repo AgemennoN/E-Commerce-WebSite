@@ -262,6 +262,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutUsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -284,6 +285,7 @@
     <Content Include="Views\Products\HighPrice.cshtml" />
     <Content Include="Views\Products\LowPrice.cshtml" />
     <Content Include="Views\Shared\Category.cshtml" />
+    <Content Include="Views\AboutUs\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
