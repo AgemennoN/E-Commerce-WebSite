@@ -129,7 +129,23 @@ namespace WebPortal.Controllers
             return RedirectToAction("ProductList", "Admin");
         }
 
+        public ActionResult CategoryDelete(string Id)
+        {
+            int CategoryId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.CategoryDeleteFromDb(CategoryId, out OMessage);
+            return RedirectToAction("CategoryList", "Admin");
+        }
 
+        public ActionResult UserDelete(string Id)
+        {
+            int UserId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.UserDeleteFromDb(UserId, out OMessage);
+            return RedirectToAction("UserList", "Admin");
+        }
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi

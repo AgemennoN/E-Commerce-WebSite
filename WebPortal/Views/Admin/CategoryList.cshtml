@@ -46,7 +46,7 @@
                 <td>@item.CategoryName</td>
                 <td width="40"><a href="~/Admin/ProductDetail/@item.CategoryId" class="btn btn-primary">Detay</a></td>
                 <td width="60"><a href="~/Admin/ProductUpdate/@item.CategoryId" class="btn btn-warning">Düzenle</a></td>
-                <td width="30"><a href="~/Admin/ProductDelete/@item.CategoryId" class="btn btn-danger">Sil</a></td>
+                <td width="30"><a href="@Url.Action("CategoryDelete","Admin", new {Id = @item.CategoryId} )" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>

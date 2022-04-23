@@ -160,7 +160,6 @@ namespace BusinessLayer
             return IsAdded;
         }
 
-
         public List<TblOrder> GetOrderList(out string OMessage)
         {
             List<TblOrder> OrderList = new List<TblOrder>();
@@ -213,11 +212,63 @@ namespace BusinessLayer
             }
             catch (Exception ex)
             {
-
                 OMessage = ex.Message;
             }
             return Success;
         }
+
+        public bool CategoryDeleteFromDb(int CategoryId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblCategory Category = (from Data in Context.TblCategories where Data.CategoryId == CategoryId select Data).FirstOrDefault();
+                if (Category == null)
+                {
+                    OMessage = "Böyle bir Kategori Veri tabanında kayıtlı değil.";
+                }
+                else
+                {
+                    Context.TblCategories.Where(x => x.CategoryId == CategoryId).ToList().ForEach(x => x.CategoryActive = false);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + CategoryId.ToString() + " " + Category.CategoryName + " Kategori silindi.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+
+        public bool UserDeleteFromDb(int UserId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblUser User = (from Data in Context.TblUsers where Data.UserId == UserId select Data).FirstOrDefault();
+                if (User == null)
+                {
+                    OMessage = "Böyle bir Kullanıcı Veri tabanında kayıtlı değil.";
+                }
+                else
+                {
+                    Context.TblUsers.Where(x => x.UserId == UserId).ToList().ForEach(x => x.UserActive = false);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + UserId.ToString() + " " + User.UserName + " adlı Kullanıcı silindi.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+
 
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 

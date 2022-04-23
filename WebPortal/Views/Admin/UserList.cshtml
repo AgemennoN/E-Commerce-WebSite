@@ -49,7 +49,7 @@
             <td>@item.UserPhoneNumber</td>
             <td>@item.UserRegisterDate</td>
             <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
-            <td width="30"><a href="~/Admin/ProductDelete/@item.UserId" class="btn btn-danger">Sil</a></td>
+            <td width="30"><a href="@Url.Action("UserDelete","Admin", new {Id = @item.UserId} )" class="btn btn-danger">Sil</a></td>
         </tr>
         }
     </tbody>
