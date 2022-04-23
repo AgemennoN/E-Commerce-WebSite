@@ -10,6 +10,7 @@ namespace WebPortal.Controllers
 {
     public class HomeController : Controller
     {
+        //>>>Hüseyin Bilgiç<<<
         public ActionResult Index(string id)
         {
             TBusinessLayer business = new TBusinessLayer();
@@ -18,18 +19,21 @@ namespace WebPortal.Controllers
             if (Category != null)
             {
                 ViewBag.Category = Category;
-                ViewBag.Products = business.GetProductsByCategoryId(
-                    Category.CategoryId,
-                    out OMessage
-                );
+                ViewBag.ProductsByCategory = business.GetProductsByCategoryId(Category.CategoryId, out OMessage);
             }
             else if (id != null && Category == null)
             {
                 return new RedirectResult("/");
             }
             ViewBag.Categories = business.GetCategories(out OMessage);
+
+            //>>>Belgin Çoban--<<<
+            ViewBag.ProductsOnSales = business.GetProducDiscounts(out OMessage);
+            //>> --End<<<
+
             return View(ViewBag);
         }
+        //>>>Hüseyin Bilgiç<<<
 
         #region Celal Serdar Ergun Aksiyon
         // Celal Serdar Ergun Aksiyon

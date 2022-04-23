@@ -2,43 +2,77 @@
 @{
     ViewBag.Title = "Ana Sayfa";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
-    List<PortalDataLayer.TblProduct> Products = new List<PortalDataLayer.TblProduct>();
+
+    <!--Hüseyin Bilgiç - Start -->
+
+    List<PortalDataLayer.TblProduct> ProductsByCategory = new List<PortalDataLayer.TblProduct>();
     PortalDataLayer.TblCategory Category = new PortalDataLayer.TblCategory();
     if (ViewBag.Category != null)
     {
         Category = (PortalDataLayer.TblCategory)ViewBag.Category;
 
     }
-    if (ViewBag.Products != null)
+    if (ViewBag.ProductsByCategory != null)
     {
-        Products = (List<PortalDataLayer.TblProduct>)ViewBag.Products;
+        ProductsByCategory = (List<PortalDataLayer.TblProduct>)ViewBag.ProductsByCategory;
+    }
+    <!--Hüseyin Bilgiç - End -->
+}
+
+@{
+    if (TempData["LoginMessage"] != null)
+    {
+
+        <script type="text/javascript">
+
+             window.onload = function () {
+               alert("@TempData["LoginMessage"].ToString()");
+              };
+        </script>
+
+    }
+
+    if (TempData["LogoutMessage"] != null)
+    {
+
+        <script type="text/javascript">
+
+             window.onload = function () {
+               alert("@TempData["LogoutMessage"].ToString()");
+              };
+        </script>
+
     }
 }
 
-
 <div class="w3l_banner_nav_right">
-    @if (Products.Count != 0)
-    {
-        <div class="products-breadcrumb">
-            <div class="container">
-                <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Home</a><span>|</span></li>
-                    @if (ViewBag.Category != null)
-                    {
-                        <li>@Category.CategoryName</li>
-                    }
-                </ul>
-            </div>
+    <div class="products-breadcrumb">
+        <div class="container">
+            <ul>
+                <!--Hüseyin Bilgiç - Start -->
+                <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Ana Sayfa</a><span>|</span></li>
+                @if (ViewBag.Category != null)
+                {
+                    <li>@Category.CategoryName</li>
+                }
+                <!--Hüseyin Bilgiç - End -->
+            </ul>
         </div>
+    </div>
+    <br />
+    @if (ProductsByCategory.Count != 0)
+    {
+        <!--Hüseyin Bilgiç - Start -->
         if (ViewBag.Category != null)
         {
             <h1 class="container" id="categoryName" style="text-align: center;">@Category.CategoryName</h1><br />
         }
-        foreach (PortalDataLayer.TblProduct Product in Products)
-        {
-            if ((bool)Product.ProductActive)
+        <!--Hüseyin Bilgiç - End -->
+            foreach (PortalDataLayer.TblProduct Product in ProductsByCategory)
             {
-                string total = ((decimal)@Product.ProductPrice - ((decimal)@Product.ProductPrice * ((decimal)@Product.ProductDiscount / 100))).ToString("f2");
+                if ((bool)Product.ProductActive)
+                {
+                    
                 <div class="col-md-3 top_brand_left">
                     <div class="hover14 column">
                         <div class="agile_top_brand_left_grid">
@@ -46,18 +80,20 @@
                             <div class="agile_top_brand_left_grid1">
                                 <figure>
                                     <div class="snipcart-item block">
+                                        <!--Hüseyin Bilgiç - Start -->
                                         <div class="snipcart-thumb">
-                                            <a href="single.html"><img title=" " alt=" " src="~/@Product.ProductImage" /></a>
+                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
                                             <p>@Product.ProductName</p>
                                             <h4>
-                                                @total
-                                                @if (@Product.ProductPrice.ToString() != @total)
+                                                @Product.PriceOnSale
+                                                @if (Product.ProductPrice != Product.PriceOnSale)
                                                 {
                                                     <span>@Product.ProductPrice</span>
                                                 }
 
                                             </h4>
                                         </div>
+                                        <!--Hüseyin Bilgiç - End -->
                                         <div class="snipcart-details top_brand_home_details">
                                             <form action="checkout.html" method="post">
                                                 <fieldset>
@@ -86,56 +122,47 @@
 
         }
     }
-    else if (Products.Count == 0 && ViewBag.Category == null)
+    //Kategori seçilmemiş ise bu sayfa gözükecek. - Hüseyin Bilgiç
+    else if (ProductsByCategory.Count == 0 && ViewBag.Category == null)
     {
         <section class="slider">
             <div class="flexslider">
                 <ul class="slides">
                     <li>
                         <div class="w3l_banner_nav_right_banner">
-                            <h3>Manav Melih ile<span>Evlerinizi</span>Şenlendirin</h3>
+                            <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
                             <div class="more">
-                                <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
+                                <a href="/Products" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
                             </div>
                         </div>
                     </li>
                     <li>
                         <div class="w3l_banner_nav_right_banner1">
-                            <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
+                            <h3>En Taze Sebze <span>Çeşitleri</span></h3>
                             <div class="more">
-                                <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
+                                <a href="/Products" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
                             </div>
                         </div>
                     </li>
                     <li>
+                        <!-- Belgin Çoban --Start -->
                         <div class="w3l_banner_nav_right_banner2">
-                            <h3>En uygun <i>Fiyatlarla</i></h3>
+                            <h3>Hesaplı Fiyatlarla<i>Buz Gibi İçecekler</i></h3>
                             <div class="more">
-                                <a href="kampanyasayfasi.html" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
+                                <a href="/Campaigns/Index" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
                             </div>
                         </div>
+                        <!-- Belgin Çoban --End -->
                     </li>
                 </ul>
             </div>
         </section>
     }
+    //Kategori seçilmiş fakat içerisinde ürün yoksa bu sayfa gözükecek. - Hüseyin Bilgiç
     else
     {
-        <div class="products-breadcrumb">
-            <div class="container">
-                <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/Home">Home</a><span>|</span></li>
-                    @if (ViewBag.Category != null)
-                    {
-                        <li>@Category.CategoryName</li>
-                    }
-                </ul>
-            </div>
-        </div>
-        <hr />
         <h1 class="container" id="categoryName" style="text-align: center;">Seçilen kategoride ürün bulunmamaktadır.</h1>
     }
-
 
     <!-- flexSlider -->
     <link rel="stylesheet" href="~/wwwroot/css/flexslider.css" type="text/css" media="screen" property="" />
@@ -159,79 +186,54 @@
     <div class="container">
         <h3>İndirimli Ürünler</h3>
         <div class="agile_top_brands_grids">
+            <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADAN BAŞLAYACAK-->
+            <!-- Belgin Çoban -Start-->
+            @foreach (var Product in ViewBag.ProductsOnSales)
+            {
+                <div class="col-md-3 top_brand_left">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid">
+                            @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="single.html"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
 
-            <div class="col-md-3 top_brand_left">
-                <div class="hover14 column">
-                    <div class="agile_top_brand_left_grid">
-                        @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
-                        <div class="agile_top_brand_left_grid1">
-                            <figure>
-                                <div class="snipcart-item block">
-                                    <div class="snipcart-thumb">
-                                        <a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
-                                        <p>Sun Flower Oil</p>
-                                        <h4>₺ 7.99 <span>₺ 10.00</span></h4>
+                                            @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
+                                                <p>Sun Flower Oil</p>*@
+                                            <p>@Product.ProductName</p>
+                                            <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
+
+
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <form action="checkout.html" method="post">
+                                                <fieldset>
+                                                    <input type="hidden" name="cmd" value="_cart" />
+                                                    <input type="hidden" name="add" value="1" />
+                                                    <input type="hidden" name="business" value=" " />
+                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
+                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
+                                                    <input type="hidden" name="amount" value="7.99" />
+                                                    <input type="hidden" name="discount_amount" value="1.00" />
+                                                    <input type="hidden" name="currency_code" value="TRY" />
+                                                    <input type="hidden" name="return" value=" " />
+                                                    <input type="hidden" name="cancel_return" value=" " />
+                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                </fieldset>
+                                            </form>
+                                        </div>
                                     </div>
-                                    <div class="snipcart-details top_brand_home_details">
-                                        <form action="checkout.html" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                <input type="hidden" name="amount" value="7.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </figure>
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
 
-            <div class="col-md-3 top_brand_left">
-                <div class="hover14 column">
-                    <div class="agile_top_brand_left_grid">
-                        @*<div class="tag"><img src="~/wwwroot/images/tag.png" alt=" " class="img-responsive" /></div>*@
-                        <div class="agile_top_brand_left_grid1">
-                            <figure>
-                                <div class="snipcart-item block">
-                                    <div class="snipcart-thumb">
-                                        <a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
-                                        <p>Sun Flower Oil</p>
-                                        <h4>₺ 7.99 <span>₺ 10.00</span></h4>
-                                    </div>
-                                    <div class="snipcart-details top_brand_home_details">
-                                        <form action="checkout.html" method="post">
-                                            <fieldset>
-                                                <input type="hidden" name="cmd" value="_cart" />
-                                                <input type="hidden" name="add" value="1" />
-                                                <input type="hidden" name="business" value=" " />
-                                                @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                <input type="hidden" name="amount" value="7.99" />
-                                                <input type="hidden" name="discount_amount" value="1.00" />
-                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                <input type="hidden" name="return" value=" " />
-                                                <input type="hidden" name="cancel_return" value=" " />
-                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                            </fieldset>
-                                        </form>
-                                    </div>
-                                </div>
-                            </figure>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- İNDİRİMLİ ÜRÜNLER İÇİN FOR DÖNGÜSÜ BURADA BİTECEK.-->
+            <!-- Belgin Çoban - End.-->
             <div class="clearfix"> </div>
         </div>
     </div>
@@ -268,7 +270,7 @@
                             <img src="~/wwwroot/images/7.jpg" alt=" " class="img-responsive" />
                             <div class="w3l_fresh_vegetables_grid1_rel_pos">
                                 <div class="more m1">
-                                    <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
+                                    <a href="/Products" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
                                 </div>
                             </div>
                         </div>
