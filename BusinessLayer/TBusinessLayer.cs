@@ -51,7 +51,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive==true orderby DataLow.ProductPrice select DataLow).ToList();
+                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive==true orderby DataLow.PriceOnSale select DataLow).ToList();
             }
             catch (Exception ex)
             {
@@ -65,7 +65,7 @@ namespace BusinessLayer
             OMessage = "";
             try
             {
-                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive == true orderby DataLow.ProductPrice descending select DataLow).ToList();
+                Products = (from DataLow in Context.TblProducts where DataLow.ProductActive == true orderby DataLow.PriceOnSale descending select DataLow).ToList();
             }
             catch (Exception ex)
             {
