@@ -20,43 +20,43 @@
     }
 }
 
-<style>
-    #ProductSubmit {
-        background-color: cornflowerblue;
-    }
-</style>
 
 <div class="jumbotron">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
-                <h3 class="text-primary text-center">Ürün Düzenleme Formu</h3>
+                <h3 class="text-success text-center">Ürün Düzenleme Formu</h3>
                 <br />
                 @using (Html.BeginForm("ProductEdit", "Admin", FormMethod.Post))
-                    {
+                {
 
                     //ProductId yi form içinde göndermem gerekiyorki düzenlencek itemin Id sini yollayabileyim
                     //ama mantıklı nasıl olur bilemedim Tam buna bakyordum Telegramdan konuştuk Pushluyorum şu Anda
                     <div class="form-group">
-                        <input name="TxtProductId" value="@Product.ProductId"> 
+                        <input type="hidden" name="TxtProductId" value="@Product.ProductId" readonly>
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Ürün Adı : </label>
                         <input class="form-control" type="text" name="TxtProductName" placeholder="Adı" value="@Product.ProductName" required="">
                     </div>
                     <div class="form-group">
                         <input type="file" name="TxtProductImage" placeholder="Resmi" value="@Product.ProductImage">
-                        <small class="text-muted">(Ornek : isim.jpg)</small>
+                        <small class="text-muted">(Örnek : isim.jpg)</small>
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Ürün Fiyatı :</label>
                         <input class="form-control" type="text" name="TxtProductPrice" placeholder="Fiyatı" value="@Product.ProductPrice" required="">
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Ürün İndirim Miktarı :</label>
                         <input class="form-control" type="text" name="TxtProductDiscount" placeholder="İndirim Yüzde Miktarı" value="@Product.ProductDiscount" required="">
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Ürün Stok Miktarı</label>
                         <input class="form-control" type="text" name="TxtProductStock" placeholder="Stok Miktarı" value="@Product.ProductStock" required="">
                     </div>
                     <div class="form-group">
+                        <label class="control-label">Ürün Kategorisi</label>
                         <select class="form-control" name="TxtCategory">
                             @{
                                 foreach (var item in CategoryList)
@@ -66,7 +66,7 @@
                             }
                         </select>
                     </div>
-                    <input id="ProductSubmit" type="submit" class="btn btn-primary btn-block" value="Ürünü Düzenle">
+                    <input id="ProductSubmit" type="submit" class="btn btn-success btn-block" value="Güncelle">
                 }
             </div>
         </div>

@@ -12,6 +12,7 @@ namespace WebPortal.Controllers
     {
         // GET: Admin
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+
         //Admin Sayfasi Urunler Listesi Yapildi
         public ActionResult Index(string Id)
         {
@@ -30,6 +31,15 @@ namespace WebPortal.Controllers
                 return View(ViewBag);
             }
 
+        }
+
+        // Urun Listeleme Sayfasi
+        public ActionResult ProductList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
+            return View(ViewBag);
         }
 
         // Get: Urun Ekleme Sayfasi
@@ -72,55 +82,6 @@ namespace WebPortal.Controllers
             return RedirectToAction("ProductList", "Admin");
         }
 
-        // Get: Kategori Ekleme Sayfasi
-        [HttpGet]
-        public ActionResult CategoryCreate()
-        {
-            return View();
-        }
-
-        // Post: Kategori Ekleme Sayfasi
-        [HttpPost]
-        public ActionResult CategoryCreate(TblCategory Category)
-        {
-            string CategoryName = Request.Form["TxtCategoryName"].ToString();
-
-            Category.CategoryName = CategoryName;
-            Category.CategoryActive = true;
-
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            BusinessLayer.AddCategory(out OMessage, Category);
-
-            return RedirectToAction("CategoryList", "Admin");
-        }
-
-
-        public ActionResult ProductList()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetList = BusinessLayer.GetProductList(out OMessage);
-            return View(ViewBag);
-        }
-        
-        public ActionResult CategoryList()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetList = BusinessLayer.GetCategories(out OMessage);
-            return View(ViewBag);
-        }
-
-        public ActionResult UserList()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.GetListByUsers = BusinessLayer.GetUserList(out OMessage);
-            ViewBag.GetListBySubscribers = BusinessLayer.GetSubscriberList(out OMessage);
-            return View(ViewBag);
-        }
-
         // Get: Urun Duzenleme Sayfasi
         [HttpGet]
         public ActionResult ProductEdit()
@@ -128,22 +89,22 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             ViewBag.CategoryList = BusinessLayer.GetCategoryList(out OMessage);
-            
-            if(Request.QueryString["ProductId"] != null)
+
+            if (Request.QueryString["ProductId"] != null)
             {
                 int ProductId = new int();
                 TblProduct Product = null;
-                if(Int32.TryParse(Request.QueryString["ProductId"], out ProductId))
-                   // If the parameter is Parseble
+                if (Int32.TryParse(Request.QueryString["ProductId"], out ProductId))
+                    // If the parameter is Parseble
                     Product = BusinessLayer.GetProductByProductId(ProductId, out OMessage);
 
-                if(Product == null)
+                if (Product == null)
                     // if the item with the ProdectId does not exist Send Admin to the ProductList Page
                     return RedirectToAction("ProductList", "Admin");
 
                 ViewBag.ProductbyId = Product;  // Else sent the product to the ProductEdit Page
             }
-            else if(Request.QueryString["ProductId"] == null)
+            else if (Request.QueryString["ProductId"] == null)
             {   // if Url is entered by hand and the parameter "ProductId" doesn't entered.
                 return RedirectToAction("ProductList", "Admin");
             }
@@ -176,7 +137,7 @@ namespace WebPortal.Controllers
             Product.ProductStock = Convert.ToInt32(ProductStock);
             Product.ProductActive = true;
             Product.CategoryId = Convert.ToInt32(Category);
-            
+
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             BusinessLayer.EditProduct(Product, out OMessage);
@@ -184,7 +145,18 @@ namespace WebPortal.Controllers
             ////return new RedirectResult("~/Admin");
             return RedirectToAction("ProductList", "Admin");
         }
-        
+
+        // Urun Detay Sayfasi
+        public ActionResult ProductDetail(int id)
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.Detail = BusinessLayer.GetProductByProductId(id, out OMessage);
+            return View(ViewBag);
+
+        }
+
+        // Urun Silme Sayfasi
         public ActionResult ProductDelete(string Id)
         {
             int ProductId = Convert.ToInt32(Id);
@@ -194,6 +166,40 @@ namespace WebPortal.Controllers
             return RedirectToAction("ProductList", "Admin");
         }
 
+
+        // Kategori Listeleme Sayfasi
+        public ActionResult CategoryList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetList = BusinessLayer.GetCategories(out OMessage);
+            return View(ViewBag);
+        }
+
+        // Get: Kategori Ekleme Sayfasi
+        [HttpGet]
+        public ActionResult CategoryCreate()
+        {
+            return View();
+        }
+
+        // Post: Kategori Ekleme Sayfasi
+        [HttpPost]
+        public ActionResult CategoryCreate(TblCategory Category)
+        {
+            string CategoryName = Request.Form["TxtCategoryName"].ToString();
+
+            Category.CategoryName = CategoryName;
+            Category.CategoryActive = true;
+
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            BusinessLayer.AddCategory(out OMessage, Category);
+
+            return RedirectToAction("CategoryList", "Admin");
+        }
+
+        // Kategori Silme Sayfasi
         public ActionResult CategoryDelete(string Id)
         {
             int CategoryId = Convert.ToInt32(Id);
@@ -203,6 +209,17 @@ namespace WebPortal.Controllers
             return RedirectToAction("CategoryList", "Admin");
         }
 
+        // Kullanici Listeleme Sayfasi
+        public ActionResult UserList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            ViewBag.GetListByUsers = BusinessLayer.GetUserList(out OMessage);
+            ViewBag.GetListBySubscribers = BusinessLayer.GetSubscriberList(out OMessage);
+            return View(ViewBag);
+        }
+
+        // Kullanici Silme Sayfasi
         public ActionResult UserDelete(string Id)
         {
             int UserId = Convert.ToInt32(Id);
@@ -212,6 +229,7 @@ namespace WebPortal.Controllers
             return RedirectToAction("UserList", "Admin");
         }
 
+        // Abone Silme Sayfasi
         public ActionResult SubsriberDelete(string Id)
         {
             int SubsriberId = Convert.ToInt32(Id);
@@ -221,6 +239,7 @@ namespace WebPortal.Controllers
             return RedirectToAction("UserList", "Admin");
         }
 
+        // Siparis Dagitim Sayfasi
         public ActionResult OrderDeliver(string Id)
         {
             int OrderId = Convert.ToInt32(Id);
