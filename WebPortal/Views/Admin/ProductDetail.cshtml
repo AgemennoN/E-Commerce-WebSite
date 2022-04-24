@@ -21,7 +21,8 @@
         <div class="card">
             <h3 class="card-header" style="margin-bottom: 25px; color: red;">(@Product.ProductName)</h3>
             <div class="card-body bg-white  border border-primary shadow-0">
-                <label>Fiyat : <span style="color:red; margin-right:5px;">@Product.ProductPrice ₺</span></label>
+                <label> Açıklama : <span style="color:red; margin-right:5px;">@Product.ProductDescription</span></label>
+                <label>Fiyat : <span style="color:red; margin-right:5px;">@Product.ProductPrice ₺</span></label><br />
                 @if (Product.ProductDiscount > 0)
                 {
                     <label><sub style="color:forestgreen;">(% @Product.ProductDiscount indirim)</sub></label><br /><br />

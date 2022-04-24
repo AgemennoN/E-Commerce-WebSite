@@ -16,6 +16,9 @@
     <!-- font-awesome icons -->
     <link href="~/wwwroot/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
+    <!--Bootstrap CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--//Bootstrap CDN-->
     <!-- js -->
     <script src="~/wwwroot/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -100,16 +103,16 @@
     <div class="logo_products">
         <div class="container">
             <div class="w3ls_logo_products_left">
-                <h1><a href="~/Home/Index"><span>Manav</span> Melih</a></h1>
+                <h1><a href="~/Admin/Index"><span>Manav</span> Melih</a></h1>
             </div>
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
-                    <li><a href="~/Admin/Index" class="btn btn-success-outline">Siparişler</a><i>/</i></li>
-                    <li><a href="~/Admin/ProductList" class="btn btn-success-outline">Tüm Ürünler</a><i>/</i></li>
-                    <li><a href="~/Admin/CategoryList" class="btn btn-success-outline">Tüm Kategoriler</a><i>/</i></li>
-                    <li><a href="~/Admin/UserList" class="btn btn-success-outline">Kullanıcılar</a><i>/</i></li>
-                    <li><a href="~/Admin/ContactList" class="btn btn-success-outline">Gelen Mesajlar</a><i>/</i></li>
-                    <li><a href="~/Admin/Statistics" class="btn btn-success-outline">İstatsiktik</a><i></i></li>
+                    <li><a href="~/Admin/Index">Siparişler</a><i>/</i></li>
+                    <li><a href="~/Admin/ProductList">Tüm Ürünler</a><i>/</i></li>
+                    <li><a href="~/Admin/CategoryList">Tüm Kategoriler</a><i>/</i></li>
+                    <li><a href="~/Admin/UserList">Kullanıcılar</a><i>/</i></li>
+                    <li><a href="~/Admin/ContactList">Gelen Mesajlar</a><i>/</i></li>
+                    <li><a href="~/Admin/Statistics">İstatistik</a><i></i></li>
                 </ul>
             </div>
             @*<div class="w3ls_logo_products_left1">
@@ -131,11 +134,12 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Bilgilendirme</h3>
                 <ul class="w3_footer_grid_list">
-                    <li><a href="~/Admin/Index">Tüm Ürünler</a><i>/</i></li>
-                    <li><a href="~/Admin/CategoryList">Tüm Kategoriler</a><i>/</i></li>
+                    <li><a href="~/Admin/Index">Siparişler</a><i>/</i></li>
+                    <li><a href="~/Admin/ProductList">Tüm Ürünler</a><i>/</i></li>
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="#">Kampanyalar</a><i>/</i></li>
-                    <li><a href="#">Hakkımızda</a><i>/</i></li>
+                    <li><a href="~/Admin/UserList">Kullanıcılar</a><i>/</i></li>
+                    <li><a href="~/Admin/ContactList">Gelen Mesajlar</a><i>/</i></li>
+                    <li><a href="~/Admin/Statistics">İstatistik</a><i></i></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">

@@ -38,7 +38,7 @@
                     </div>
                     <div class="form-group">
                         <input type="file" name="TxtProductImage" placeholder="Resmi" value="@Product.ProductImage">
-                        <small class="text-muted">(Örnek : isim.jpg)</small>
+                        <small class="text-muted">(Örnek : Ürün.jpg)</small>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Ürün Fiyatı :</label>
@@ -49,11 +49,11 @@
                         <input class="form-control" type="text" name="TxtProductDiscount" placeholder="İndirim Yüzde Miktarı" value="@Product.ProductDiscount" required="">
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Ürün Stok Miktarı</label>
+                        <label class="control-label">Ürün Stok Miktarı :</label>
                         <input class="form-control" type="text" name="TxtProductStock" placeholder="Stok Miktarı" value="@Product.ProductStock" required="">
                     </div>
                     <div class="form-group">
-                        <label class="control-label">Ürün Kategorisi</label>
+                        <label class="control-label">Ürün Kategorisi : </label>
                         <select class="form-control" name="TxtCategory">
                             @{
                                 foreach (var item in CategoryList)
@@ -65,6 +65,7 @@
                     </div>
                     <input id="ProductSubmit" type="submit" class="btn btn-success btn-block" value="Güncelle">
                 }
+                <a href="@Url.Action("ProductList")" class="btn btn-link">Vazgeç</a>
             </div>
         </div>
     </div>

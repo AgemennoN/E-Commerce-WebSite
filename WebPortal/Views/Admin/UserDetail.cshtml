@@ -4,7 +4,15 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<style>
+    th {
+        color: black !important;
+    }
 
+    td {
+        color: black !important;
+    }
+</style>
 
 @{
     PortalDataLayer.TblUser User = new PortalDataLayer.TblUser();
@@ -24,7 +32,7 @@
 
 
 <div class="privacy about">
-    <h3 class="text-info">#@User.UserId @User.UserName</h3>
+    <h3 class="text-info"><i class="fa fa-user"></i> @User.UserName</h3>
 
     @if (User.UserActive == false)
     {
@@ -33,15 +41,29 @@
 </div>
 
 
-<ul class="phone_email">
-    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
-    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
-    <li><i class="text-info" aria-hidden="true"></i>Kayıt tarihi: @User.UserRegisterDate</li>
-</ul>
+@*<ul class="phone_email">
+        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+        <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+        <li><i class="text-info" aria-hidden="true"></i>Kayıt tarihi: @User.UserRegisterDate</li>
+    </ul>*@
 
+<div class="card text-center">
+    <div class="card-header bg-primary text-light">
+        Detaylar
+    </div>
+    <div class="card-body">
+        <ul>
+            <li class="list-unstyled"><i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+            <li class="list-unstyled"><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+            <li class="list-unstyled"><i class="fa fa-clock-o text-info" aria-hidden="true"></i> @User.UserRegisterDate</li>
+        </ul>
+    </div>
+</div>
+<br />
+<br />
+<br />
 
-
-<h4>#@User.UserId @User.UserName Kullanıcısına Ait siparişler</h4>
+<h6 class="text-center btn btn-block btn-warning"><i class="fa fa-user text-info"></i>"@User.UserName" Kullanıcısına Ait Tüm Siparişler</h6>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -71,16 +93,17 @@
                     <td width="40"><a href="~/Admin/OrderDetail?OrderId=@Order.OrderId" class="btn btn-primary">Detay</a></td>
                     @if (Order.IsDelivered == false)
                     {
-                        <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-danger">Teslim Et</a></td>
+                        <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-warning">Teslim Et</a></td>
                     }
                     else
                     {
-                        <td width="40"><a href="#" class="btn btn-warning">Teslim Edildi</a></td>
+                        <td width="40"><a href="#" class="btn btn-success">Teslim Edildi</a></td>
                     }
 
                 </tr>
             }
         }
     </tbody>
-    Siparişlerin Toplam Getirisi: @TotalRevenue
+    <br />
+    <h6 class="text-capitalize">[Siparişlerin Toplam Getirisi: <span class="text-danger">@TotalRevenue ₺</span>]</h6>
 </table>

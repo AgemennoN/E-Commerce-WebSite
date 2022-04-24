@@ -33,6 +33,49 @@ namespace WebPortal.Controllers
 
         }
 
+        // Siparis Dagitim
+        public ActionResult OrderDeliver(string Id)
+        {
+            int OrderId = Convert.ToInt32(Id);
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.OrderDeliverById(OrderId, out OMessage);
+            return RedirectToAction("Index", "Admin");
+        }
+
+
+        // Siparis Detaylari Sayfasi
+        public ActionResult OrderDetail()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+
+            if (Request.QueryString["OrderId"] != null)
+            {
+                int OrderId = new int();
+                TblOrder Order = null;
+                List<TblCart> CartsInOrder = new List<TblCart>();
+                if (Int32.TryParse(Request.QueryString["OrderId"], out OrderId))
+                {   // If the parameter is Parseble
+
+                    Order = BusinessLayer.GetOrderByOrderId(OrderId, out OMessage);
+                    CartsInOrder = BusinessLayer.GetCartsInsideTheOrder(Order);
+                }
+                if (Order == null)
+                    // if the item with the OrderId does not exist Sent Admin to the OrderList Page
+                    return RedirectToAction("Index", "Admin");
+
+                // Else sent the Order and Cartlist to the OrderDetail Page
+                ViewBag.CartsInOrder = CartsInOrder;
+                ViewBag.OrderbyId = Order;
+            }
+            else if (Request.QueryString["OrderId"] == null)
+            {   // if Url is entered by hand and the parameter "OrderId" doesn't entered.
+                return RedirectToAction("Index", "Admin");
+            }
+            return View(ViewBag);
+        }
+
         // Urun Listeleme Sayfasi
         public ActionResult ProductList()
         {
@@ -58,6 +101,7 @@ namespace WebPortal.Controllers
         public ActionResult ProductCreate(TblProduct Product)
         {
             string ProductName = Request.Form["TxtProductName"].ToString();
+            string ProductDescription = Request.Form["TxtProductDescription"].ToString();
             string ProductImage = Request.Form["TxtProductImage"].ToString();
             string ProductPrice = Request.Form["TxtProductPrice"].ToString();
             string ProductDiscount = Request.Form["TxtProductDiscount"].ToString();
@@ -65,6 +109,7 @@ namespace WebPortal.Controllers
             string Category = Request.Form["TxtCategory"].ToString();
 
             Product.ProductName = ProductName;
+            Product.ProductDescription = ProductDescription;
             Product.ProductImage = ProductImage;
             Product.ProductPrice = Convert.ToDecimal(ProductPrice);
             Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
@@ -301,50 +346,6 @@ namespace WebPortal.Controllers
             return RedirectToAction("UserList", "Admin");
         }
 
-        // Siparis Dagitim Sayfasi
-        public ActionResult OrderDeliver(string Id)
-        {
-            int OrderId = Convert.ToInt32(Id);
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            bool Success = BusinessLayer.OrderDeliverById(OrderId, out OMessage);
-            return RedirectToAction("Index", "Admin");
-        }
-
-
-
-        public ActionResult OrderDetail()
-        {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-
-            if (Request.QueryString["OrderId"] != null)
-            {
-                int OrderId = new int();
-                TblOrder Order = null;
-                List<TblCart> CartsInOrder = new List<TblCart>();
-                if (Int32.TryParse(Request.QueryString["OrderId"], out OrderId))
-                {   // If the parameter is Parseble
-
-                    Order = BusinessLayer.GetOrderByOrderId(OrderId, out OMessage);
-                    CartsInOrder = BusinessLayer.GetCartsInsideTheOrder(Order);
-                }
-                if (Order == null)
-                    // if the item with the OrderId does not exist Sent Admin to the OrderList Page
-                    return RedirectToAction("Index", "Admin");
-
-                // Else sent the Order and Cartlist to the OrderDetail Page
-                ViewBag.CartsInOrder = CartsInOrder;
-                ViewBag.OrderbyId = Order;  
-            }
-            else if (Request.QueryString["OrderId"] == null)
-            {   // if Url is entered by hand and the parameter "OrderId" doesn't entered.
-                return RedirectToAction("Index", "Admin");
-            }
-            return View(ViewBag);
-        }
-
-
         public ActionResult UserDetail()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -375,7 +376,7 @@ namespace WebPortal.Controllers
         public ActionResult ContactList()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
-            
+
             List<TblContact> Messages = BusinessLayer.GetContacts(out string OMessage);
             ViewBag.ContactMessages = Messages;
             return View(ViewBag);

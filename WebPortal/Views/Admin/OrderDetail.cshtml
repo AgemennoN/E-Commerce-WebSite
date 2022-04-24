@@ -15,6 +15,9 @@
         CartsInOrder = ViewBag.CartsInOrder;
     }
 }
+
+
+
 @* Sepet tablosunun css kismi Template olarak Hasan Huseyin Demirtas'in Sepet sayfasindan alinmistir.*@
 <div class="privacy about">
     @{
@@ -26,11 +29,11 @@
             <h4 class="btn btn-danger btn-block">Teslim Edilmedi</h4>
         }
         <div class="checkout-right">
-            <h4><i class="text-info" aria-hidden="true"></i>@Order.OrderDateTime</h4>
-            <h4><i class="text-info" aria-hidden="true"></i>#@Order.OrderId @Order.Name</h4>
-            <h4><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@Order.PhoneNumber"> @Order.PhoneNumber</a></h4>
-            <h4>Adres: @Order.Address / @Order.City</h4>
-            <h4>Alışveriş Sepeti @CartsInOrder.Count Farklı Ürün İçermektedir, Sepet Fiyatı: @Order.TotalPrice</h4>
+            <h4><i class="fa fa-clock-o text-primary" aria-hidden="true"></i>@Order.OrderDateTime</h4>
+            <h4><i class="fa fa-user text-info" aria-hidden="true"></i> @Order.Name</h4>
+            <h4><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@Order.PhoneNumber"> @Order.PhoneNumber</a></h4>
+            <h4><i class="fa fa-building-o text-info" aria-hidden="true"></i> @Order.Address / @Order.City</h4>
+            <h4>Alışveriş Sepeti <span class="text-primary">(@CartsInOrder.Count)</span> Farklı Ürün İçermektedir<br /><br /> <i class="text-info fa fa-shopping-cart"></i> <span class="text-danger">@Order.TotalPrice ₺</span></h4>
             <table class="timetable_sub">
                 <thead>
                     <tr>
@@ -63,12 +66,24 @@
             </table>
         </div>
         <br />
-        <h5>Hesap detayları:</h5>
-        <ul class="phone_email">
-            <li><i class="text-info" aria-hidden="true"></i><a href="~/Admin/UserDetail?UserId=@User.UserId"> #@User.UserId @User.UserName</a></li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
-        </ul>
-
+        @*<h4>Hesap detayları:</h4>
+            <ul class="phone_email">
+                <li class="list-unstyled"><i class="text-info" aria-hidden="true"></i><a href="~/Admin/UserDetail?UserId=@User.UserId"> <i class="fa fa-user"></i> @User.UserName</a></li>
+                <li class="list-unstyled"><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+                <li class="list-unstyled"><i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+            </ul>*@
     }
+
+    <div class="jumbotron">
+        <div class="card text-center">
+            <div class="card-header bg-primary text-light">
+                Hesap Sahibi → <i class="fa fa-user"></i> @User.UserName
+            </div>
+            <div class="card-body">
+                E-Posta Adresi → <i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a><br /><br />
+                Telefon Numarası → <i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a><br /><br />
+                <i class="text-info" aria-hidden="true"></i><a class="btn btn-primary" href="~/Admin/UserDetail?UserId=@User.UserId"> Profili Görüntüle</a>
+            </div>
+        </div>
+    </div>
 </div>
