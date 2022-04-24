@@ -21,7 +21,10 @@
     <div class="w3ls_w3l_banner_nav_right_grid">
         <h3>Tüm Ürünler</h3>
         <!--FIRAT-START-->
-        <div class="dropdown" style="margin:0 6% 1% 0; float:right">
+        <div class="" style="float:right">
+            <label class="btn btn-lg btn-primary"><a href="~/Products/" style="color:white">Filtreleri Sıfırla</a></label>
+        </div>
+        <div class="dropdown" style="margin:0 0% 1% 0; float:right">
             <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
             <ul id="dropdownlist" class="dropdown-menu" style="opacity:0.7;">
                 @{
@@ -36,13 +39,11 @@
                     }
                     else
                     {
-
                         <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
                         <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
                     }
                 }
             </ul>
-            <label class="btn btn-lg btn-primary"><a href="~/Products/" style="color:white">Filtreleri Sıfırla</a></label>
         </div>
         <h style="color:red"><b>En yüksek fiyata göre listelendi.</b></h>
         <br /><br />

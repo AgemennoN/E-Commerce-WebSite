@@ -20,30 +20,7 @@
     </div>
     <div class="w3ls_w3l_banner_nav_right_grid">
         <h3>Tüm Ürünler</h3>
-        <div class="dropdown" style="margin:0 6% 1% 0; float:right">
-            <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
-            <ul id="dropdownlist" class="dropdown-menu" style="opacity:0.7;">
-                @{
-                    List<PortalDataLayer.TblProduct> Products = ViewBag.Products;
-
-                    if (Request.QueryString["UrunAdi"] != null && Request.QueryString["UrunAdi"].ToString() != "")
-                    {
-                        TempData["UrunAdi"] = Request.QueryString["UrunAdi"];
-                        //<li><a href="~/Products?SortType=" Ascending">En Düşük Fiyat</a></li>
-
-                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
-                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
-
-                        //<li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
-
-                    }
-                    else
-                    {
-                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
-                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
-                    }
-                }
-            </ul>
+        <div class="" style="float:right">
             @{
                 if (Request.QueryString["UrunAdi"] != null)
                 {
@@ -52,117 +29,142 @@
 
             }
         </div>
-        <br />
-        <!--Vejdi BURAK-START-->
-        <div class="w3ls_w3l_banner_nav_right_grid1">
-            <h6>
+            <div class="dropdown" style="margin:0 6% 1% 0; float:right">
+                <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
+                <ul id="dropdownlist" class="dropdown-menu" style="opacity:0.7;">
+                    @{
+                        List<PortalDataLayer.TblProduct> Products = ViewBag.Products;
+
+                        if (Request.QueryString["UrunAdi"] != null && Request.QueryString["UrunAdi"].ToString() != "")
+                        {
+                            TempData["UrunAdi"] = Request.QueryString["UrunAdi"];
+                            //<li><a href="~/Products?SortType=" Ascending">En Düşük Fiyat</a></li>
+
+                            <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                            <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                            //<li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                            <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+                        }
+                    }
+                </ul>
+            </div>
+            <br />
+            <!--Vejdi BURAK-START-->
+            <div class="w3ls_w3l_banner_nav_right_grid1">
+                <h6>
+                    @{
+                        if (Request.QueryString["UrunAdi"] != null)
+                        {
+                            <label>Aranan Ürün: @Request.QueryString["UrunAdi"]</label>
+
+
+                        }
+
+                    }
+                </h6>
+
                 @{
-                    if (Request.QueryString["UrunAdi"] != null)
-                    {
-                        <label>Aranan Ürün: @Request.QueryString["UrunAdi"]</label>
 
+                    if (Products.Count == 0)
+                    {
+                        <div class="alert alert-danger">
+                            <label class="">Aranan Ürün Bulunamadı</label>
+                        </div>
 
                     }
 
-                }
-            </h6>
-
-            @{
-                
-                if (Products.Count == 0)
-                {
-                    <div class="alert alert-danger">
-                        <label class="">Aranan Ürün Bulunamadı</label>
-                    </div>
-
-                }
-
-                foreach (var Product in Products)
-                {
-                    //double Price = (double)Product.ProductPrice * (100 - (double)Product.ProductDiscount) / 100;
-                    if (Product.ProductDiscount != 0)
+                    foreach (var Product in Products)
                     {
-                        <div class="col-md-3 w3ls_w3l_banner_left">
-                            <div class="hover14 column">
-                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                        //double Price = (double)Product.ProductPrice * (100 - (double)Product.ProductDiscount) / 100;
+                        if (Product.ProductDiscount != 0)
+                        {
+                            <div class="col-md-3 w3ls_w3l_banner_left">
+                                <div class="hover14 column">
+                                    <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 
-                                    <div class="agile_top_brand_left_grid1">
-                                        <figure>
-                                            <div class="snipcart-item block">
-                                                <div class="snipcart-thumb">
-                                                    <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
-                                                    <p>@Product.ProductName</p>
-                                                    <h4>@Product.PriceOnSale<span>@Product.ProductPrice</span></h4>
+                                        <div class="agile_top_brand_left_grid1">
+                                            <figure>
+                                                <div class="snipcart-item block">
+                                                    <div class="snipcart-thumb">
+                                                        <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
+                                                        <p>@Product.ProductName</p>
+                                                        <h4>@Product.PriceOnSale<span>@Product.ProductPrice</span></h4>
+                                                    </div>
+                                                    <div class="snipcart-details">
+                                                        <form action="#" method="post">
+                                                            <fieldset>
+                                                                <input type="hidden" name="cmd" value="_cart" />
+                                                                <input type="hidden" name="add" value="1" />
+                                                                <input type="hidden" name="business" value=" " />
+                                                                <input type="hidden" name="item_name" value="@Product.ProductName" />
+                                                                <input type="hidden" name="amount" value="@Product.ProductPrice" />
+                                                                <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
+                                                                <input type="hidden" name="currency_code" value="TRY" />
+                                                                <input type="hidden" name="return" value=" " />
+                                                                <input type="hidden" name="cancel_return" value=" " />
+                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <div class="snipcart-details">
-                                                    <form action="#" method="post">
-                                                        <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name" value="@Product.ProductName" />
-                                                            <input type="hidden" name="amount" value="@Product.ProductPrice" />
-                                                            <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
-                                                            <input type="hidden" name="currency_code" value="TRY" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </figure>
+                                            </figure>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="col-md-3 w3ls_w3l_banner_left">
-                            <div class="hover14 column">
-                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                        }
+                        else
+                        {
+                            <div class="col-md-3 w3ls_w3l_banner_left">
+                                <div class="hover14 column">
+                                    <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
 
-                                    <div class="agile_top_brand_left_grid1">
-                                        <figure>
-                                            <div class="snipcart-item block">
-                                                <div class="snipcart-thumb">
-                                                    <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
-                                                    <p>@Product.ProductName</p>
-                                                    <h4>@Product.ProductPrice</h4>
+                                        <div class="agile_top_brand_left_grid1">
+                                            <figure>
+                                                <div class="snipcart-item block">
+                                                    <div class="snipcart-thumb">
+                                                        <a href="single.html"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
+                                                        <p>@Product.ProductName</p>
+                                                        <h4>@Product.ProductPrice</h4>
+                                                    </div>
+                                                    <div class="snipcart-details">
+                                                        <form action="#" method="post">
+                                                            <fieldset>
+                                                                <input type="hidden" name="cmd" value="_cart" />
+                                                                <input type="hidden" name="add" value="1" />
+                                                                <input type="hidden" name="business" value=" " />
+                                                                <input type="hidden" name="item_name" value="@Product.ProductName" />
+                                                                <input type="hidden" name="amount" value="@Product.ProductPrice" />
+                                                                <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
+                                                                <input type="hidden" name="currency_code" value="TRY" />
+                                                                <input type="hidden" name="return" value=" " />
+                                                                <input type="hidden" name="cancel_return" value=" " />
+                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                            </fieldset>
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                                <div class="snipcart-details">
-                                                    <form action="#" method="post">
-                                                        <fieldset>
-                                                            <input type="hidden" name="cmd" value="_cart" />
-                                                            <input type="hidden" name="add" value="1" />
-                                                            <input type="hidden" name="business" value=" " />
-                                                            <input type="hidden" name="item_name" value="@Product.ProductName" />
-                                                            <input type="hidden" name="amount" value="@Product.ProductPrice" />
-                                                            <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
-                                                            <input type="hidden" name="currency_code" value="TRY" />
-                                                            <input type="hidden" name="return" value=" " />
-                                                            <input type="hidden" name="cancel_return" value=" " />
-                                                            <input type="submit" name="submit" value="Sepete Ekle" class="button" />
-                                                        </fieldset>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </figure>
+                                            </figure>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
+
                     }
-
                 }
-            }
 
 
-            <div class="clearfix"> </div>
+                <div class="clearfix"> </div>
+            </div>
+            <!--Vejdi BURAK-END-->
+
         </div>
-        <!--Vejdi BURAK-END-->
-
     </div>
-</div>
 <div class="clearfix"></div>
