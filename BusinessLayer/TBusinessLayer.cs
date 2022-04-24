@@ -486,9 +486,6 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
-
-
-
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         public TblProduct GetProductByProductId(int ProductId, out string OMessage)
         {
@@ -745,6 +742,7 @@ namespace BusinessLayer
             }
             return Contact;
         }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
         //BUKET SOYHAN
         public bool RemoveSubscriber(string MailAddress, out string OMessage)

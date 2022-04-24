@@ -346,6 +346,7 @@ namespace WebPortal.Controllers
             return RedirectToAction("UserList", "Admin");
         }
 
+        //Kullanıcı Detayını Görüntüleme
         public ActionResult UserDetail()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -373,6 +374,7 @@ namespace WebPortal.Controllers
             return View(ViewBag);
         }
 
+        //İletişim Listesini Listeleme
         public ActionResult ContactList()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -408,6 +410,25 @@ namespace WebPortal.Controllers
                 return RedirectToAction("ContactList", "Admin");
             }
 
+        }
+        // İstatistik Sayfası
+        public ActionResult Statistics()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            ViewBag.ProductsCount = BusinessLayer.GetProductList(out string OMessage).Count();
+            ViewBag.CategoriesCount = BusinessLayer.GetCategoryList(out OMessage).Count();
+            ViewBag.UsersCount = BusinessLayer.GetUserList(out OMessage).Count();
+            ViewBag.SubscribersCount = BusinessLayer.GetSubscriberList(out OMessage).Count();
+            List<TblOrder> OrderList = BusinessLayer.GetOrderList(out OMessage); // Tüm siparişlerin listesi
+            ViewBag.OrdersCount = OrderList.Count;
+
+            double TotalRevenue=0;
+            foreach(TblOrder Order in OrderList)
+            {
+                TotalRevenue += Convert.ToDouble(Order.TotalPrice); // Foreach içerisinde TblOrders' ta bulunan gelirleri toplar.
+            }
+            ViewBag.TotalRevenue = TotalRevenue;
+            return View(ViewBag);
         }
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
     }
