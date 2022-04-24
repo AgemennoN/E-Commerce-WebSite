@@ -65,9 +65,9 @@
         <br />
         <h5>Hesap detayları:</h5>
         <ul class="phone_email">
-            <li><i class="text-info" aria-hidden="true"></i>#@User.UserId @User.UserName</li>
-            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber">@User.UserPhoneNumber</a></li>
-            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail">@User.UserMail</a></li>
+            <li><i class="text-info" aria-hidden="true"></i><a href="~/Admin/UserDetail?UserId=@User.UserId"> #@User.UserId @User.UserName</a></li>
+            <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+            <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
         </ul>
 
     }

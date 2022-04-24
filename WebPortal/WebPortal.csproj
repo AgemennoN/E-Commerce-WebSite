@@ -300,6 +300,7 @@
     <Content Include="Views\Admin\ProductEdit.cshtml" />
     <Content Include="Views\Admin\OrderDetail.cshtml" />
     <Content Include="Views\Admin\ProductDetail.cshtml" />
+    <Content Include="Views\Admin\UserDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

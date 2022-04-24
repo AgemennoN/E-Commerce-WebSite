@@ -214,8 +214,8 @@ namespace WebPortal.Controllers
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
-            ViewBag.GetListByUsers = BusinessLayer.GetUserList(out OMessage);
-            ViewBag.GetListBySubscribers = BusinessLayer.GetSubscriberList(out OMessage);
+            ViewBag.GetListOfUsers = BusinessLayer.GetUserList(out OMessage);
+            ViewBag.GetListOfSubscribers = BusinessLayer.GetSubscriberList(out OMessage);
             return View(ViewBag);
         }
 
@@ -268,7 +268,7 @@ namespace WebPortal.Controllers
                     CartsInOrder = BusinessLayer.GetCartsInsideTheOrder(Order);
                 }
                 if (Order == null)
-                    // if the item with the OrderId does not exist Send Admin to the OrderList Page
+                    // if the item with the OrderId does not exist Sent Admin to the OrderList Page
                     return RedirectToAction("Index", "Admin");
 
                 // Else sent the Order and Cartlist to the OrderDetail Page
@@ -283,7 +283,32 @@ namespace WebPortal.Controllers
         }
 
 
+        public ActionResult UserDetail()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            if (Request.QueryString["UserId"] != null)
+            {
+                int UserId = new int();
+                TblUser User = null;
+                if (Int32.TryParse(Request.QueryString["UserId"], out UserId))
+                {   // If the parameter is Parseble
+                    User = BusinessLayer.GetUserByUserId(UserId);
+                    ViewBag.AllOrders = BusinessLayer.GetOrderList(out OMessage);
+                }
+                if (User == null)
+                    // if the item with the UserId does not exist Sent Admin to the UserList Page
+                    return RedirectToAction("UserList", "Admin");
 
+                // Else sent the User to the UserDetail Page
+                ViewBag.UserById = User;
+            }
+            else if (Request.QueryString["UserId"] == null)
+            {   // if Url is entered by hand and the parameter "UserId" doesn't entered.
+                return RedirectToAction("UserList", "Admin");
+            }
+            return View(ViewBag);
+        }
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi

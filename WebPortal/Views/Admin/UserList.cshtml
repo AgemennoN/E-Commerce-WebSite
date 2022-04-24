@@ -7,18 +7,18 @@
 
 @{
     //Üyelerin ekrana getirildiği ViewBag
-    List<PortalDataLayer.TblUser> GetListByUsers = new List<PortalDataLayer.TblUser>();
+    List<PortalDataLayer.TblUser> UserList = new List<PortalDataLayer.TblUser>();
 
-    if (ViewBag.GetList != null)
+    if (ViewBag.GetListOfUsers != null)
     {
-        GetListByUsers = ViewBag.GetListByUsers;
+        UserList = ViewBag.GetListOfUsers;
     }
     //Abonelerin ekrana getirildiği ViewBag
-    List<PortalDataLayer.TblSubscriber> GetListBySubscribers = new List<PortalDataLayer.TblSubscriber>();
+    List<PortalDataLayer.TblSubscriber> SubscriberList = new List<PortalDataLayer.TblSubscriber>();
 
-    if (ViewBag.GetListBySubscribers != null)
+    if (ViewBag.GetListOfSubscribers != null)
     {
-        GetListBySubscribers = ViewBag.GetListBySubscribers;
+        SubscriberList = ViewBag.GetListOfSubscribers;
     }
 }
 
@@ -47,7 +47,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in GetListByUsers)
+        @foreach (var item in UserList)
         {
             <tr>
                 <th width="30">@item.UserId</th>
@@ -56,12 +56,13 @@
                 <td>@item.UserMail</td>
                 <td>@item.UserPhoneNumber</td>
                 <td>@item.UserRegisterDate</td>
-                <td width="40"><a href="~/Admin/ProductDetail/@item.UserId" class="btn btn-primary">Detay</a></td>
+                <td width="40"><a href="~/Admin/UserDetail?UserId=@item.UserId" class="btn btn-primary">Detay</a></td>
                 <td width="30"><a href="@Url.Action("UserDelete","Admin", new {Id = @item.UserId} )" class="btn btn-danger">Sil</a></td>
             </tr>
         }
     </tbody>
 </table>
+
 <h2>Aboneler</h2>
 <br />
 <table class="table table-bordered table-striped">
@@ -73,7 +74,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in GetListBySubscribers)
+        @foreach (var item in SubscriberList)
         {
         <tr>
             <th width="30">@item.Id</th>
