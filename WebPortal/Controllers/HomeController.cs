@@ -40,8 +40,7 @@ namespace WebPortal.Controllers
         // Ekleme aksiyonunu yapar
         public ActionResult AddProductAction()
         {
-            string OMessage = "Urun sepete eklenemedi";
-            ;
+            string OMessage = "Sepete Eklemek Icin Lutfen Uye Girisi Yapiniz";
             string ProductIdString = Request.Form["ProductId"].ToString();
             int ProductId = Convert.ToInt32(ProductIdString);
             TblUser User = (TblUser)Session["User"];
