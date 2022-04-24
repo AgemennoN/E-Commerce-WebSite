@@ -199,6 +199,58 @@ namespace WebPortal.Controllers
             return RedirectToAction("CategoryList", "Admin");
         }
 
+
+        // Get: Urun Duzenleme Sayfasi
+        [HttpGet]
+        public ActionResult CategoryEdit()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+
+            if (Request.QueryString["CategoryId"] != null)
+            {
+                int CategoryId = new int();
+                TblCategory Category = null;
+                if (Int32.TryParse(Request.QueryString["CategoryId"], out CategoryId))
+                {
+                    // If the parameter is Parseble
+                    Category = BusinessLayer.GetCategoryById(CategoryId, out OMessage);
+                }
+                if (Category == null)
+                {
+                    // if the item with the CategoryId does not exist Send Admin to the CategoryList Page
+                    return RedirectToAction("CategoryList", "Admin");
+                }
+
+                ViewBag.CategoryById = Category;  // Else sent the Category to the CategoryEdit Page
+            }
+            else if (Request.QueryString["CategoryId"] == null)
+            {   // if Url is entered by hand and the parameter "CategoryId" doesn't entered.
+                return RedirectToAction("CategoryList", "Admin");
+            }
+            return View(ViewBag);
+        }
+
+        // Post: Urun Duzenleme Sayfasi
+        [HttpPost]
+        public ActionResult CategoryEdit(TblCategory Category)
+        {
+
+            string CategoryName = Request.Form["TxtCategoryName"].ToString();
+            string CategoryId = Request.Form["TxtCategoryId"].ToString();
+
+            Category.CategoryName = CategoryName;
+            Category.CategoryId = Convert.ToInt32(CategoryId);
+
+
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            BusinessLayer.EditCategory(Category, out OMessage);
+
+            ////return new RedirectResult("~/Admin");
+            return RedirectToAction("CategoryList", "Admin");
+        }
+
         // Kategori Silme Sayfasi
         public ActionResult CategoryDelete(string Id)
         {

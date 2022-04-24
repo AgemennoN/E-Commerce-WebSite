@@ -29,9 +29,6 @@
                 <br />
                 @using (Html.BeginForm("ProductEdit", "Admin", FormMethod.Post))
                 {
-
-                    //ProductId yi form içinde göndermem gerekiyorki düzenlencek itemin Id sini yollayabileyim
-                    //ama mantıklı nasıl olur bilemedim Tam buna bakyordum Telegramdan konuştuk Pushluyorum şu Anda
                     <div class="form-group">
                         <input type="hidden" name="TxtProductId" value="@Product.ProductId" readonly>
                     </div>

@@ -68,6 +68,25 @@ namespace BusinessLayer
         }
         //Hüseyin Bilgiç - End>>>
 
+        //<<<[YK]
+        // Overload of Huseyin Bilgic's GetCategoryById function, Instead of String parameter this one gets Int parameter 
+        public TblCategory GetCategoryById(int CategoryId, out string OMessage)
+        {
+            TblCategory Category = new TblCategory();
+            OMessage = "";
+            try
+            {
+                Category = (from data in Context.TblCategories where data.CategoryId == CategoryId select data).FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+
+            }
+            return Category;
+        }
+        //[YK] - End>>>
+
         //<<< Vejdi BURAK - Start
         public List<TblProduct> GetProducts(out string OMessage)
         {
@@ -547,6 +566,31 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        // Admin Kategori Düzenleme Fonksiyonu
+        public bool EditCategory(TblCategory Category, out string OMessage)
+        {
+            OMessage = "";
+            bool IsEdited = false;
+            try
+            {
+                TblCategory data = (from Data in Context.TblCategories where Data.CategoryId == Category.CategoryId select Data).FirstOrDefault();
+                if (data != null)
+                {
+                    data.CategoryName = Category.CategoryName;
+                    Context.SaveChanges();
+                    IsEdited = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return IsEdited;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         // From Db changes TblOrder's IsDelivered to True
@@ -631,5 +675,7 @@ namespace BusinessLayer
             return User;
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+    
+    
     }
 }

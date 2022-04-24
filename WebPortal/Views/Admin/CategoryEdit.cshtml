@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "CategoryEdit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    PortalDataLayer.TblCategory CategoryById = new PortalDataLayer.TblCategory();
+
+    if (ViewBag.CategoryById != null)
+    {
+        CategoryById = ViewBag.CategoryById;
+    }
+
+}
+
+<style>
+    #CategorySubmit {
+        background-color: cornflowerblue;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h3 class="text-primary text-center">Kategori Ekleme Formu</h3>
+                <br />
+                @using (Html.BeginForm("CategoryEdit", "Admin", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <input type="hidden" name="TxtCategoryId" value="@CategoryById.CategoryId" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtCategoryName" placeholder="Adı" value="@CategoryById.CategoryName" required="">
+                    </div>
+                    <input id="CategorySubmit" type="submit" class="btn btn-primary btn-block" value="Kategori Düzenle">
+                }
+            </div>
+        </div>
+    </div>
+</div>
