@@ -30,7 +30,7 @@
                     {
                         TempData["UrunAdi"] = Request.QueryString["UrunAdi"];
                         //<li><a href="~/Products?SortType=" Ascending">En Düşük Fiyat</a></li>
-                        
+
                         <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
                         <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
 
@@ -44,16 +44,15 @@
                     }
                 }
             </ul>
+            @{
+                if (Request.QueryString["UrunAdi"] != null)
+                {
+                    <label class="btn btn-lg btn-primary"><a href="~/Products/" style="color:white">Filtreleri Sıfırla</a></label><br />
+                }
+
+            }
         </div>
         <br />
-        @{
-            if (Request.QueryString["UrunAdi"] != null)
-            {
-                <label class="btn btn-lg btn-primary"><a href="~/Products/" style="color:white">Filtreleri Sıfırla</a></label><br />
-            }
-
-        }
-
         <!--Vejdi BURAK-START-->
         <div class="w3ls_w3l_banner_nav_right_grid1">
             <h6>

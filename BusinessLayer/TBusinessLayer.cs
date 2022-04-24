@@ -73,6 +73,8 @@ namespace BusinessLayer
         }
         ///Vejdi BURAK - End >>>
 
+
+        //Fırat-Start
         public List<TblProduct> GetLowPrice(out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
