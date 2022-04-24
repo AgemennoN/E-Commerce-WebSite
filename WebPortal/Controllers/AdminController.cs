@@ -78,7 +78,7 @@ namespace WebPortal.Controllers
             string OMessage;
             BusinessLayer.AddProduct(out OMessage, Product);
 
-            //return new RedirectResult("~/Admin");
+            TempData["ProductMessage"] = OMessage;
             return RedirectToAction("ProductList", "Admin");
         }
 
@@ -142,7 +142,7 @@ namespace WebPortal.Controllers
             string OMessage;
             BusinessLayer.EditProduct(Product, out OMessage);
 
-            ////return new RedirectResult("~/Admin");
+            TempData["ProductMessage"] = OMessage;
             return RedirectToAction("ProductList", "Admin");
         }
 
@@ -163,6 +163,7 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             bool Success = BusinessLayer.ProductDeleteFromDb(ProductId, out OMessage);
+            TempData["ProductMessage"] = OMessage;
             return RedirectToAction("ProductList", "Admin");
         }
 
@@ -278,16 +279,17 @@ namespace WebPortal.Controllers
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
             bool Success = BusinessLayer.UserDeleteFromDb(UserId, out OMessage);
+            TempData["UserRemoved"] = OMessage;
             return RedirectToAction("UserList", "Admin");
         }
 
         // Abone Silme Sayfasi
-        public ActionResult SubsriberDelete(string Id)
+        public ActionResult SubscriberDelete(string MailAddress)
         {
-            int SubsriberId = Convert.ToInt32(Id);
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage;
-            bool Success = BusinessLayer.SubscriberDeleteFromDb(SubsriberId, out OMessage);
+            bool Success = BusinessLayer.RemoveSubscriber(MailAddress, out OMessage);
+            TempData["UserRemoved"] = OMessage;
             return RedirectToAction("UserList", "Admin");
         }
 
@@ -359,6 +361,15 @@ namespace WebPortal.Controllers
             {   // if Url is entered by hand and the parameter "UserId" doesn't entered.
                 return RedirectToAction("UserList", "Admin");
             }
+            return View(ViewBag);
+        }
+
+        public ActionResult ContactList()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            
+            List<TblContact> Messages = BusinessLayer.GetContacts(out string OMessage);
+            ViewBag.ContactMessages = Messages;
             return View(ViewBag);
         }
 

@@ -22,6 +22,8 @@
     }
 }
 
+
+
 <style>
     th {
         color: black !important;
@@ -76,12 +78,22 @@
     <tbody>
         @foreach (var item in SubscriberList)
         {
-        <tr>
-            <th width="30">@item.Id</th>
-            <td>@item.MailAddress</td>
-            <td width="30"><a href="@Url.Action("SubscriberDelete","Admin", new {Id = @item.Id} )" class="btn btn-danger">Sil</a></td>
-        </tr>
+            <tr>
+                <th width="30">@item.Id</th>
+                <td>@item.MailAddress</td>
+                <td width="30"><a href="@Url.Action("SubscriberDelete","Admin", new {MailAddress = @item.MailAddress} )" class="btn btn-danger">Sil</a></td>
+            </tr>
         }
     </tbody>
 </table>
+
+@{
+    if (TempData["UserRemoved"] != null)
+    {
+        <script type="text/javascript">
+                alert('@TempData["UserRemoved"].ToString()');
+        </script>
+    }
+}
+
 <!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Kullanıcılar Listesi Kodu-->

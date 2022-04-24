@@ -59,4 +59,15 @@
         }
     </tbody>
 </table>
+
+
+@{
+    if (TempData["ProductMessage"] != null)
+    {
+        <script type="text/javascript">
+                alert('@TempData["ProductMessage"].ToString()');
+        </script>
+    }
+}
+
 <!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->

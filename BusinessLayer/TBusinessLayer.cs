@@ -14,7 +14,7 @@ namespace BusinessLayer
         {
             Context = new DbManavMelihEntities();
         }
-        //<<<Hüseyin Bilgiç - Start
+        //<<<Huseyin Bilgic - Start
         public List<TblCategory> GetCategories(out string OMessage)
         {
             List<TblCategory> Categories = new List<TblCategory>();
@@ -30,9 +30,9 @@ namespace BusinessLayer
             }
             return Categories;
         }
-        //Hüseyin Bilgiç - End>>>
+        //Huseyin Bilgic - End>>>
 
-        //<<<Hüseyin Bilgiç - Start
+        //<<<Huseyin Bilgic - Start
         public List<TblProduct> GetProductsByCategoryId(int CategoryId, out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -48,9 +48,9 @@ namespace BusinessLayer
             }
             return Products;
         }
-        //Hüseyin Bilgiç - End>>>
+        //Huseyin Bilgic - End>>>
 
-        //<<<Hüseyin Bilgiç - Start
+        //<<<Huseyin Bilgic - Start
         public TblCategory GetCategoryById(string CategoryName, out string OMessage)
         {
             TblCategory Category = new TblCategory();
@@ -66,7 +66,7 @@ namespace BusinessLayer
             }
             return Category;
         }
-        //Hüseyin Bilgiç - End>>>
+        //Huseyin Bilgic - End>>>
 
         //<<<[YK]
         // Overload of Huseyin Bilgic's GetCategoryById function, Instead of String parameter this one gets Int parameter 
@@ -120,7 +120,7 @@ namespace BusinessLayer
         }
         ///Vejdi BURAK - End >>>
 
-        //<<<Fırat Seven - Start
+        //<<<Firat Seven - Start
         public List<TblProduct> GetLowPrice(out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -135,8 +135,8 @@ namespace BusinessLayer
             }
             return Products;
         }
-        ///Fırat Seven - End >>>
-        //<<<Fırat Seven - Start
+        ///Firat Seven - End >>>
+        //<<<Firat Seven - Start
         public List<TblProduct> GetHighPrice(out string OMessage)
         {
             List<TblProduct> Products = new List<TblProduct>();
@@ -151,7 +151,7 @@ namespace BusinessLayer
             }
             return Products;
         }
-        ///Fırat Seven - End >>>
+        ///Firat Seven - End >>>
 
         //<<<AKIN CAN CESARETLI - START
         public List<TblUser> GetUsers(out string Omessage)
@@ -185,11 +185,11 @@ namespace BusinessLayer
                     Context.TblUsers.Add(User);
                     Context.SaveChanges();
                     result = true;
-                    Omessage = "Yeni Kayıt Başarılı";
+                    Omessage = "Yeni Kayit Basarili";
                 }
                 else
                 {
-                    Omessage = "Kullanıcı ismi zaten kullanılıyor";
+                    Omessage = "Kullanici ismi zaten kullaniliyor";
                 }
 
             }
@@ -210,18 +210,18 @@ namespace BusinessLayer
             TblUser User = (from user in Context.TblUsers where user.UserName == Username && user.UserActive == true select user).FirstOrDefault();
             if (User == null)
             {
-                Omessage = "Giriş bilgileri hatalı";
+                Omessage = "Giris bilgileri hatali";
             }
             else if (User.UserName == Username)
             {
                 if (User.UserPassword != Password)
                 {
-                    Omessage = "Giriş bilgileri hatalı";
+                    Omessage = "Giris bilgileri hatali";
                 }
                 else if (User.UserPassword == Password)
                 {
                     result = User;
-                    Omessage = "Giriş başarılı";
+                    Omessage = "Giris basarili";
 
                 }
             }
@@ -230,7 +230,7 @@ namespace BusinessLayer
         }
         //AKIN CAN CESARETLI - END>>>
 
-        //<<<Belgin Çoban - Start
+        //<<<Belgin coban - Start
         public List<TblProduct> GetProducDiscounts(out string OMessage)
         {
             List<TblProduct> products = new List<TblProduct>();
@@ -246,7 +246,7 @@ namespace BusinessLayer
             }
             return products;
         }
-        //Belgin Çoban - End>>>
+        //Belgin coban - End>>>
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
         //Admin Paneli Urunler Listesi Kodu
@@ -269,7 +269,7 @@ namespace BusinessLayer
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
-        //Admin Paneli Kullanıcılar Listesi Kodu
+        //Admin Paneli Kullanicilar Listesi Kodu
         public List<TblUser> GetUserList(out string OMessage)
         {
             List<TblUser> UserList = new List<TblUser>();
@@ -334,6 +334,7 @@ namespace BusinessLayer
                 Context.TblProducts.Add(Product);
                 Context.SaveChanges();
                 IsAdded = true;
+                OMessage = "Urun Basariyla eklendi";
             }
             catch (Exception ex)
             {
@@ -411,14 +412,14 @@ namespace BusinessLayer
                 TblProduct Product = (from Data in Context.TblProducts where Data.ProductId == ProductId select Data).FirstOrDefault();
                 if (Product == null)
                 {
-                    OMessage = "Böyle bir ürün Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Urun Veri tabaninda kayitli degil.";
                 }
                 else
                 {
                     Context.TblProducts.Where(x => x.ProductId == ProductId).ToList().ForEach(x => x.ProductActive = false);
                     Context.SaveChanges();
                     Success = true;
-                    OMessage = "#" + ProductId.ToString() + " " + Product.ProductName + " isimli ürün silindi.";
+                    OMessage = "#" + ProductId.ToString() + " " + Product.ProductName + " isimli Urun silindi.";
                 }
             }
             catch (Exception ex)
@@ -439,7 +440,7 @@ namespace BusinessLayer
                 TblCategory Category = (from Data in Context.TblCategories where Data.CategoryId == CategoryId select Data).FirstOrDefault();
                 if (Category == null)
                 {
-                    OMessage = "Böyle bir Kategori Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Kategori Veri tabaninda kayitli degil.";
                 }
                 else
                 {
@@ -467,14 +468,14 @@ namespace BusinessLayer
                 TblUser User = (from Data in Context.TblUsers where Data.UserId == UserId select Data).FirstOrDefault();
                 if (User == null)
                 {
-                    OMessage = "Böyle bir Kullanıcı Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Kullanici Veri tabaninda kayitli degil.";
                 }
                 else
                 {
                     Context.TblUsers.Where(x => x.UserId == UserId).ToList().ForEach(x => x.UserActive = false);
                     Context.SaveChanges();
                     Success = true;
-                    OMessage = "#" + UserId.ToString() + " " + User.UserName + " adlı Kullanıcı silindi.";
+                    OMessage = "#" + UserId.ToString() + " " + User.UserName + " Adli uye silindi.";
                 }
             }
             catch (Exception ex)
@@ -485,33 +486,7 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
-        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
-        public bool SubscriberDeleteFromDb(int SubscriberId, out string OMessage)
-        {
-            bool Success = false;
-            OMessage = "";
-            try
-            {
-                TblSubscriber Subscriber = (from Data in Context.TblSubscribers where Data.Id == SubscriberId select Data).FirstOrDefault();
-                if (Subscriber == null)
-                {
-                    OMessage = "Böyle bir Abone Veri tabanında kayıtlı değil.";
-                }
-                else
-                {
-                    Context.TblSubscribers.Remove(Subscriber);
-                    Context.SaveChanges();
-                    Success = true;
-                    OMessage = "#" + SubscriberId.ToString() + " " + Subscriber.MailAddress + " adresli Abone silindi.";
-                }
-            }
-            catch (Exception ex)
-            {
-                OMessage = ex.Message;
-            }
-            return Success;
-        }
-        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
 
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
@@ -524,7 +499,7 @@ namespace BusinessLayer
                 Product = (from Data in Context.TblProducts where Data.ProductId == ProductId select Data).FirstOrDefault();
                 if (Product == null)
                 {
-                    OMessage = "Böyle bir ürün Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Urun Veri tabaninda kayitli degil.";
                 }
             }
             catch (Exception ex)
@@ -536,7 +511,7 @@ namespace BusinessLayer
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
-        // Admin Urun Düzenleme Fonksiyonu
+        // Admin Urun Duzenleme Fonksiyonu
         public bool EditProduct(TblProduct Product, out string OMessage)
         {
             OMessage = "";
@@ -555,6 +530,7 @@ namespace BusinessLayer
                     data.CategoryId = Product.CategoryId;
                     Context.SaveChanges();
                     IsEdited = true;
+                    OMessage = "Urun Detaylari Basariyla Degistirildi";
                 }
             }
             catch (Exception ex)
@@ -567,7 +543,7 @@ namespace BusinessLayer
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
-        // Admin Kategori Düzenleme Fonksiyonu
+        // Admin Kategori Duzenleme Fonksiyonu
         public bool EditCategory(TblCategory Category, out string OMessage)
         {
             OMessage = "";
@@ -603,14 +579,14 @@ namespace BusinessLayer
                 TblOrder Order = (from Data in Context.TblOrders where Data.OrderId == OrderId select Data).FirstOrDefault();
                 if (Order == null)
                 {
-                    OMessage = "Böyle bir Sipariş Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Siparis Veri tabaninda kayitli degil.";
                 }
                 else
                 {
                     Context.TblOrders.Where(x => x.OrderId == OrderId).ToList().ForEach(x => x.IsDelivered = true);
                     Context.SaveChanges();
                     Success = true;
-                    OMessage = "#" + OrderId.ToString() + " " + Order.Name + " isimli\n" + Order.OrderDateTime + " Tarihli Sipariş Teslim Edildi.";
+                    OMessage = "#" + OrderId.ToString() + " " + Order.Name + " isimli\n" + Order.OrderDateTime + " Tarihli Siparis Teslim Edildi.";
                 }
             }
             catch (Exception ex)
@@ -631,7 +607,7 @@ namespace BusinessLayer
                 Order = (from Data in Context.TblOrders where Data.OrderId == OrderId select Data).FirstOrDefault();
                 if (Order == null)
                 {
-                    OMessage = "Böyle bir Sipariş Veri tabanında kayıtlı değil.";
+                    OMessage = "Böyle bir Siparis Veri tabaninda kayitli degil.";
                 }
             }
             catch (Exception ex)
@@ -675,7 +651,79 @@ namespace BusinessLayer
             return User;
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
-    
-    
+
+
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        public bool SubscriberDeleteFromDb(int SubscriberId, out string OMessage)
+        {
+            bool Success = false;
+            OMessage = "";
+            try
+            {
+                TblSubscriber Subscriber = (from Data in Context.TblSubscribers where Data.Id == SubscriberId select Data).FirstOrDefault();
+                if (Subscriber == null)
+                {
+                    OMessage = "Böyle bir Abone Veri tabaninda kayitli degil.";
+                }
+                else
+                {
+                    Context.TblSubscribers.Remove(Subscriber);
+                    Context.SaveChanges();
+                    Success = true;
+                    OMessage = "#" + SubscriberId.ToString() + " " + Subscriber.MailAddress + " adresli Abone silindi.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Success;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        public List<TblContact> GetContacts(out string OMessage)
+        {
+            List<TblContact> Messages = new List<TblContact>();
+            OMessage = "";
+            try
+            {
+                Messages = (from data in Context.TblContacts select data).ToList();
+                if (Messages == null)
+                {
+                    OMessage = "Gösterilecek Mesaj yok";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+
+            return Messages;
+        }
+
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+
+        //BUKET SOYHAN
+        public bool RemoveSubscriber(string MailAddress, out string OMessage)
+        {
+            OMessage = "";
+            bool result = false;
+            try
+            {
+                TblSubscriber Subscriber = (from Subs in Context.TblSubscribers where Subs.MailAddress == MailAddress select Subs).FirstOrDefault();
+                Context.TblSubscribers.Remove(Subscriber);
+                Context.SaveChanges();
+                OMessage = MailAddress + " adresi abonelikten cikarildi";
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return result;
+        }
     }
 }
