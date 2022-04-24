@@ -129,7 +129,7 @@ namespace BusinessLayer
             }
             return Products;
         }
-        ///Fırat Seven - End >>>
+        //Fırat Seven - End >>>
 
         //<<<AKIN CAN CESARETLI - START
         public List<TblUser> GetUsers(out string Omessage)
