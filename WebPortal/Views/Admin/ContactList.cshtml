@@ -50,7 +50,7 @@
                 <td><a href="tel:@item.ContactPhone"> @item.ContactPhone</a></td>
                 <td>@item.ContactSubject</td>
                 <td>TARIH EKLENECEK</td>
-                <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
+                <td width="40"><a href="@Url.Action("ContactDetail","Admin", new {MessageId = @item.ContactId} )" class="btn btn-primary">Detay</a></td>
                 <td width="30"><a href="@Url.Action("ContactMessageDelete","Admin", new {MessageId = @item.ContactId} )" class="btn btn-danger">Sil</a></td>
             </tr>
         }

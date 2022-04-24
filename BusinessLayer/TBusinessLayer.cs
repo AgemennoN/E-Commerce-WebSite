@@ -727,6 +727,24 @@ namespace BusinessLayer
             return result;
         }
 
+        public TblContact GetContactById(int Id, out string OMessage)
+        {
+            OMessage = "Mesaj Bulundu";
+            TblContact Contact = new TblContact();
+            try
+            {
+                Contact = (from Data in Context.TblContacts where Data.ContactId == Id select Data).FirstOrDefault();
+                if (Contact != null)
+                {
+                    OMessage = "Mesaj Bulundu";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Contact;
+        }
 
         //BUKET SOYHAN
         public bool RemoveSubscriber(string MailAddress, out string OMessage)

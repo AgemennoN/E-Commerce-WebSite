@@ -147,23 +147,31 @@ namespace WebPortal.Controllers
         }
 
         // Urun Detay Sayfasi
-        public ActionResult ProductDetail(int id)
+        public ActionResult ProductDetail(string id)
         {
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            ViewBag.Detail = BusinessLayer.GetProductByProductId(id, out OMessage);
-            return View(ViewBag);
-
+            if(Int32.TryParse(id, out int IntId))
+            {
+                TBusinessLayer BusinessLayer = new TBusinessLayer();
+                string OMessage;
+                ViewBag.Detail = BusinessLayer.GetProductByProductId(IntId, out OMessage);
+                return View(ViewBag);
+            }
+            else
+            {
+                return RedirectToAction("ProductList", "Admin");
+            }
         }
 
         // Urun Silme Sayfasi
         public ActionResult ProductDelete(string Id)
         {
-            int ProductId = Convert.ToInt32(Id);
-            TBusinessLayer BusinessLayer = new TBusinessLayer();
-            string OMessage;
-            bool Success = BusinessLayer.ProductDeleteFromDb(ProductId, out OMessage);
-            TempData["ProductMessage"] = OMessage;
+            if (Int32.TryParse(Id, out int IntId))
+            {
+                TBusinessLayer BusinessLayer = new TBusinessLayer();
+                string OMessage;
+                bool Success = BusinessLayer.ProductDeleteFromDb(IntId, out OMessage);
+                TempData["ProductMessage"] = OMessage;
+            }
             return RedirectToAction("ProductList", "Admin");
         }
 
@@ -373,7 +381,7 @@ namespace WebPortal.Controllers
             return View(ViewBag);
         }
 
-        // Abone Silme Sayfasi
+        // Contact Silme Sayfasi
         public ActionResult ContactMessageDelete(int MessageId)
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -383,7 +391,23 @@ namespace WebPortal.Controllers
             return RedirectToAction("ContactList", "Admin");
         }
 
+        // Contact Detay Sayfasi
+        public ActionResult ContactDetail(string MessageId)
+        {
+            
+            if (Int32.TryParse(MessageId, out int intId))
+            {
+                TBusinessLayer BusinessLayer = new TBusinessLayer();
+                string OMessage;
+                ViewBag.Detail = BusinessLayer.GetContactById(intId, out OMessage);
+                return View(ViewBag);
+            }
+            else
+            {
+                return RedirectToAction("ContactList", "Admin");
+            }
+
+        }
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
-        //Admin Sayfasi Urunler Listesi Yapildi
     }
 }
