@@ -248,5 +248,68 @@ namespace BusinessLayer
         }
         #endregion
 
+        //<<<Buket Soyhan - START
+
+        public bool IsSubscriber(string MailAddress, out string OMessage)
+        {
+            OMessage = "";
+            bool result = false;
+            try
+            {
+                TblSubscriber Subscriber = (from Subs in Context.TblSubscribers where Subs.MailAddress == MailAddress select Subs).FirstOrDefault();
+                if (Subscriber != null)
+                {
+                    result = true;
+                    OMessage = MailAddress + " adresi zaten kayıt edilmiş.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public bool AddSubscriber(string MailAddress, out string OMessage)
+        {
+            OMessage = "";
+            bool result = false;
+            try
+            {
+                TblSubscriber NewSubscriber = new TblSubscriber();
+                NewSubscriber.MailAddress = MailAddress;
+                Context.TblSubscribers.Add(NewSubscriber);
+                Context.SaveChanges();
+                OMessage = MailAddress + " adresin abonelik islemi gerceklestirildi.";
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return result;
+        }
+
+        public bool RemoveSubscriber(string MailAddress, out string OMessage)
+        {
+            OMessage = "";
+            bool result = false;
+            try
+            {
+                TblSubscriber Subscriber = (from Subs in Context.TblSubscribers where Subs.MailAddress == MailAddress select Subs).FirstOrDefault();
+                Context.TblSubscribers.Remove(Subscriber);
+                Context.SaveChanges();
+                OMessage = MailAddress + " adresi abonelikten çıkarıldı";
+                result = true;
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return result;
+        }
+
+        //Buket Soyhan - END>>>
+
     }
 }

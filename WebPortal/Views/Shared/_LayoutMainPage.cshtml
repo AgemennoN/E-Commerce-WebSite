@@ -167,20 +167,32 @@
             <div class="w3agile_newsletter_left">
                 <h3>Yeniliklerden Haberdar Olmak İçin</h3>
             </div>
-            <div class="w3agile_newsletter_right">
-                <form action="#" method="post">
-                    <input type="email" name="Email" value="E-Posta" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                    <input type="submit" value="Şimdi Abone Ol">
-                </form>
+            @using (Html.BeginForm("AddSubscriber", "Home", FormMethod.Post))
+            {
+        <div class="w3agile_newsletter_right">
+            <form action="#" method="post">
+                <input type="email" name="Email" value="E-Posta" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
+                <input type="submit" name="Input" value="Abone Ol">
+            </form>
+            <br />
+            <br />
+            <div>
+                @{
+                    if (TempData["Subscriber"] != null)
+                    {
+                        <script type="text/javascript">
+                        alert('@TempData["Subscriber"].ToString()');
+                        </script>
+                    }
+                }
+                
             </div>
-            <div class="clearfix"> </div>
         </div>
 
-        <div>
-
-            @* Birşeyler değiştirdi *@
-
-        </div>
+                
+            }
+                <div class="clearfix"> </div>
+            </div>
 
     </div>
     <!-- //newsletter -->
