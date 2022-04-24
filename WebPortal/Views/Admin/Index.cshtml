@@ -55,7 +55,7 @@
             <td width="600">@Order.Address / @Order.City</td>
             <td width="40">@Order.TotalPrice</td>
             <td width="40">@Order.OrderDateTime</td>
-            <td width="40"><a href="#" class="btn btn-primary">Detay</a></td>
+            <td width="40"><a href="~/Admin/OrderDetail?OrderId=@Order.OrderId" class="btn btn-primary">Detay</a></td>
             @if (Order.IsDelivered == false)
             {
                 <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-danger">Teslim Et</a></td>

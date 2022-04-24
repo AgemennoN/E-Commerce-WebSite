@@ -249,6 +249,42 @@ namespace WebPortal.Controllers
             return RedirectToAction("Index", "Admin");
         }
 
+
+
+        public ActionResult OrderDetail()
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+
+            if (Request.QueryString["OrderId"] != null)
+            {
+                int OrderId = new int();
+                TblOrder Order = null;
+                List<TblCart> CartsInOrder = new List<TblCart>();
+                if (Int32.TryParse(Request.QueryString["OrderId"], out OrderId))
+                {   // If the parameter is Parseble
+
+                    Order = BusinessLayer.GetOrderByOrderId(OrderId, out OMessage);
+                    CartsInOrder = BusinessLayer.GetCartsInsideTheOrder(Order);
+                }
+                if (Order == null)
+                    // if the item with the OrderId does not exist Send Admin to the OrderList Page
+                    return RedirectToAction("Index", "Admin");
+
+                // Else sent the Order and Cartlist to the OrderDetail Page
+                ViewBag.CartsInOrder = CartsInOrder;
+                ViewBag.OrderbyId = Order;  
+            }
+            else if (Request.QueryString["OrderId"] == null)
+            {   // if Url is entered by hand and the parameter "OrderId" doesn't entered.
+                return RedirectToAction("Index", "Admin");
+            }
+            return View(ViewBag);
+        }
+
+
+
+
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi
     }

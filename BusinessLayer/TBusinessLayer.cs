@@ -577,5 +577,59 @@ namespace BusinessLayer
         }
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        public TblOrder GetOrderByOrderId(int OrderId, out string OMessage)
+        {
+            TblOrder Order = new TblOrder();
+            OMessage = "";
+            try
+            {
+                Order = (from Data in Context.TblOrders where Data.OrderId == OrderId select Data).FirstOrDefault();
+                if (Order == null)
+                {
+                    OMessage = "Böyle bir Sipariş Veri tabanında kayıtlı değil.";
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Order;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        public List<TblCart> GetCartsInsideTheOrder(TblOrder Order)
+        {
+            List<TblCart> Carts = new List<TblCart>();
+            foreach (string StrCartId in Order.OrderedCarts.Split(','))
+            {
+                if (StrCartId != "")
+                {
+                    int IntCartId;
+                    Int32.TryParse(StrCartId, out IntCartId);
+                    if (IntCartId != 0)
+                    {
+                        TblCart Cart = (from Data in Context.TblCarts where Data.CartId == IntCartId select Data).FirstOrDefault();
+                        Carts.Add(Cart);
+                    }
+                }
+            }
+            return Carts;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
+
+
+        //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
+        // Gets User even if User.Active == False;
+        public TblUser GetUserByUserId(int UserId)
+        {
+            TblUser User = null;
+
+            User = (from Data in Context.TblUsers where Data.UserId == UserId select Data).FirstOrDefault();
+
+            return User;
+        }
+        //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
     }
 }

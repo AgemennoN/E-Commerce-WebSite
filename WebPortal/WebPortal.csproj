@@ -298,6 +298,7 @@
     <Content Include="Views\Admin\ProductCreate.cshtml" />
     <Content Include="Views\Admin\CategoryCreate.cshtml" />
     <Content Include="Views\Admin\ProductEdit.cshtml" />
+    <Content Include="Views\Admin\OrderDetail.cshtml" />
     <Content Include="Views\Admin\ProductDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
