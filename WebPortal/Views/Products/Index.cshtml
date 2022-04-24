@@ -4,6 +4,9 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 
+
+
+
 }
 
 <div class="w3l_banner_nav_right">
@@ -20,10 +23,37 @@
         <div class="dropdown" style="margin:0 6% 1% 0; float:right">
             <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
             <ul id="dropdownlist" class="dropdown-menu" style="opacity:0.7;">
-                <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
-                <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+                @{
+                    List<PortalDataLayer.TblProduct> Products = ViewBag.Products;
+
+                    if (Request.QueryString["UrunAdi"] != null && Request.QueryString["UrunAdi"].ToString() != "")
+                    {
+                        TempData["UrunAdi"] = Request.QueryString["UrunAdi"];
+                        //<li><a href="~/Products?SortType=" Ascending">En Düşük Fiyat</a></li>
+                        
+                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                        //<li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+                    }
+                }
             </ul>
-        </div><br />
+        </div>
+        <br />
+        @{
+            if (Request.QueryString["UrunAdi"] != null)
+            {
+                <label class="btn btn-lg btn-primary"><a href="~/Products/" style="color:white">Filtreleri Sıfırla</a></label><br />
+            }
+
+        }
+
         <!--Vejdi BURAK-START-->
         <div class="w3ls_w3l_banner_nav_right_grid1">
             <h6>
@@ -31,13 +61,15 @@
                     if (Request.QueryString["UrunAdi"] != null)
                     {
                         <label>Aranan Ürün: @Request.QueryString["UrunAdi"]</label>
+
+
                     }
 
                 }
             </h6>
 
             @{
-                List<PortalDataLayer.TblProduct> Products = ViewBag.Products;
+                
                 if (Products.Count == 0)
                 {
                     <div class="alert alert-danger">

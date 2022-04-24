@@ -24,8 +24,22 @@
         <div class="dropdown" style="margin:0 6% 1% 0; float:right">
             <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown">Sırala<span class="caret"></span></button>
             <ul id="dropdownlist" class="dropdown-menu" style="opacity:0.7;">
-                <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
-                <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+                @{
+                    if (ViewBag.UrunAdi != null && ViewBag.UrunAdi != "")
+                    {
+                        TempData["UrunAdi"] = ViewBag.UrunAdi;                        
+                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                        //<li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("En Düşük Fiyat", "LowPrice", "Products")</li>
+                        <li>@Html.ActionLink("En Yüksek Fiyat", "HighPrice", "Products")</li>
+                    }
+                }
             </ul>
         </div>
         <h style="color:red"><b>En yüksek fiyata göre listelendi.</b></h>
@@ -34,6 +48,15 @@
         <br />
         <!--FIRAT--END-->
         <div class="w3ls_w3l_banner_nav_right_grid1">
+            <h6>
+                @{
+                    if (ViewBag.UrunAdi != null)
+                    {
+                        <label>Aranan Ürün: @ViewBag.UrunAdi</label>
+                    }
+
+                }
+            </h6>
 
             @{
 
