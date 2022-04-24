@@ -14,7 +14,7 @@
         CartList = (List<PortalDataLayer.TblCart>)ViewBag.CartList;
         ProductInfos = (List<PortalDataLayer.TblProduct>)ViewBag.ProductInfos;
     }
-}
+}w
 
 <div class="banner">
     <div class="w3l_banner_nav_right">
@@ -47,23 +47,34 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                            @for (int i = 0; i < CartList.Count; i++)
+                            @if (CartList.Count > 0)
                             {
-                                <tr class="rem1">
-                                    <td class="invert"> @(i + 1) </td>
-                                    <td class="invert-image"><img src="@ProductInfos[i].ProductImage" alt=" " class="img-responsive"></td>
-                                    <td class="invert">@ProductInfos[i].ProductName</td>
-                                    <td class="invert">@CartList[i].Quantity</td>
-                                    <td class="invert">@ProductInfos[i].ProductPrice</td>
-                                    <td class="invert">@(ProductInfos[i].ProductPrice* CartList[i].Quantity) </td>
-                                    <td class="invert">
-                                        <a href="~/Cart/DeleteProduct/@CartList[i].CartId" class="button" />
-                                        <button id="@CartList[i].CartId" name="DeleteProduct"> Ürünü Sil</button>
+                                for (int i = 0; i < CartList.Count; i++)
+                                {
+                                    <tr class="rem1">
+                                        <td class="invert"> @(i + 1) </td>
+                                        <td class="invert-image"><img src="@ProductInfos[i].ProductImage" alt=" " class="img-responsive"></td>
+                                        <td class="invert">@ProductInfos[i].ProductName</td>
+                                        <td class="invert">@CartList[i].Quantity</td>
+                                        <td class="invert">@ProductInfos[i].ProductPrice</td>
+                                        <td class="invert">@(ProductInfos[i].ProductPrice* CartList[i].Quantity) </td>
+                                        <td class="invert">
+                                            <a href="~/Cart/DeleteProduct/@CartList[i].CartId" class="button" />
+                                            <button id="@CartList[i].CartId" name="DeleteProduct"> Ürünü Sil</button>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td class="rem1" colspan="7">
+                                        <div class="alert alert-danger bg-danger mt-5" style="color:white">
+                                            <h1> Sepetinizde Ürün Bulunmamaktadır...</h1>
+                                        </div>
                                     </td>
                                 </tr>
                             }
-
                         </tbody>
                     </table>
                 </div>
@@ -100,9 +111,19 @@
                         </div>
                     </div>
                     <div class="col-md-8 address_form_agile">
-                        <div class="checkout-right-basket">
-                            <a href="~/Payment/Index">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                        </div>
+                        @if (CartList.Count > 0)
+                        {
+                            <div class="checkout-right-basket">
+                                <a href="~/Payment/Index" onclick="alert('Ödeme Sayfasına Yönlendiriliyorsunuz...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="checkout-right-basket">
+                                <a href="~/Home/Index" onclick="alert('Sepetinizde Ürün Bulunmamaktadır\n Bu Nedenle Ana Sayfaya Yönlendiriliyorsunuz...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                            </div>
+
+                        }
                     </div>
                     <div class="clearfix"> </div>
                 </div>

@@ -3,7 +3,25 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
-
+@{
+    bool IsChanged = false;
+    string Controller = "CheckCartUpdates";
+    string View = "Payment";
+    if (ViewBag.IsChanged != null)
+    {
+        IsChanged = (bool)ViewBag.IsChanged;
+    }
+    if (IsChanged)
+    {
+        Controller = "CheckCartUpdates";
+        View = "Payment";
+    }
+    else
+    {
+        Controller = "CheckCartUpdates";
+        View = "Payment";
+    }
+}
 
 
 <div class="w3l_banner_nav_right">
@@ -22,53 +40,48 @@
         <h3>Ödeme Sayfası</h3>
         @if (Session["User"] != null)
         {
-
             <div class="checkout-right">
                 <!--Horizontal Tab-->
                 <div id="parentHorizontalTab">
                     <div class="resp-tabs-container hor_1">
                         <div>
                             <div id="tab4" class="tab-grid" style="display: block;">
-                                <div class="row">
-                                    <div class=" col-md-2"> </div>
-                                    <div class="col-md-6">
-                                        @using (Html.BeginForm("AddPayment", "Payment", FormMethod.Post))
-                                        {
-                                            <section class="creditly-wrapper wthree, w3_agileits_wrapper col-md-6">
+                                @using (Html.BeginForm(Controller, View, FormMethod.Post))
+                                {
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
                                                 <div class="information-wrapper">
                                                     <div class="first-row form-group">
                                                         <div class="controls">
-                                                            <div class="controls">
-                                                                <label class="control-label">Ad Soyad: </label>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Ad Soyad </label>
                                                                 <input class="billing-address-name form-control" type="text" name="NameSurname" placeholder="Ad Soyad" value="" required>
                                                             </div>
                                                             <div class="w3_agileits_card_number_grids">
                                                                 <div class="w3_agileits_card_number_grid_left">
-                                                                    <div class="controls">
-                                                                        <label class="control-label">Mobile number:</label>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Telefon Numarası</label>
                                                                         <input class="form-control" type="text" placeholder="Telefon Numarası" name="PhoneNumber" value="" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="w3_agileits_card_number_grid_right">
-                                                                    <div class="controls">
-                                                                        <label class="control-label">Adres: </label>
+                                                                    <div class="form-group">
+                                                                        <label class="control-label">Adres </label>
                                                                         <input class="form-control" type="text" name="Adress" placeholder="Adres" value="" required>
                                                                     </div>
                                                                 </div>
                                                                 <div class="clear"> </div>
                                                             </div>
-                                                            <div class="controls">
-                                                                <label class="control-label">Şehir: </label>
+                                                            <div class="form-group">
+                                                                <label class="control-label">Şehir </label>
                                                                 <input class="form-control" type="text" name="City" placeholder="Şehir" required>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
-                                            </section>
-
+                                            </div>
                                             <div class="col-md-6">
-
                                                 <div class="clearfix">
                                                     <div class="form-group form-group-cc-number">
                                                         <label>Kart Numarası</label>
@@ -89,13 +102,24 @@
                                                         <input class="form-control" placeholder="mm/yy" type="text">
                                                     </div>
                                                 </div>
-
-                                                <input class="btn btn-primary submit" type="submit" value="Ödemeyi Tamamla">
+                                                <input class="btn btn-primary" type="submit" value="Ödemeyi Tamamla">
                                             </div>
-                                        }
+                                            @if (IsChanged)
+                                            {
+                                                <div class="checkout-right-basket">
+                                                    <a href="~/Cart/Index" onclick="alert('Sepette Değişiklik Var...\nSepet Sayfasına Yönlendilriyorsunuz...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="checkout-right-basket">
+                                                    <a href="~/Payment/AddPayment" onclick="alert('Siparişiniz Tamamlandı...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                                                </div>
 
+                                            }
+                                        </div>
                                     </div>
-                                </div>
+                                }
                             </div>
                         </div>
                     </div>

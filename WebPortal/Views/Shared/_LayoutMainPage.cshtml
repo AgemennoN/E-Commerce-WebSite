@@ -1,4 +1,14 @@
-﻿
+﻿@{
+    BusinessLayer.TBusinessLayer BusinessLayer = new BusinessLayer.TBusinessLayer();
+    string Redirect = "";
+    bool IsThereItem = false;
+    if (Session["User"] != null)
+    {
+        int UserId = ((PortalDataLayer.TblUser)Session["User"]).UserId;
+        IsThereItem = BusinessLayer.CartIsEmpty(UserId);
+    }
+}
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -32,7 +42,7 @@
             });
         });
     </script>
-    
+
     <!-- start-smoth-scrolling -->
 </head>
 
@@ -60,9 +70,26 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("Index","Cart")" class="btn btn-info " style="color:black; font-size:15px; "><i class="fa fa-shopping-cart" aria-hidden="true"></i><span> Sepete Git</span></a>
-                        <a href="@Url.Action("Logout","Login")" class="btn btn-danger " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
+                        if (!IsThereItem)
+                        {
+                            <a href=""
+                               onclick="alert('Sepetinizde Ürün Bulunmadığı için \n Ana Sayfaya Yönlendiriliyorsunuz...')"
+                               class="btn btn-info " style="color:black; font-size:15px; ">
+                                <i class="fa fa-shopping-cart" aria-hidden="true">
+                                </i><span> Sepete Git</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Cart")"
+                               onclick="alert('Sepet Sayfasına Yönlendiriliyorsunuz')"
+                               class="btn btn-info " style="color:black; font-size:15px; ">
+                                <i class="fa fa-shopping-cart" aria-hidden="true">
+                                </i><span> Sepete Git</span>
+                            </a>
+                        }
 
+                        <a href="@Url.Action("Logout", "Login")" class="btn btn-danger " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
                     }
 
 
@@ -271,6 +298,7 @@
         });
     </script>
 
+    @*Celal tarafından eklendi*@
     @{
         if (TempData["CartMessage"] != null)
         {
@@ -279,5 +307,6 @@
             </script>
         }
     }
+
 </body>
 </html>
