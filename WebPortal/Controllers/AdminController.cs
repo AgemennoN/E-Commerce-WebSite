@@ -373,6 +373,16 @@ namespace WebPortal.Controllers
             return View(ViewBag);
         }
 
+        // Abone Silme Sayfasi
+        public ActionResult ContactMessageDelete(int MessageId)
+        {
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
+            string OMessage;
+            bool Success = BusinessLayer.ContactMessageDelete(MessageId, out OMessage);
+            TempData["ContactMessageDelete"] = OMessage;
+            return RedirectToAction("ContactList", "Admin");
+        }
+
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - End
         //Admin Sayfasi Urunler Listesi Yapildi
     }

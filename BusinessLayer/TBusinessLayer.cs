@@ -705,6 +705,28 @@ namespace BusinessLayer
 
         //[EGEMEN-GOKHAN-MELIH-TAYFUN] - End >>>
 
+        public bool ContactMessageDelete(int MessageId, out string OMessage)
+        {
+            OMessage = "Mesaj Silinemedi";
+            bool result = false;
+            try
+            {
+                TblContact Contact = (from Data in Context.TblContacts where Data.ContactId == MessageId select Data).FirstOrDefault();
+                if (Contact != null)
+                {
+                    Context.TblContacts.Remove(Contact);
+                    Context.SaveChanges();
+                    OMessage = "Mesaj Silindi";
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return result;
+        }
+
 
         //BUKET SOYHAN
         public bool RemoveSubscriber(string MailAddress, out string OMessage)

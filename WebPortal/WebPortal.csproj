@@ -302,6 +302,7 @@
     <Content Include="Views\Admin\ProductDetail.cshtml" />
     <Content Include="Views\Admin\UserDetail.cshtml" />
     <Content Include="Views\Admin\CategoryEdit.cshtml" />
+    <Content Include="Views\Admin\ContactList.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
