@@ -40,7 +40,7 @@
     <!-- header -->
     <div class="agileits_header">
         <div class="w3l_offers">
-            <a href="#">Manavda Zirve = Manav Melih</a>
+            <a href="/AboutUs">Manavda Zirve = Manav Melih</a>
         </div>
         <div class="w3l_search">
             @using (Html.BeginForm("Index", "Products", FormMethod.Get))
@@ -114,15 +114,15 @@
     <div class="logo_products">
         <div class="container">
             <div class="w3ls_logo_products_left">
-                <h1><a href="~/Home/Index"><span>Manav</span> Melih</a></h1>
+                <h1><a href="~/"><span>Manav</span> Melih</a></h1>
             </div>
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
-                    <li><a href="~/Home/Index">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="~/Products/Index">Ürünler</a><i>/</i></li>
+                    <li><a href="~/">Ana Sayfa</a><i>/</i></li>
+                    <li><a href="~/Products/">Ürünler</a><i>/</i></li>
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="/Campaigns/Index">Kampanyalar</a><i>/</i></li>
-                    <li><a href="about.html">Hakkımızda</a><i></i></li>
+                    <li><a href="~/Campaigns">Kampanyalar</a><i>/</i></li>
+                    <li><a href="~/AboutUs">Hakkımızda</a><i></i></li>
                     @if ((bool)Session["Admin"] == true)
                     {
                         <li><a href="~/Admin/Index"> / Admin Paneli</a><i></i></li>
@@ -190,11 +190,11 @@
             <div class="col-md-3 w3_footer_grid">
                 <h3>Bilgilendirme</h3>
                 <ul class="w3_footer_grid_list">
-                    <li><a href="~/Home/Index">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="products.html">Ürünler</a><i>/</i></li>
+                    <li><a href="~/">Ana Sayfa</a><i>/</i></li>
+                    <li><a href="~/Products">Ürünler</a><i>/</i></li>
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="BestOffers.html">Kampanyalar</a><i>/</i></li>
-                    <li><a href="about.html">Hakkımızda</a><i>/</i></li>
+                    <li><a href="~/Campaigns">Kampanyalar</a><i>/</i></li>
+                    <li><a href="~/AboutUs">Hakkımızda</a><i>/</i></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">
