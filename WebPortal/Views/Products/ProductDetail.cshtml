@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
+
+    PortalDataLayer.TblProduct product = new PortalDataLayer.TblProduct();
+
+    if (ViewBag.Product != null)
+    {
+        product = (PortalDataLayer.TblProduct)ViewBag.Product;
+    }
+
+}
+@* [YK] + Hüseyin Bilgiç -- Start *@
+<div class="banner">
+
+    <div class="w3l_banner_nav_right">
+        <!-- products-breadcrumb -->
+        <div class="products-breadcrumb">
+            <div class="container">
+                <ul>
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+                    <li>@product.ProductName</li>
+                </ul>
+            </div>
+        </div>
+        <!-- //products-breadcrumb -->
+        @if (ViewBag.Product != null)
+        {
+            <div class="agileinfo_single  container">
+
+                <h5 class="margin-" style="font-size:35px ">
+                    @product.ProductName
+                </h5>
+                <div class="col-md-3 agileinfo_single_left">
+                    <img id="example" src="@Url.Content(product.ProductImage)" alt=" " class="img-responsive" width="500" height="500">
+                </div>
+                <div class="col-md-8 agileinfo_single_right">
+                    <div class="w3agile_description">
+                        <h4 style="font-size:30px">Ürün Detayı :</h4>
+                        <p style="font-size:25px">
+                            @product.ProductDescription
+                        </p>
+                    </div>
+                    <div class="snipcart-item block">
+                        <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                            <h4 style="font-size:20px">
+                                ₺ @product.PriceOnSale
+                                @if (product.ProductPrice != product.PriceOnSale)
+                                {
+                                    <span font-size:17px>₺ @product.ProductPrice </span>
+                                }
+
+                            </h4>
+                        </div>
+                        @if (product.ProductActive == false)
+                        {
+                            <label>Bu ürün satıştan kaldırılmıştır</label>
+                        }
+                        else if (product.ProductActive == true)
+                        {
+                            <div class="snipcart-details agileinfo_single_right_details">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="business" value=" ">
+                                        <input type="hidden" name="item_name" value="@product.ProductName">
+                                        <input type="hidden" name="amount" value="21.00">
+                                        <input type="hidden" name="discount_amount" value="@product.ProductDiscount">
+                                        <input type="hidden" name="currency_code" value="TRY ">
+                                        <input type="hidden" name="return" value=" ">
+                                        <input type="hidden" name="cancel_return" value=" ">
+                                        <input type="submit" name="submit" value="Sepete Ekle" class="button">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+
+        }
+        else
+        {
+            <h1 class="container" style="text-align: center;"> Ürün Bulunamadı. Tekrar Deneyiniz!</h1>
+        }
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+@* [YK] + Hüseyin Bilgiç -- End *@
+
+
+
+
+
+
+
+
