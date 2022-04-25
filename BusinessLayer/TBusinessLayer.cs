@@ -98,6 +98,34 @@ namespace BusinessLayer
             }
             return Products;
         }
+        public List<TblProduct> GetFoundLowProducts(out string OMessage, string UrunAdi)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from Data in Context.TblProducts where (Data.ProductName.ToLower()).Contains(UrunAdi) && Data.ProductActive == true orderby Data.PriceOnSale select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Products;
+        }
+        public List<TblProduct> GetFoundHighProducts(out string OMessage, string UrunAdi)
+        {
+            List<TblProduct> Products = new List<TblProduct>();
+            OMessage = "";
+            try
+            {
+                Products = (from Data in Context.TblProducts where (Data.ProductName.ToLower()).Contains(UrunAdi) && Data.ProductActive == true orderby Data.PriceOnSale descending select Data).ToList();
+            }
+            catch (Exception ex)
+            {
+                OMessage = ex.Message;
+            }
+            return Products;
+        }
         ///Vejdi BURAK - End >>>
         
         //<<<Fırat Seven - Start
