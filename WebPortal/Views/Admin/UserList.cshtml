@@ -1,0 +1,99 @@
+﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Kullanıcılar Listesi Kodu-->
+
+@{
+    ViewBag.Title = "Admin Kullanıcılar Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    //Üyelerin ekrana getirildiği ViewBag
+    List<PortalDataLayer.TblUser> UserList = new List<PortalDataLayer.TblUser>();
+
+    if (ViewBag.GetListOfUsers != null)
+    {
+        UserList = ViewBag.GetListOfUsers;
+    }
+    //Abonelerin ekrana getirildiği ViewBag
+    List<PortalDataLayer.TblSubscriber> SubscriberList = new List<PortalDataLayer.TblSubscriber>();
+
+    if (ViewBag.GetListOfSubscribers != null)
+    {
+        SubscriberList = ViewBag.GetListOfSubscribers;
+    }
+}
+
+
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+<h2>Üyeler</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Kullanıcı Adı</th>
+            <th>Kullanıcı Parolası</th>
+            <th>Mail Adresi</th>
+            <th>Telefon Numarası</th>
+            <th>Üye Olma Tarihi</th>
+            <th>Detay</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in UserList)
+        {
+            <tr>
+                <th width="30">@item.UserId</th>
+                <td>@item.UserName</td>
+                <td>@item.UserPassword</td>
+                <td>@item.UserMail</td>
+                <td>@item.UserPhoneNumber</td>
+                <td>@item.UserRegisterDate</td>
+                <td width="40"><a href="~/Admin/UserDetail?UserId=@item.UserId" class="btn btn-primary">Detay</a></td>
+                <td width="30"><a href="@Url.Action("UserDelete","Admin", new {Id = @item.UserId} )" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h2>Aboneler</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Aboneler</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in SubscriberList)
+        {
+            <tr>
+                <th width="30">@item.Id</th>
+                <td>@item.MailAddress</td>
+                <td width="30"><a href="@Url.Action("SubscriberDelete","Admin", new {MailAddress = @item.MailAddress} )" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    if (TempData["UserRemoved"] != null)
+    {
+        <script type="text/javascript">
+                alert('@TempData["UserRemoved"].ToString()');
+        </script>
+    }
+}
+
+<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Kullanıcılar Listesi Kodu-->

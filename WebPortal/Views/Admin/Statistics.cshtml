@@ -1,0 +1,102 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    int ProductsCount = 0;
+    int CategoriesCount = 0;
+    int UsersCount = 0;
+    int SubscribersCount = 0;
+    int OrdersCount = 0;
+    double TotalRevenue = 0;
+
+    if (ViewBag.ProductsCount != null)
+    { ProductsCount = ViewBag.ProductsCount; }
+
+    if (ViewBag.CategoriesCount != null)
+    { CategoriesCount = ViewBag.CategoriesCount; }
+
+    if (ViewBag.UsersCount != null)
+    { UsersCount = ViewBag.UsersCount; }
+
+    if (ViewBag.SubscribersCount != null)
+    { SubscribersCount = ViewBag.SubscribersCount; }
+
+    if (ViewBag.OrdersCount != null)
+    { OrdersCount = ViewBag.OrdersCount; }
+
+    if (ViewBag.TotalRevenue != null)
+    { TotalRevenue = ViewBag.TotalRevenue; }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <h2>İstatistikler</h2>
+    <br/>
+    <div class="container-fluid">
+            <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Ürün Sayısı</h3>
+                            <p>@ProductsCount</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Kategori Sayısı</h3>
+                            <p>@CategoriesCount</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Kullanıcı Sayısı</h3>
+                            <p>@UsersCount</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Abone Sayısı</h3>
+                            <p>@SubscribersCount</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Sipariş Sayısı</h3>
+                            <p>@OrdersCount</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="well">
+                            <h3>Toplam Hasılat</h3>
+                            <p>TRY @TotalRevenue</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

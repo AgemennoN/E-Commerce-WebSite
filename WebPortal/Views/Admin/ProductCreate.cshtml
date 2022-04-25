@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "ProductCreate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblProduct> ProductList = new List<PortalDataLayer.TblProduct>();
+    List<PortalDataLayer.TblCategory> CategoryList = new List<PortalDataLayer.TblCategory>();
+
+    if (ViewBag.CategoryList != null)
+    {
+        CategoryList = ViewBag.CategoryList;
+    }
+
+}
+
+<style>
+    #ProductSubmit {
+        background-color: cornflowerblue;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h3 class="text-primary text-center">Ürün Ekleme Formu</h3>
+                <br />
+                @using (Html.BeginForm("ProductCreate", "Admin", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtProductName" placeholder="Adı" required="">
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" type="text" maxlength="300" name="TxtProductDescription" placeholder="Açıklama" required=""></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="TxtProductImage" placeholder="Resmi" required="">
+                        <small class="text-muted">(Ornek : isim.jpg)</small>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtProductPrice" placeholder="Fiyatı" required="">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtProductDiscount" placeholder="İndirim Yüzde Miktarı" required="">
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtProductStock" placeholder="Stok Miktarı" required="">
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="TxtCategory">
+                            @{
+                                foreach (var item in CategoryList)
+                                {
+                                    <option value="@item.CategoryId">@item.CategoryName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <input id="ProductSubmit" type="submit" class="btn btn-primary btn-block" value="Ürün Ekle">
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

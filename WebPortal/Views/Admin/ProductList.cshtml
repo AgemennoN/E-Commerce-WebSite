@@ -1,0 +1,72 @@
+﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
+
+@{
+    ViewBag.Title = "Admin Ürün Listesi";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblProduct> GetList = new List<PortalDataLayer.TblProduct>();
+
+    if (ViewBag.GetList != null)
+    {
+        GetList = ViewBag.GetList;
+    }
+}
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+<p>
+    <a href="~/Admin/ProductCreate" class="btn btn-primary">Ürün Ekle</a>
+</p>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Resim</th>
+            <th>Fiyat</th>
+            <th>İndirim Yüzdeliği</th>
+            <th>Stok</th>
+            <th>Detay</th>
+            <th>Düzenle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in GetList)
+        {
+            <tr>
+                <th width="30">@item.ProductId</th>
+                <td width="500">@item.ProductName</td>
+                <td width="50" class="text-center"><img src=@Url.Content(item.ProductImage) width="30" height="30" /></td>
+                <td width="40">@item.ProductPrice</td>
+                <td width="100">@item.ProductDiscount</td>
+                <td width="40">@item.ProductStock</td>
+                <td width="40"><a href="@Url.Action("ProductDetail","Admin", new {Id = @item.ProductId} )" class="btn btn-primary">Detay</a></td>
+                <td width="60"><a href="~/Admin/ProductEdit?ProductId=@item.ProductId" class="btn btn-warning">Düzenle</a></td>
+                <td width="30"><a href="@Url.Action("ProductDelete","Admin", new {Id = @item.ProductId} )" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@{
+    if (TempData["ProductMessage"] != null)
+    {
+        <script type="text/javascript">
+                alert('@TempData["ProductMessage"].ToString()');
+        </script>
+    }
+}
+
+<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->

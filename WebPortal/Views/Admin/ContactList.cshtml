@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ContactList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblContact> Messages = new List<PortalDataLayer.TblContact>();
+    if (ViewBag.ContactMessages != null)
+    {
+        Messages = ViewBag.ContactMessages;
+    }
+}
+
+
+
+
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+<h2>Gelen Mesajlar</h2>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Gönderenin Adı</th>
+            <th>E-mail Adresi</th>
+            <th>Telefon Numarası</th>
+            <th>Gönderinin Konusu</th>
+            <th>Gönderinin Tarihi</th>
+            <th>Detay</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Messages)
+        {
+            <tr>
+                <th width="30">@item.ContactId</th>
+                <td>@item.ContactName</td>
+                <td><a href="mailto:@item.ContactMail"> @item.ContactMail</a></td>
+                <td><a href="tel:@item.ContactPhone"> @item.ContactPhone</a></td>
+                <td>@item.ContactSubject</td>
+                <td>TARIH EKLENECEK</td>
+                <td width="40"><a href="@Url.Action("ContactDetail","Admin", new {MessageId = @item.ContactId} )" class="btn btn-primary">Detay</a></td>
+                <td width="30"><a href="@Url.Action("ContactMessageDelete","Admin", new {MessageId = @item.ContactId} )" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@{
+    if (TempData["ContactMessageDelete"] != null)
+    {
+        <script type="text/javascript">
+                alert('@TempData["ContactMessageDelete"].ToString()');
+        </script>
+    }
+}
+

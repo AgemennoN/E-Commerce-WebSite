@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "ContactDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{ 
+    PortalDataLayer.TblContact Contact = new PortalDataLayer.TblContact();
+    if (ViewBag.Detail != null)
+    {
+        Contact = ViewBag.Detail;
+    }
+}
+
+<h2>#@Contact.ContactId @Contact.ContactSubject</h2>
+
+<ul class="phone_email">
+    <li><i class="fa fa-user" aria-hidden="true"></i> @Contact.ContactName</li>
+    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@Contact.ContactPhone"> @Contact.ContactPhone</a></li>
+    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:Contact.ContactMail"> @Contact.ContactMail</a></li>
+    <li><i class="fa fa-calendar" aria-hidden="true"></i> Bilinmiyor.</li>
+    <li><i class="fa fa-envelope" aria-hidden="true"></i> İçerik:</li>
+    @Contact.ContactMessage
+</ul>
+

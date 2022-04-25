@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "CategoryCreate";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    #CategorySubmit {
+        background-color: cornflowerblue;
+    }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <h3 class="text-primary text-center">Kategori Ekleme Formu</h3>
+                <br />
+                @using (Html.BeginForm("CategoryCreate", "Admin", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <input class="form-control" type="text" name="TxtCategoryName" placeholder="Adı" required="">
+                    </div>
+                    <input id="CategorySubmit" type="submit" class="btn btn-primary btn-block" value="Kategori Ekle">
+                }
+            </div>
+        </div>
+    </div>
+</div>

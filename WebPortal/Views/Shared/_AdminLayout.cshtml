@@ -16,6 +16,9 @@
     <!-- font-awesome icons -->
     <link href="~/wwwroot/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
     <!-- //font-awesome icons -->
+    <!--Bootstrap CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--//Bootstrap CDN-->
     <!-- js -->
     <script src="~/wwwroot/js/jquery-1.11.1.min.js"></script>
     <!-- //js -->
@@ -32,23 +35,20 @@
             });
         });
     </script>
-    
     <!-- start-smoth-scrolling -->
 </head>
 
 <body>
     <!-- header -->
-    <div class="agileits_header">
+    <!--<div class="agileits_header">
         <div class="w3l_offers">
-            <a href="/AboutUs">Manavda Zirve = Manav Melih</a>
+            <a href="#">Manavda Zirve = Manav Melih</a>
         </div>
         <div class="w3l_search">
-            @using (Html.BeginForm("Index", "Products", FormMethod.Get))
-            {
-                <input type="text" name="UrunAdi" value="Ürün adı giriniz..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+            <form action="#" method="post">
+                <input type="text" name="Product" value="Ürün adı giriniz..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
                 <input type="submit" value=" ">
-            }
-
+            </form>
         </div>
         <div class="product_list_header">
             <form action="#" method="post" class="last">
@@ -62,37 +62,28 @@
         <div class="w3l_header_right" style="margin-top:6px;">
             <ul>
                 <li>
-                    @if (Session["User"] == null)
-                    {
-                        <a href="~/Login" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
-                    }
-                    else
-                    {
-                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
-                    }
-
-
+                    <a href="login.html" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Giriş Yap</span></a>
                 </li>
-            </ul>
-            @*<ul>
-                    <li class="dropdown profile_details_drop">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
-                        <div class="mega-dropdown-menu">
-                            <div class="w3ls_vegetables">
-                                <ul class="dropdown-menu drp-mnu">
-                                    <li><a href="login.html">Giriş Yap</a></li>
-                                    <li><a href="login.html">Üye Ol</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                </ul>*@
-        </div>
+            </ul>-->
+    @*<ul>
+            <li class="dropdown profile_details_drop">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user" aria-hidden="true"></i><span class="caret"></span></a>
+                <div class="mega-dropdown-menu">
+                    <div class="w3ls_vegetables">
+                        <ul class="dropdown-menu drp-mnu">
+                            <li><a href="login.html">Giriş Yap</a></li>
+                            <li><a href="login.html">Üye Ol</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>*@
+    <!--</div>
         <div class="w3l_header_right1">
-            <h2><a href="/Contact">İletişim</a></h2>
+            <h2><a href="mail.html">İletişim</a></h2>
         </div>
         <div class="clearfix"> </div>
-    </div>
+    </div>-->
     <!-- script-for sticky-nav -->
     <script>
         $(document).ready(function () {
@@ -112,107 +103,51 @@
     <div class="logo_products">
         <div class="container">
             <div class="w3ls_logo_products_left">
-                <h1><a href="~/"><span>Manav</span> Melih</a></h1>
+                <h1><a href="~/Admin/Index"><span>Manav</span> Melih</a></h1>
             </div>
             <div class="w3ls_logo_products_left1">
                 <ul class="special_items">
-                    <li><a href="~/">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="~/Products/">Ürünler</a><i>/</i></li>
-                    @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="~/Campaigns">Kampanyalar</a><i>/</i></li>
-                    <li><a href="~/AboutUs">Hakkımızda</a><i></i></li>
-                    @if ((bool)Session["Admin"] == true)
-                    {
-                        <li style="background-color:green;"><a href="~/Admin/Index" style="color:white;"><i class="fa fa-lock"></i> Admin Paneli</a><i></i></li>
-                    }
+                    <li><a href="~/Admin/Index">Siparişler</a><i>/</i></li>
+                    <li><a href="~/Admin/ProductList">Tüm Ürünler</a><i>/</i></li>
+                    <li><a href="~/Admin/CategoryList">Tüm Kategoriler</a><i>/</i></li>
+                    <li><a href="~/Admin/UserList">Kullanıcılar</a><i>/</i></li>
+                    <li><a href="~/Admin/ContactList">Gelen Mesajlar</a><i>/</i></li>
+                    <li><a href="~/Admin/Statistics">İstatistik</a><i>/</i></li>
+                    <li><i class="fa fa-home"></i><a href="~/Home/Index">Ana Sayfaya Dön</a><i></i></li>
                 </ul>
             </div>
-            <div class="w3ls_logo_products_left1">
-                <ul class="phone_email">
-                    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:0123456789">(012) 345 6789</a></li>
-                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:Melih@grocery.com">Melih@grocery.com</a></li>
-                </ul>
-            </div>
+            @*<div class="w3ls_logo_products_left1">
+                    <ul class="phone_email">
+                        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:0123456789">(012) 345 6789</a></li>
+                        <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:Melih@grocery.com">Melih@grocery.com</a></li>
+                    </ul>
+                </div>*@
             <div class="clearfix"> </div>
         </div>
     </div>
     <!-- //header -->
-    <!-- banner -->
-    <div class="banner">
-        <div class="w3l_banner_nav_left">
-            <nav class="navbar nav_bottom">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header nav_2">
-                    <button type="button" class="navbar-toggle collapsed navbar-toggle1" data-toggle="collapse" data-target="#bs-megadropdown-tabs">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                @RenderPage("~/Views/Shared/Category.cshtml")
-                <!-- /.navbar-collapse -->
-            </nav>
-        </div>
+    <div class="container">
+        @RenderBody()
     </div>
-
-    @RenderBody()
-
-    <!-- newsletter -->
-    <div class="newsletter">
-        <div class="container">
-            <div class="w3agile_newsletter_left">
-                <h3>Yeniliklerden Haberdar Olmak İçin</h3>
-            </div>
-            @using (Html.BeginForm("AddSubscriber", "Home", FormMethod.Post))
-            {
-        <div class="w3agile_newsletter_right">
-            <form action="#" method="post">
-                <input type="email" name="Email" value="E-Posta" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Email';}" required="">
-                <input type="submit" name="Input" value="Abone Ol">
-            </form>
-            <br />
-            <br />
-            <div>
-                @{
-                    if (TempData["Subscriber"] != null)
-                    {
-                        <script type="text/javascript">
-                        alert('@TempData["Subscriber"].ToString()');
-                        </script>
-                    }
-                }
-                
-            </div>
-        </div>
-
-                
-            }
-                <div class="clearfix"> </div>
-            </div>
-
-    </div>
-    <!-- //newsletter -->
     <!-- footer -->
     <div class="footer">
         <div class="container">
             <div class="col-md-3 w3_footer_grid">
                 <h3>Bilgilendirme</h3>
                 <ul class="w3_footer_grid_list">
-                    <li><a href="~/">Ana Sayfa</a><i>/</i></li>
-                    <li><a href="~/Products">Ürünler</a><i>/</i></li>
+                    <li><a href="~/Admin/Index">Siparişler</a><i>/</i></li>
+                    <li><a href="~/Admin/ProductList">Tüm Ürünler</a><i>/</i></li>
                     @*↓ DataBase kısmından descending olarak çekip Product benzeri bir viev oluştur ↓*@
-                    <li><a href="~/Campaigns">Kampanyalar</a><i>/</i></li>
-                    <li><a href="~/AboutUs">Hakkımızda</a><i>/</i></li>
+                    <li><a href="~/Admin/UserList">Kullanıcılar</a><i>/</i></li>
+                    <li><a href="~/Admin/ContactList">Gelen Mesajlar</a><i>/</i></li>
+                    <li><a href="~/Admin/Statistics">İstatistik</a><i></i></li>
                 </ul>
             </div>
             <div class="col-md-3 w3_footer_grid">
                 @*<h3>what in stores</h3>
                     <ul class="w3_footer_grid_list">
                         <li><a href="pet.html">Pet Food</a></li>
-                        <li><a href="frozen.html">Frozen Snacks</a></li>
-                        <li><a href="kitchen.html">Kitchen</a></li>
+                        <li><a href="frozen.html">Frozen Snacks</a#<li><a href="kitchen.html">Kitchen</a></li>
                         <li><a href="products.html">Branded Foods</a></li>
                         <li><a href="household.html">Households</a></li>
                     </ul>*@
@@ -247,27 +182,9 @@
 
             <div class="clearfix"> </div>
 
-            <div class="agile_footer_grids">
-                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                    <div class="w3_footer_grid_bottom">
-                        <h4>100% Güvenli Ödeme</h4>
-                        <img src="~/wwwroot/images/card.png" alt=" " class="img-responsive" />
-                    </div>
-                </div>
-                <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-                    <div class="w3_footer_grid_bottom">
-                        <h5>Sosyal Medya Hesaplarımız</h5>
-                        <ul class="agileits_social_icons">
-                            <li><a href="https://facebook.com" target="_blank" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="https://twitter.com" target="_blank" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="https://instagram.com" target="_blank" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
+
             <div class="wthree_footer_copy">
-                <p><a> © @DateTime.Now.Year Manav Melih. Tüm hakları saklıdır | TechCareer Back-End BootCamp Team</a></p>
+                <p>© @DateTime.Now.Year Manav Melih. Tüm hakları saklıdır | TechCareer Back-End BootCamp Team</p>
             </div>
         </div>
     </div>

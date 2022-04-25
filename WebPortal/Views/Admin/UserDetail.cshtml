@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "UserDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+
+@{
+    PortalDataLayer.TblUser User = new PortalDataLayer.TblUser();
+    List<PortalDataLayer.TblOrder> AllOrders = new List<PortalDataLayer.TblOrder>();
+
+    if (ViewBag.UserById != null)
+    {
+        User = ViewBag.UserById;
+    }
+
+    if (ViewBag.AllOrders != null)
+    {
+        AllOrders = ViewBag.AllOrders;
+    }
+    decimal TotalRevenue = 0;
+}
+
+
+<div class="privacy about">
+    <h3 class="text-info"><i class="fa fa-user"></i> @User.UserName</h3>
+
+    @if (User.UserActive == false)
+    {
+        <h4 class="btn btn-danger btn-block">Bu Hesap Artık Aktif Değil</h4>
+    }
+</div>
+
+
+@*<ul class="phone_email">
+        <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+        <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+        <li><i class="text-info" aria-hidden="true"></i>Kayıt tarihi: @User.UserRegisterDate</li>
+    </ul>*@
+
+<div class="card text-center">
+    <div class="card-header bg-primary text-light">
+        Detaylar
+    </div>
+    <div class="card-body">
+        <ul>
+            <li class="list-unstyled"><i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+            <li class="list-unstyled"><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+            <li class="list-unstyled"><i class="fa fa-clock-o text-info" aria-hidden="true"></i> @User.UserRegisterDate</li>
+        </ul>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<h6 class="text-center btn btn-block btn-warning"><i class="fa fa-user text-info"></i>"@User.UserName" Kullanıcısına Ait Tüm Siparişler</h6>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Telefon Numarası</th>
+            <th>Adres</th>
+            <th>Fiyat</th>
+            <th>Tarih / Saat</th>
+            <th>Detay</th>
+            <th>Teslim Et</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Order in AllOrders)
+        {
+            if (Order.UserId == User.UserId)
+            {
+                TotalRevenue += (decimal)Order.TotalPrice;
+                <tr>
+                    <th width="30">@Order.OrderId</th>
+                    <td width="50">@Order.Name</td>
+                    <td width="50">@Order.PhoneNumber</td>
+                    <td width="600">@Order.Address / @Order.City</td>
+                    <td width="40">@Order.TotalPrice</td>
+                    <td width="40">@Order.OrderDateTime</td>
+                    <td width="40"><a href="~/Admin/OrderDetail?OrderId=@Order.OrderId" class="btn btn-primary">Detay</a></td>
+                    @if (Order.IsDelivered == false)
+                    {
+                        <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-warning">Teslim Et</a></td>
+                    }
+                    else
+                    {
+                        <td width="40"><a href="#" class="btn btn-success">Teslim Edildi</a></td>
+                    }
+
+                </tr>
+            }
+        }
+    </tbody>
+    <br />
+    <h6 class="text-capitalize">[Siparişlerin Toplam Getirisi: <span class="text-danger">@TotalRevenue ₺</span>]</h6>
+</table>

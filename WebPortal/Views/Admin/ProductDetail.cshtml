@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    PortalDataLayer.TblProduct Product = new PortalDataLayer.TblProduct();
+
+    if (ViewBag.Detail != null)
+    {
+        Product = ViewBag.Detail;
+    }
+}
+
+<div class="row mt-5">
+    <div class="col-md-3">
+        <img class="img-thumbnail img-fluid" style="width:250px; height:250px; margin-bottom:25px;" src="@Product.ProductImage" alt="Resim Bulunamadı" />
+    </div>
+    <div class="col-md-7 col-md-offset-2 mt-3">
+        <div class="card">
+            <h3 class="card-header" style="margin-bottom: 25px; color: red;">(@Product.ProductName)</h3>
+            <div class="card-body bg-white  border border-primary shadow-0">
+                <label> Açıklama : <span style="color:red; margin-right:5px;">@Product.ProductDescription</span></label>
+                <label>Fiyat : <span style="color:red; margin-right:5px;">@Product.ProductPrice ₺</span></label><br />
+                @if (Product.ProductDiscount > 0)
+                {
+                    <label><sub style="color:forestgreen;">(% @Product.ProductDiscount indirim)</sub></label><br /><br />
+                }
+                else
+                {
+                    <br /><br />
+                }
+                <label>Stok : <span style="color:red;">@Product.ProductStock Adet</span></label><br /><br />
+                <label><a href="@Url.Action("ProductList","Admin")" class="btn btn-primary float-right">Geri Dön</a></label><br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+

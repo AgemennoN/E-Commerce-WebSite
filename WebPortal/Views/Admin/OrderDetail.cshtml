@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    PortalDataLayer.TblOrder Order = new PortalDataLayer.TblOrder();
+    List<PortalDataLayer.TblCart> CartsInOrder = new List<PortalDataLayer.TblCart>();
+    BusinessLayer.TBusinessLayer businessLayer = new BusinessLayer.TBusinessLayer();
+
+    if (ViewBag.OrderbyId != null)
+    {
+        Order = ViewBag.OrderbyId;
+        CartsInOrder = ViewBag.CartsInOrder;
+    }
+}
+
+
+
+@* Sepet tablosunun css kismi Template olarak Hasan Huseyin Demirtas'in Sepet sayfasindan alinmistir.*@
+<div class="privacy about">
+    @{
+        PortalDataLayer.TblUser User = businessLayer.GetUserByUserId((int)Order.UserId);
+        <h3>Sipariş Detayları</h3>
+        <br />
+        if ((bool)Order.IsDelivered == false)
+        {
+            <h4 class="btn btn-danger btn-block">Teslim Edilmedi</h4>
+        }
+        <div class="checkout-right">
+            <h4><i class="fa fa-clock-o text-primary" aria-hidden="true"></i>@Order.OrderDateTime</h4>
+            <h4><i class="fa fa-user text-info" aria-hidden="true"></i> @Order.Name</h4>
+            <h4><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@Order.PhoneNumber"> @Order.PhoneNumber</a></h4>
+            <h4><i class="fa fa-building-o text-info" aria-hidden="true"></i> @Order.Address / @Order.City</h4>
+            <h4>Alışveriş Sepeti <span class="text-primary">(@CartsInOrder.Count)</span> Farklı Ürün İçermektedir<br /><br /> <i class="text-info fa fa-shopping-cart"></i> <span class="text-danger">@Order.TotalPrice ₺</span></h4>
+            <table class="timetable_sub">
+                <thead>
+                    <tr>
+                        <th>SepetId</th>
+                        <th>Ürün İsmi</th>
+                        <th>Ürün Resmi</th>
+                        <th>Ürün Adeti</th>
+                        <th>Birim Fiyatı</th>
+                        <th>Toplam Fiyatı</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (PortalDataLayer.TblCart Cart in CartsInOrder)
+                    {
+                        PortalDataLayer.TblProduct Product = businessLayer.GetProductByProductId((int)Cart.ProductId, out string OMessage);
+
+                        <tr class="rem1">
+                            <td class="invert" width="30"> @Cart.CartId </td>
+                            <td class="invert" width="50"> @Product.ProductName </td>
+                            <td class="invert-image" width="50"><img src="@Product.ProductImage" width="30" height="30" class="text-center"></td>
+                            <td class="invert" width="50"> @Cart.Quantity </td>
+                            <td class="invert" width="50"> @Product.ProductPrice </td>
+                            <td class="invert" width="50"> @Cart.Price </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <br />
+        @*<h4>Hesap detayları:</h4>
+            <ul class="phone_email">
+                <li class="list-unstyled"><i class="text-info" aria-hidden="true"></i><a href="~/Admin/UserDetail?UserId=@User.UserId"> <i class="fa fa-user"></i> @User.UserName</a></li>
+                <li class="list-unstyled"><i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a></li>
+                <li class="list-unstyled"><i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a></li>
+            </ul>*@
+    }
+
+    <div class="jumbotron">
+        <div class="card text-center">
+            <div class="card-header bg-primary text-light">
+                Hesap Sahibi → <i class="fa fa-user"></i> @User.UserName
+            </div>
+            <div class="card-body">
+                E-Posta Adresi → <i class="fa fa-envelope-o text-info" aria-hidden="true"></i><a href="mailto:@User.UserMail"> @User.UserMail</a><br /><br />
+                Telefon Numarası → <i class="fa fa-phone text-info" aria-hidden="true"></i><a href="tel:@User.UserPhoneNumber"> @User.UserPhoneNumber</a><br /><br />
+                <i class="text-info" aria-hidden="true"></i><a class="btn btn-primary" href="~/Admin/UserDetail?UserId=@User.UserId"> Profili Görüntüle</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
+
+@{
+    ViewBag.Title = "Siparişler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    List<PortalDataLayer.TblOrder> GetOrders = new List<PortalDataLayer.TblOrder>();
+
+    if (ViewBag.GetList != null)
+    {
+        GetOrders = ViewBag.GetList;
+    }
+}
+
+<style>
+    th {
+        color: black !important;
+    }
+
+    td {
+        color: black !important;
+    }
+</style>
+<div class="container">
+    <div class="w3ls_logo_products_left1">
+        <ul class="special_items">
+            <li><a href="~/Admin/Index" class="btn btn-success-outline">Bekleyen Siparişler</a><i>/</i></li>
+            <li><a href="~/Admin/Index/All" class="btn btn-success-outline">Tüm Siparişler</a><i></i></li>
+        </ul>
+    </div>
+</div>
+<br />
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Ad</th>
+            <th>Telefon Numarası</th>
+            <th>Adres</th>
+            <th>Fiyat</th>
+            <th>Tarih / Saat</th>
+            <th>Detay</th>
+            <th>Teslim Et</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Order in GetOrders)
+        {
+            <tr>
+                <th width="30">@Order.OrderId</th>
+                <td width="50">@Order.Name</td>
+                <td width="50">@Order.PhoneNumber</td>
+                <td width="600">@Order.Address / @Order.City</td>
+                <td width="40">@Order.TotalPrice</td>
+                <td width="40">@Order.OrderDateTime</td>
+                <td width="40"><a href="~/Admin/OrderDetail?OrderId=@Order.OrderId" class="btn btn-primary">Detay</a></td>
+                @if (Order.IsDelivered == false)
+                {
+                    <td width="40"><a href="@Url.Action("OrderDeliver","Admin", new {Id = Order.OrderId} )" class="btn btn-warning">Teslim Et</a></td>
+                }
+                else
+                {
+                    <td width="40"><a href="#" class="btn btn-success">Teslim Edildi</a></td>
+                }
+
+            </tr>
+        }
+    </tbody>
+</table>
+<!--[EGEMEN-GOKHAN-MELIH-TAYFUN] Admin Sayfasi Urunler Listesi Kodu-->
