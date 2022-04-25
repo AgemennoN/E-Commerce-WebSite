@@ -19,43 +19,77 @@ namespace WebPortal.Controllers
         // Emre Tuzunoglu Begin
         public ActionResult AddPayment()
         {
-            TblOrder Order = new TblOrder();
+            TblOrder Order = null;
             TblUser User = (TblUser)Session["User"];
+            TBusinessLayer BusinessLayer = new TBusinessLayer();
             string OMessage = "";
-            Order.Name = Request.Form["NameSurname"].ToString();
-            Order.PhoneNumber = Request.Form["PhoneNumber"].ToString();
-            Order.Address = Request.Form["Adress"].ToString();
-            Order.City = Request.Form["City"].ToString();
-            Order.OrderedCarts = (string)TempData["CartOrders"];
-            Order.TotalPrice = (decimal)TempData["TotalPrice"];
-            Order.IsDelivered = false;
-            Order.OrderDateTime = DateTime.Now;
-
-            Order.UserId = User.UserId;
-            if (User != null)
+            string Redirect = "~/Home";
+            // Bu kısmı TempData ile Cart sayfasından gelen verilerin boş olup olmadığı kontrol ettirilecek...
+            if (TempData["CartOrders"].ToString() != "" && TempData["CartOrders"] != null)
             {
-                TBusinessLayer BusinessLayer = new TBusinessLayer();
-                bool Succes = BusinessLayer.AddPayment(Order, out OMessage);
-
-                if (Succes == true)
+                if (((decimal)TempData["TotalPrice"]) != 0 && TempData["TotalPrice"] != null)
                 {
-                    BusinessLayer.isUpdatedCart(User.UserId);
+                    Order = new TblOrder();
+                    Order.Name = Request.Form["NameSurname"].ToString();
+                    Order.PhoneNumber = Request.Form["PhoneNumber"].ToString();
+                    Order.Address = Request.Form["Adress"].ToString();
+                    Order.City = Request.Form["City"].ToString();
+                    Order.OrderedCarts = (string)TempData["CartOrders"];
+                    Order.TotalPrice = (decimal)TempData["TotalPrice"];
+                    Order.IsDelivered = false;
+                    Order.OrderDateTime = DateTime.Now;
+                    Order.UserId = User.UserId;
                 }
             }
-            return new RedirectResult("~/Home");
+
+            if (User != null && Order != null)
+            {
+                if (BusinessLayer.CartIsEmpty(User.UserId))
+                {
+                    bool Succes = BusinessLayer.AddPayment(Order, out OMessage);
+
+                    if (Succes == true)
+                    {
+                        BusinessLayer.isUpdatedCart(User.UserId);
+
+                        TempData["ResultMessage"] =
+                            "'Siparişiniz Tamamlandı...\nAna Sayfaya Yönlendirliyorsunuz...'";
+                    }
+                    else
+                    {
+                        TempData["ResultMessage"] =
+                            "'Siparişiniz Tamamlanamadı...\nSepetinizde Değişiklik olabilir...'";
+                        Redirect = "~/Cart/Index";
+                    }
+                }
+            }
+            else
+            {
+                TempData["ResultMessage"] =
+                    "'Siparişiniz Tamamlanamadı...\nSepetinizde Değişiklik olabilir...'";
+                Redirect = "~/Cart/Index";
+            }
+
+            return new RedirectResult(Redirect);
         }
 
-        #region hhuseyin.demirtas
+        #region hhuseyin.demirtas (Kullanim disi)
         //hhuseyin.demirtas --- user icin kart tablosunda degisiklik var mı?
-        public ActionResult CheckCartUpdates()
+        public bool CheckCartUpdates()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
             List<TblProduct> ProductInfos = new List<TblProduct>();
             TblUser User = (TblUser)Session["User"];
+            bool result = false;
 
+            string BeforeCart = "";
+            decimal BeforePrice = 0;
             string OMesage = "";
-            string BeforeCart = TempData["CartOrders"].ToString();
-            decimal BeforePrice = Convert.ToDecimal(TempData["TotalPrice"]);
+            if (TempData["CartOrders"] != null && TempData["TotalPrice"] != null)
+            {
+                BeforeCart = TempData["CartOrders"].ToString();
+                BeforePrice = Convert.ToDecimal(TempData["TotalPrice"]);
+            }
 
             if (User != null)
             {
@@ -65,9 +99,9 @@ namespace WebPortal.Controllers
                     out OMesage
                 );
 
-                ViewBag.IsChanged = IsChanegd(CartItems, ProductInfos, BeforeCart, BeforePrice);
+                result = IsChanegd(CartItems, ProductInfos, BeforeCart, BeforePrice);
             }
-            return View(ViewBag);
+            return result;
         }
 
         //hhuseyin.demirtas ---TempData ve guncel cart tablosu arasında kullanıcı için farklılık var mı?

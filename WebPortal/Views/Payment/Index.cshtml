@@ -3,25 +3,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutMainPage.cshtml";
 }
-@{
-    bool IsChanged = false;
-    string Controller = "CheckCartUpdates";
-    string View = "Payment";
-    if (ViewBag.IsChanged != null)
-    {
-        IsChanged = (bool)ViewBag.IsChanged;
-    }
-    if (IsChanged)
-    {
-        Controller = "CheckCartUpdates";
-        View = "Payment";
-    }
-    else
-    {
-        Controller = "CheckCartUpdates";
-        View = "Payment";
-    }
-}
 
 
 <div class="w3l_banner_nav_right">
@@ -46,10 +27,11 @@
                     <div class="resp-tabs-container hor_1">
                         <div>
                             <div id="tab4" class="tab-grid" style="display: block;">
-                                @using (Html.BeginForm(Controller, View, FormMethod.Post))
-                                {
-                                    <div class="row">
-                                        <div class="col-md-12">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @using (Html.BeginForm("AddPayment", "Payment", FormMethod.Post))
+                                        {
                                             <div class="col-md-6">
                                                 <div class="information-wrapper">
                                                     <div class="first-row form-group">
@@ -104,22 +86,9 @@
                                                 </div>
                                                 <input class="btn btn-primary" type="submit" value="Ödemeyi Tamamla">
                                             </div>
-                                            @if (IsChanged)
-                                            {
-                                                <div class="checkout-right-basket">
-                                                    <a href="~/Cart/Index" onclick="alert('Sepette Değişiklik Var...\nSepet Sayfasına Yönlendilriyorsunuz...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                                                </div>
-                                            }
-                                            else
-                                            {
-                                                <div class="checkout-right-basket">
-                                                    <a href="~/Payment/AddPayment" onclick="alert('Siparişiniz Tamamlandı...')">Ödeme Yap <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                                                </div>
-
-                                            }
-                                        </div>
+                                        }
                                     </div>
-                                }
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -134,7 +103,6 @@
         }
     </div>
 </div>
-
 
 <div class="clearfix"></div>
 

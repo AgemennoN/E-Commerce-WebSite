@@ -345,10 +345,10 @@ namespace BusinessLayer
                     select CartItems
                 ).ToList();
 
-                if (HaveItems.Count != 0)
+                if (HaveItems.Count != 0 && HaveItems != null)
                     result = true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
