@@ -110,7 +110,7 @@ namespace WebPortal.Controllers
 
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
-            Product.ProductImage = ProductImage;
+            Product.ProductImage = "/wwwroot/images/" + ProductImage;
             Product.ProductPrice = Convert.ToDecimal(ProductPrice);
             Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
             // İndirim oranına göre güncel fiyat otomatik olarak eklendi.
@@ -132,6 +132,7 @@ namespace WebPortal.Controllers
         public ActionResult ProductEdit()
         {
             TBusinessLayer BusinessLayer = new TBusinessLayer();
+
             string OMessage;
             ViewBag.CategoryList = BusinessLayer.GetCategoryList(out OMessage);
 
@@ -140,8 +141,10 @@ namespace WebPortal.Controllers
                 int ProductId = new int();
                 TblProduct Product = null;
                 if (Int32.TryParse(Request.QueryString["ProductId"], out ProductId))
+                {
                     // If the parameter is Parseble
                     Product = BusinessLayer.GetProductByProductId(ProductId, out OMessage);
+                }
 
                 if (Product == null)
                     // if the item with the ProdectId does not exist Send Admin to the ProductList Page
@@ -163,11 +166,8 @@ namespace WebPortal.Controllers
             string ProductId = Request.Form["TxtProductId"].ToString();
             string ProductName = Request.Form["TxtProductName"].ToString();
             string ProductDescription = Request.Form["TxtProductDescription"].ToString();
-            string ProductImage;
-            if (Request.Form["TxtProductImage"] == null || Request.Form["TxtProductImage"].ToString() == "")
-                ProductImage = "/wwwroot/images/1.png";
-            else
-                ProductImage = Request.Form["TxtProductImage"].ToString();
+            string ProductImage = Request.Form["TxtProductImage"].ToString();
+            string DefaultProductImage = Request.Form["TxtProductDefaultImage"].ToString();
             string ProductPrice = Request.Form["TxtProductPrice"].ToString();
             string ProductDiscount = Request.Form["TxtProductDiscount"].ToString();
             string ProductStock = Request.Form["TxtProductStock"].ToString();
@@ -176,7 +176,14 @@ namespace WebPortal.Controllers
             Product.ProductId = Convert.ToInt32(ProductId);
             Product.ProductName = ProductName;
             Product.ProductDescription = ProductDescription;
-            Product.ProductImage = ProductImage;
+            if (ProductImage.ToString().Trim() == null || ProductImage.ToString().Trim() == "")
+            {
+                Product.ProductImage = DefaultProductImage;
+            }
+            else
+            {
+                Product.ProductImage = "/wwwroot/images/" + ProductImage;
+            }
             Product.ProductPrice = Convert.ToDecimal(ProductPrice);
             Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
             // İndirim oranına göre güncel fiyat otomatik olarak eklendi.
@@ -196,7 +203,7 @@ namespace WebPortal.Controllers
         // Urun Detay Sayfasi
         public ActionResult ProductDetail(string id)
         {
-            if(Int32.TryParse(id, out int IntId))
+            if (Int32.TryParse(id, out int IntId))
             {
                 TBusinessLayer BusinessLayer = new TBusinessLayer();
                 string OMessage;
@@ -399,7 +406,7 @@ namespace WebPortal.Controllers
         // Contact Detay Sayfasi
         public ActionResult ContactDetail(string MessageId)
         {
-            
+
             if (Int32.TryParse(MessageId, out int intId))
             {
                 TBusinessLayer BusinessLayer = new TBusinessLayer();
@@ -424,8 +431,8 @@ namespace WebPortal.Controllers
             List<TblOrder> OrderList = BusinessLayer.GetOrderList(out OMessage); // Tüm siparişlerin listesi
             ViewBag.OrdersCount = OrderList.Count;
 
-            double TotalRevenue=0;
-            foreach(TblOrder Order in OrderList)
+            double TotalRevenue = 0;
+            foreach (TblOrder Order in OrderList)
             {
                 TotalRevenue += Convert.ToDouble(Order.TotalPrice); // Foreach içerisinde TblOrders' ta bulunan gelirleri toplar.
             }
