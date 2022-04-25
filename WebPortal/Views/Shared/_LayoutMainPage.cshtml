@@ -1,4 +1,14 @@
-﻿
+﻿@{
+    BusinessLayer.TBusinessLayer BusinessLayer = new BusinessLayer.TBusinessLayer();
+    string Redirect = "";
+    bool IsThereItem = false;
+    if (Session["User"] != null)
+    {
+        int UserId = ((PortalDataLayer.TblUser)Session["User"]).UserId;
+        IsThereItem = BusinessLayer.CartIsEmpty(UserId);
+    }
+}
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -32,7 +42,7 @@
             });
         });
     </script>
-    
+
     <!-- start-smoth-scrolling -->
 </head>
 
@@ -50,15 +60,7 @@
             }
 
         </div>
-        <div class="product_list_header">
-            <form action="#" method="post" class="last">
-                <fieldset>
-                    <input type="hidden" name="cmd" value="_cart" />
-                    <input type="hidden" name="display" value="1" />
-                    <input type="submit" name="submit" value="Alışveriş Sepeti" class="button" />
-                </fieldset>
-            </form>
-        </div>
+
         <div class="w3l_header_right" style="margin-top:6px;">
             <ul>
                 <li>
@@ -68,7 +70,26 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
+                        if (!IsThereItem)
+                        {
+                            <a href=""
+                               onclick="alert('Sepetinizde Ürün Bulunmadığı için \n Ana Sayfaya Yönlendiriliyorsunuz...')"
+                               class="btn btn-info " style="color:black; font-size:15px; ">
+                                <i class="fa fa-shopping-cart" aria-hidden="true">
+                                </i><span> Sepete Git</span>
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("Index","Cart")"
+                               onclick="alert('Sepet Sayfasına Yönlendiriliyorsunuz')"
+                               class="btn btn-info " style="color:black; font-size:15px; ">
+                                <i class="fa fa-shopping-cart" aria-hidden="true">
+                                </i><span> Sepete Git</span>
+                            </a>
+                        }
+
+                        <a href="@Url.Action("Logout", "Login")" class="btn btn-danger " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
                     }
 
 
@@ -185,6 +206,7 @@
                 }
                 
             </div>
+            <div class="clearfix"> </div>
         </div>
 
                 
@@ -288,45 +310,26 @@
             );
         });
     </script>
-    <!-- here stars scrolling icon -->
-    <script type="text/javascript">
-        $(document).ready(function () {
-            /*
-                var defaults = {
-                containerID: 'toTop', // fading element id
-                containerHoverID: 'toTopHover', // fading element hover id
-                scrollSpeed: 1200,
-                easingType: 'linear'
-                };
-            */
 
-            $().UItoTop({ easingType: 'easeOutQuart' });
+    @*Celal tarafından eklendi*@
+    @{
+        if (TempData["CartMessage"] != null)
+        {
+            <script type="text/javascript">
+                alert('@TempData["CartMessage"].ToString()');
+            </script>
+        }
+    }
 
-        });
-    </script>
-    <!-- //here ends scrolling icon -->
-    <script src="~/wwwroot/js/minicart.js"></script>
-    <script>
-        paypal.minicart.render();
+    @*@{  // hhuseyin.demirtas --- Calismiyor
 
-        paypal.minicart.cart.on('checkout', function (evt) {
-            var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-            // Count the number of each item in the cart
-            for (i = 0; i < len; i++) {
-                total += items[i].get('quantity');
+            if (TempData["ResultMessage"] != null)
+            {
+                <script type="text/javascript">
+                alert('@TempData["ResultMessage"].ToString()');
+                </script>
             }
+        }*@
 
-            if (total < 1) {
-                //alert('The minimum order quantity is 1. Please add more to your shopping cart before checking out');
-                alert('En az 1 ürün sepete eklemeniz gerekiyor...')
-                evt.preventDefault();
-            }
-        });
-
-    </script>
 </body>
 </html>

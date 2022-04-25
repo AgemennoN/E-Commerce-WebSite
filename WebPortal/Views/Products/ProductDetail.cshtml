@@ -19,7 +19,7 @@
         <div class="products-breadcrumb">
             <div class="container">
                 <ul>
-                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="index.html">Home</a><span>|</span></li>
+                    <li><i class="fa fa-home" aria-hidden="true"></i><a href="~/">Ana Sayfa</a><span>|</span></li>
                     <li>@product.ProductName</li>
                 </ul>
             </div>
@@ -45,10 +45,10 @@
                     <div class="snipcart-item block">
                         <div class="snipcart-thumb agileinfo_single_right_snipcart">
                             <h4 style="font-size:20px">
-                                ₺ @product.PriceOnSale
+                                @product.PriceOnSale ₺
                                 @if (product.ProductPrice != product.PriceOnSale)
                                 {
-                                    <span font-size:17px>₺ @product.ProductPrice </span>
+                                <span font-size:17px>@product.ProductPrice ₺</span>
                                 }
 
                             </h4>
@@ -60,20 +60,14 @@
                         else if (product.ProductActive == true)
                         {
                             <div class="snipcart-details agileinfo_single_right_details">
-                                <form action="#" method="post">
+                                @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                {
                                     <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart">
-                                        <input type="hidden" name="add" value="1">
-                                        <input type="hidden" name="business" value=" ">
-                                        <input type="hidden" name="item_name" value="@product.ProductName">
-                                        <input type="hidden" name="amount" value="21.00">
-                                        <input type="hidden" name="discount_amount" value="@product.ProductDiscount">
-                                        <input type="hidden" name="currency_code" value="TRY ">
-                                        <input type="hidden" name="return" value=" ">
-                                        <input type="hidden" name="cancel_return" value=" ">
+                                        <input type="hidden" name="ProductId" value="@product.ProductId"/>
+                                        <input type="hidden" name="ReturnUrl" value="~/Products/ProductDetail/@product.ProductId">
                                         <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                     </fieldset>
-                                </form>
+                                }
                             </div>
                         }
                     </div>

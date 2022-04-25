@@ -95,23 +95,18 @@
                                                     <div class="snipcart-thumb">
                                                         <a href="~/Products/ProductDetail/@Product.ProductId"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
                                                         <p>@Product.ProductName</p>
-                                                        <h4>@Product.PriceOnSale<span>@Product.ProductPrice</span></h4>
+                                                        <h4>@Product.PriceOnSale ₺<span>@Product.ProductPrice ₺</span></h4>
                                                     </div>
                                                     <div class="snipcart-details">
-                                                        <form action="#" method="post">
+                                                        @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                                        {
+
                                                             <fieldset>
-                                                                <input type="hidden" name="cmd" value="_cart" />
-                                                                <input type="hidden" name="add" value="1" />
-                                                                <input type="hidden" name="business" value=" " />
-                                                                <input type="hidden" name="item_name" value="@Product.ProductName" />
-                                                                <input type="hidden" name="amount" value="@Product.ProductPrice" />
-                                                                <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
-                                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                                <input type="hidden" name="return" value=" " />
-                                                                <input type="hidden" name="cancel_return" value=" " />
-                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                                <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                                                                <input type="hidden" name="ReturnUrl" value="~/Products">
+                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                                             </fieldset>
-                                                        </form>
+                                                        }
                                                     </div>
                                                 </div>
                                             </figure>
@@ -132,23 +127,18 @@
                                                     <div class="snipcart-thumb">
                                                         <a href="~/Products/ProductDetail/@Product.ProductId"><img src="@Url.Content(Product.ProductImage)" alt=" " class="img-responsive" /></a>
                                                         <p>@Product.ProductName</p>
-                                                        <h4>@Product.ProductPrice</h4>
+                                                        <h4>@Product.ProductPrice ₺</h4>
                                                     </div>
                                                     <div class="snipcart-details">
-                                                        <form action="#" method="post">
+                                                        @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                                        {
+
                                                             <fieldset>
-                                                                <input type="hidden" name="cmd" value="_cart" />
-                                                                <input type="hidden" name="add" value="1" />
-                                                                <input type="hidden" name="business" value=" " />
-                                                                <input type="hidden" name="item_name" value="@Product.ProductName" />
-                                                                <input type="hidden" name="amount" value="@Product.ProductPrice" />
-                                                                <input type="hidden" name="discount_amount" value="@Product.ProductDiscount" />
-                                                                <input type="hidden" name="currency_code" value="TRY" />
-                                                                <input type="hidden" name="return" value=" " />
-                                                                <input type="hidden" name="cancel_return" value=" " />
-                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                                <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                                                                <input type="hidden" name="ReturnUrl" value="~/Products">
+                                                                <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                                             </fieldset>
-                                                        </form>
+                                                        }
                                                     </div>
                                                 </div>
                                             </figure>

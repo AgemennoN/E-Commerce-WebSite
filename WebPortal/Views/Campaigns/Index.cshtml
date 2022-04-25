@@ -22,7 +22,7 @@
                     <div class="w3l_banner_nav_right_banner">
                         <h3>Katkı Maddesiz <span>Doğal </span> Ürünler ile</h3>
                         <div class="more">
-                            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
+                            <a href="/Products" class="button--saqui button--round-l button--text-thick" data-text="Alışverişe Başla">Alışverişe Başla</a>
                         </div>
                     </div>
                 </li>
@@ -30,7 +30,7 @@
                     <div class="w3l_banner_nav_right_banner1">
                         <h3>En Taze Sebze <span>Çeşitleri</span></h3>
                         <div class="more">
-                            <a href="products.html" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
+                            <a href="/Products" class="button--saqui button--round-l button--text-thick" data-text="Şimdi Al">Şimdi Al</a>
                         </div>
                     </div>
                 </li>
@@ -38,7 +38,7 @@
                     <div class="w3l_banner_nav_right_banner2">
                         <h3>Hesaplı Fiyatlarla<i>Buz Gibi İçecekler</i></h3>
                         <div class="more">
-                            <a href="/Campaigns/Index" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
+                            <a href="/Campaigns" class="button--saqui button--round-l button--text-thick" data-text="Kampanyalarımız">Kampanyalarımız</a>
                         </div>
                     </div>
                   
@@ -82,24 +82,18 @@
                                         <div class="snipcart-thumb">
                                             <a href="~/Products/ProductDetail/@Product.ProductId"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
                                              <p>@Product.ProductName</p>
-                                             <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
+                                             <h4>@Product.PriceOnSale ₺<span>@Product.ProductPrice ₺</span></h4>
                                         </div>
                                         <div class="snipcart-details top_brand_home_details">
-                                            <form action="checkout.html" method="post">
+                                            @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                            {
+
                                                 <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value=" " />
-                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                    <input type="hidden" name="amount" value="7.99" />
-                                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                                    <input type="hidden" name="currency_code" value="TRY" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                    <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                                                    <input type="hidden" name="ReturnUrl" value="~/Campaigns">
+                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                                 </fieldset>
-                                            </form>
+                                            }
                                         </div>
                                     </div>
                                 </figure>

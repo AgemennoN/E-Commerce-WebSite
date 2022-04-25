@@ -85,31 +85,25 @@
                                             <a href="~/Products/ProductDetail/@Product.ProductId"><img title=" " alt=" " src="@Url.Content(Product.ProductImage)" /></a>
                                             <p>@Product.ProductName</p>
                                             <h4>
-                                                @Product.PriceOnSale
+                                                @Product.PriceOnSale ₺
                                                 @if (Product.ProductPrice != Product.PriceOnSale)
                                                 {
-                                                    <span>@Product.ProductPrice</span>
+                                                    <span>@Product.ProductPrice ₺</span>
                                                 }
 
                                             </h4>
                                         </div>
                                         <!--Hüseyin Bilgiç - End -->
                                         <div class="snipcart-details top_brand_home_details">
-                                            <form action="checkout.html" method="post">
+                                            @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                            {
+
                                                 <fieldset>
-                                                    <input type="hidden" name="cmd" value="_cart" />
-                                                    <input type="hidden" name="add" value="1" />
-                                                    <input type="hidden" name="business" value=" " />
-                                                    @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                    <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                    <input type="hidden" name="amount" value="7.99" />
-                                                    <input type="hidden" name="discount_amount" value="1.00" />
-                                                    <input type="hidden" name="currency_code" value="TRY" />
-                                                    <input type="hidden" name="return" value=" " />
-                                                    <input type="hidden" name="cancel_return" value=" " />
-                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                    <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                                                    <input type="hidden" name="ReturnUrl" value="~/Home/Index/@Category.CategoryName">
+                                                    <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                                 </fieldset>
-                                            </form>
+                                            }
                                         </div>
                                     </div>
                                 </figure>
@@ -205,26 +199,20 @@
                                                 @*<a href="single.html"><img title=" " alt=" " src="~/wwwroot/images/1.png" /></a>
                                             <p>Sun Flower Oil</p>*@
                                                 <p>@Product.ProductName</p>
-                                                <h4>@Product.PriceOnSale <span>@Product.ProductPrice</span></h4>
+                                                <h4>@Product.PriceOnSale ₺<span>@Product.ProductPrice ₺</span></h4>
 
 
                                             </div>
                                             <div class="snipcart-details top_brand_home_details">
-                                                <form action="checkout.html" method="post">
+                                                @using (Html.BeginForm("AddProductAction", "Home", FormMethod.Post))
+                                                {
+
                                                     <fieldset>
-                                                        <input type="hidden" name="cmd" value="_cart" />
-                                                        <input type="hidden" name="add" value="1" />
-                                                        <input type="hidden" name="business" value=" " />
-                                                        @*↓ BURAYA DB den GELEN DEGER YAZILACAK ↓*@
-                                                        <input type="hidden" name="item_name" value="Sun Flower Oil" />
-                                                        <input type="hidden" name="amount" value="7.99" />
-                                                        <input type="hidden" name="discount_amount" value="1.00" />
-                                                        <input type="hidden" name="currency_code" value="TRY" />
-                                                        <input type="hidden" name="return" value=" " />
-                                                        <input type="hidden" name="cancel_return" value=" " />
-                                                        <input type="submit" name="submit" value="Sepete Ekle" class="button" />
+                                                        <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                                                        <input type="hidden" name="ReturnUrl" value="~/">
+                                                        <input type="submit" name="submit" value="Sepete Ekle" class="button">
                                                     </fieldset>
-                                                </form>
+                                                }
                                             </div>
                                         </div>
                                     </figure>
