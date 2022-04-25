@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-@{ 
+@{
     PortalDataLayer.TblContact Contact = new PortalDataLayer.TblContact();
     if (ViewBag.Detail != null)
     {
@@ -12,14 +12,18 @@
     }
 }
 
-<h2>#@Contact.ContactId @Contact.ContactSubject</h2>
 
-<ul class="phone_email">
-    <li><i class="fa fa-user" aria-hidden="true"></i> @Contact.ContactName</li>
-    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:@Contact.ContactPhone"> @Contact.ContactPhone</a></li>
-    <li><i class="fa fa-envelope-o" aria-hidden="true"></i><a href="mailto:Contact.ContactMail"> @Contact.ContactMail</a></li>
-    <li><i class="fa fa-calendar" aria-hidden="true"></i> Bilinmiyor.</li>
-    <li><i class="fa fa-envelope" aria-hidden="true"></i> İçerik:</li>
-    @Contact.ContactMessage
-</ul>
+<div class="jumbotron">
+    <div class="card text-center">
+        <div class="card-header bg-primary text-light">
+            Kişi → <i class="fa fa-user"></i> @Contact.ContactName
+        </div>
+        <div class="card-body">
+            <i class="fa fa-envelope-o"></i>  Konu → @Contact.ContactSubject<br /><br />
+            <i class="fa fa-envelope-o text-info" aria-hidden="true"></i> E-Posta Adresi → <a href="mailto:@Contact.ContactMail"> @Contact.ContactMail</a><br /><br />
+            <i class="fa fa-phone text-info" aria-hidden="true"></i> Telefon Numarası → <a href="tel:@Contact.ContactPhone"> @Contact.ContactPhone</a><br /><br />
+            <i class="fa fa-envelope-o text-info" aria-hidden="true"></i> Mesaj → @Contact.ContactMessage
+        </div>
+    </div>
+</div>
 
