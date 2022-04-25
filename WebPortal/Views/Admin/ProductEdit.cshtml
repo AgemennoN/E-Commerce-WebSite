@@ -37,6 +37,9 @@
                         <input class="form-control" type="text" name="TxtProductName" placeholder="Adı" value="@Product.ProductName" required="">
                     </div>
                     <div class="form-group">
+                        <textarea class="form-control" type="text" maxlength="300" name="TxtProductDescription" placeholder="Açıklama" value="@Product.ProductDescription" required=""></textarea>
+                    </div>
+                    <div class="form-group">
                         <input type="file" name="TxtProductImage" placeholder="Resmi" value="@Product.ProductImage">
                         <small class="text-muted">(Örnek : Ürün.jpg)</small>
                     </div>

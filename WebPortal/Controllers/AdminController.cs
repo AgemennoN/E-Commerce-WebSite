@@ -162,6 +162,7 @@ namespace WebPortal.Controllers
         {
             string ProductId = Request.Form["TxtProductId"].ToString();
             string ProductName = Request.Form["TxtProductName"].ToString();
+            string ProductDescription = Request.Form["TxtProductDescription"].ToString();
             string ProductImage;
             if (Request.Form["TxtProductImage"] == null || Request.Form["TxtProductImage"].ToString() == "")
                 ProductImage = "/wwwroot/images/1.png";
@@ -174,6 +175,7 @@ namespace WebPortal.Controllers
 
             Product.ProductId = Convert.ToInt32(ProductId);
             Product.ProductName = ProductName;
+            Product.ProductDescription = ProductDescription;
             Product.ProductImage = ProductImage;
             Product.ProductPrice = Convert.ToDecimal(ProductPrice);
             Product.ProductDiscount = Convert.ToDecimal(ProductDiscount);
