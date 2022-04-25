@@ -67,7 +67,7 @@
                     }
                     else
                     {
-                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a> 
+                        <a href="@Url.Action("Logout","Login")" class="btn btn-success " style="color:black; font-size:15px; "><i class="fa fa-user" aria-hidden="true"></i><span> Çıkış Yap</span></a>
                     }
 
                 </li>
@@ -121,7 +121,7 @@
                     <li><a href="about.html">Hakkımızda</a><i></i></li>
                     @if ((bool)Session["Admin"] == true)
                     {
-                        <li><a href="~/Admin/Index"> / Admin Paneli</a><i></i></li>
+                        <li style="background-color:green;"><a href="~/Admin/Index" style="color:white;"><i class="fa fa-lock"></i> Admin Paneli</a><i></i></li>
                     }
                 </ul>
             </div>

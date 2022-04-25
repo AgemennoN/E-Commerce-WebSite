@@ -8,11 +8,11 @@ using PortalDataLayer;
 
 namespace WebPortal.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         // GET: Admin
         //<<<[EGEMEN-GOKHAN-MELIH-TAYFUN] - Start
-
         //Admin Sayfasi Urunler Listesi Yapildi
         public ActionResult Index(string Id)
         {
