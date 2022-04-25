@@ -53,22 +53,29 @@
 
                             </h4>
                         </div>
-                        <div class="snipcart-details agileinfo_single_right_details">
-                            <form action="#" method="post">
-                                <fieldset>
-                                    <input type="hidden" name="cmd" value="_cart">
-                                    <input type="hidden" name="add" value="1">
-                                    <input type="hidden" name="business" value=" ">
-                                    <input type="hidden" name="item_name" value="@product.ProductName">
-                                    <input type="hidden" name="amount" value="21.00">
-                                    <input type="hidden" name="discount_amount" value="@product.ProductDiscount">
-                                    <input type="hidden" name="currency_code" value="TRY ">
-                                    <input type="hidden" name="return" value=" ">
-                                    <input type="hidden" name="cancel_return" value=" ">
-                                    <input type="submit" name="submit" value="Sepete Ekle" class="button">
-                                </fieldset>
-                            </form>
-                        </div>
+                        @if (product.ProductActive == false)
+                        {
+                            <label>Bu ürün satıştan kaldırılmıştır</label>
+                        }
+                        else if (product.ProductActive == true)
+                        {
+                            <div class="snipcart-details agileinfo_single_right_details">
+                                <form action="#" method="post">
+                                    <fieldset>
+                                        <input type="hidden" name="cmd" value="_cart">
+                                        <input type="hidden" name="add" value="1">
+                                        <input type="hidden" name="business" value=" ">
+                                        <input type="hidden" name="item_name" value="@product.ProductName">
+                                        <input type="hidden" name="amount" value="21.00">
+                                        <input type="hidden" name="discount_amount" value="@product.ProductDiscount">
+                                        <input type="hidden" name="currency_code" value="TRY ">
+                                        <input type="hidden" name="return" value=" ">
+                                        <input type="hidden" name="cancel_return" value=" ">
+                                        <input type="submit" name="submit" value="Sepete Ekle" class="button">
+                                    </fieldset>
+                                </form>
+                            </div>
+                        }
                     </div>
                 </div>
                 <div class="clearfix"> </div>
